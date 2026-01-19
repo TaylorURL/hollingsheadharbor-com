@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Bulk Dry Cargo",
+    "description": "Efficient marine transportation of bulk dry cargo including aggregates, cement, and other construction materials across our port network.",
+    "iconPlaceholder": "Cargo Ship Icon"
+  },
+  {
+    "id": 2,
+    "title": "Vessel Charter",
+    "description": "Vessels for hire to meet your specific shipping needs. Our fleet is maintained to the highest standards for reliable transportation.",
+    "iconPlaceholder": "Vessel Icon"
+  },
+  {
+    "id": 3,
+    "title": "Barge Charter",
+    "description": "Barges available for charter for inland waterway transportation. Ideal for moving large quantities of materials efficiently.",
+    "iconPlaceholder": "Barge Icon"
+  },
+  {
+    "id": 4,
+    "title": "Maritime Logistics",
+    "description": "Our skilled team of maritime logistics professionals create catered shipping plans to keep your products moving and arriving on time.",
+    "iconPlaceholder": "Logistics Icon"
+  },
+  {
+    "id": 5,
+    "title": "Port Services",
+    "description": "Full-service port operations at our five strategic locations in Alabama, Florida, Michigan, Tennessee, and Texas.",
+    "iconPlaceholder": "Port Icon"
+  },
+  {
+    "id": 6,
+    "title": "Material Transport",
+    "description": "Specialized transportation solutions for construction materials with scheduling flexibility and competitive rates.",
+    "iconPlaceholder": "Transport Icon"
+  }
+]

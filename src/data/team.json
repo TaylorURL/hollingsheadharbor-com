@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Mike Hollingshead",
+    "title": "Chairman/Owner",
+    "bio": "Founded SRM in 1999. A concrete finisher turned entrepreneur who built the company from the ground up through faith and hard work.",
+    "image": "/team-mike-hollingshead.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Jeff Hollingshead",
+    "title": "Chief Executive Officer",
+    "bio": "Grew up in the business and became CEO in 2014, leading SRM's growth into one of the largest ready-mix producers in the country.",
+    "image": "/team-jeff-hollingshead.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Ryan Hollingshead",
+    "title": "SRM Materials President",
+    "bio": "Grew up in the business alongside his brother and serves as President of the materials division.",
+    "image": "/team-ryan-hollingshead.jpg"
+  }
+]
