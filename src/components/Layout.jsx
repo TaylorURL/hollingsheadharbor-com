@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom'
-import Header from './Header'
-import Footer from './Footer'
-import BackToTop from './BackToTop'
+import { Outlet } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
+import BackToTop from './BackToTop';
 
 function Layout() {
   return (
@@ -13,7 +13,7 @@ function Layout() {
       <Footer />
       <BackToTop />
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

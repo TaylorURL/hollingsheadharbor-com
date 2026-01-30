@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "cleanup": "node scripts/cleanup.js",
+    "release": "node scripts/release.js"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -26,6 +30,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "postcss": "^8.4.49",
+    "prettier": "^3.8.1",
     "tailwindcss": "^3.4.17",
     "vite": "^7.2.4"
   }

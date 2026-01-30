@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
-import HeroSection from '../components/HeroSection'
-import useScrollAnimation from '../hooks/useScrollAnimation'
+import { Link } from 'react-router-dom';
+import HeroSection from '../components/HeroSection';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 function Story() {
-  useScrollAnimation()
-  
+  useScrollAnimation();
+
   return (
     <div>
       <HeroSection
@@ -20,31 +20,40 @@ function Story() {
                 The Beginning
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] mb-8">
-                From a <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-500">Backyard</span> to the Nation
+                From a{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-500">
+                  Backyard
+                </span>{' '}
+                to the Nation
               </h2>
               <div className="prose prose-lg text-gray-500 max-w-none">
                 <p className="text-xl leading-relaxed mb-6">
-                  SRM Concrete is a family-owned and operated ready-mix, aggregates, and cement company 
-                  founded in 1999 by Mike and Melissa Hollingshead.
+                  SRM Concrete is a family-owned and operated ready-mix, aggregates, and cement
+                  company founded in 1999 by Mike and Melissa Hollingshead.
                 </p>
                 <p className="leading-relaxed mb-6">
-                  Mike, a concrete finisher, started Smyrna Ready Mix to service his own concrete needs 
-                  because he was not receiving reliable customer service from the local ready-mix companies. 
-                  Both Mike and Melissa grew up with very little, but they had a strong work ethic and a 
-                  will to succeed.
+                  Mike, a concrete finisher, started Smyrna Ready Mix to service his own concrete
+                  needs because he was not receiving reliable customer service from the local
+                  ready-mix companies. Both Mike and Melissa grew up with very little, but they had
+                  a strong work ethic and a will to succeed.
                 </p>
                 <p className="leading-relaxed">
-                  They scraped together enough money to buy a ready-mix plant. Mike and his crew put up 
-                  the plant in their backyard. He attended an auction in Indiana and purchased five used 
-                  concrete trucks for $10,000 each. Only three of them made it back to Smyrna.
+                  They scraped together enough money to buy a ready-mix plant. Mike and his crew put
+                  up the plant in their backyard. He attended an auction in Indiana and purchased
+                  five used concrete trucks for $10,000 each. Only three of them made it back to
+                  Smyrna.
                 </p>
               </div>
             </div>
-            
+
             <div className="lg:col-span-5 scroll-animate-right">
               <div className="relative">
                 <div className="aspect-[4/5] rounded-[2rem] overflow-hidden">
-                  <img src="/company-team.jpg" alt="Hollingshead Family" className="w-full h-full object-cover" />
+                  <img
+                    src="/company-team.jpg"
+                    alt="Hollingshead Family"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="absolute -bottom-6 -left-6 bg-red-600 text-white p-6 rounded-2xl shadow-2xl">
                   <div className="text-4xl font-black">1999</div>
@@ -68,11 +77,14 @@ function Story() {
               The American Dream
             </div>
             <blockquote className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 leading-tight mb-8">
-              "We started with nothing. No money, no customers, just a 
-              <span className="text-red-600"> will to work hard</span> and a belief that we could achieve anything."
+              "We started with nothing. No money, no customers, just a
+              <span className="text-red-600"> will to work hard</span> and a belief that we could
+              achieve anything."
             </blockquote>
             <div className="flex items-center justify-center gap-4">
-              <div className="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center text-white font-bold">MH</div>
+              <div className="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center text-white font-bold">
+                MH
+              </div>
               <div className="text-left">
                 <div className="text-gray-900 font-bold">Mike Hollingshead</div>
                 <div className="text-gray-500 text-sm">Chairman & Owner</div>
@@ -107,9 +119,9 @@ function Story() {
             <div className="order-2 lg:order-1 scroll-animate-left">
               <div className="relative">
                 <div className="aspect-[5/4] rounded-[2rem] overflow-hidden">
-                  <img 
-                    src="/growth-timeline.jpg" 
-                    alt="SRM company growth" 
+                  <img
+                    src="/growth-timeline.jpg"
+                    alt="SRM company growth"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -123,12 +135,12 @@ function Story() {
                 From Local to <span className="text-blue-800">National</span>
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">
-                In 2012, SRM began to focus on growth through acquisition. Since that time, over 100 
+                In 2012, SRM began to focus on growth through acquisition. Since that time, over 100
                 acquisitions have been completed across the nation.
               </p>
               <p className="text-gray-500 leading-relaxed">
-                Today, SRM has grown from a small local producer to one of the largest ready-mix 
-                producers in the country. Our mission to provide quality concrete and unmatched 
+                Today, SRM has grown from a small local producer to one of the largest ready-mix
+                producers in the country. Our mission to provide quality concrete and unmatched
                 service remains the same.
               </p>
             </div>
@@ -141,7 +153,7 @@ function Story() {
           <div className="relative bg-white rounded-[3rem] overflow-hidden border-2 border-gray-100 scroll-animate">
             <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-blue-50 to-transparent"></div>
             <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-gradient-to-tl from-red-50 to-transparent"></div>
-            
+
             <div className="relative grid grid-cols-1 lg:grid-cols-2">
               <div className="p-12 md:p-16">
                 <div className="inline-block bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded mb-6 uppercase tracking-wider">
@@ -151,21 +163,26 @@ function Story() {
                   Marine Transportation Done Right
                 </h2>
                 <p className="text-gray-500 text-lg leading-relaxed mb-8">
-                  Hollingshead Harbor is the marine transportation arm of SRM, offering efficient 
+                  Hollingshead Harbor is the marine transportation arm of SRM, offering efficient
                   transport of bulk dry cargo from our network of ports across five states.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Link 
-                    to="/team" 
+                  <Link
+                    to="/team"
                     className="inline-flex items-center gap-2 bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 px-8 rounded-full transition-colors"
                   >
                     Meet Our Team
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </Link>
-                  <Link 
-                    to="/services" 
+                  <Link
+                    to="/services"
                     className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold py-4 px-8 rounded-full transition-colors"
                   >
                     View Services
@@ -193,7 +210,7 @@ function Story() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-export default Story
+export default Story;

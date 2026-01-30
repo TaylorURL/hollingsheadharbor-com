@@ -68,7 +68,7 @@
     "zip": "32409",
     "phone": "(850) 703-2337",
     "lat": 30.2833,
-    "lng": -85.6500,
+    "lng": -85.65,
     "contacts": [
       { "name": "Alyssia Jackson", "phone": "(850) 703-2337" },
       { "name": "Kevin Harrington", "phone": "(850) 866-2914" },
@@ -165,9 +165,7 @@
     "phone": "(832) 741-4125",
     "lat": 29.7355,
     "lng": -94.9774,
-    "contacts": [
-      { "name": "Jeff Sandel", "phone": "(832) 741-4125" }
-    ]
+    "contacts": [{ "name": "Jeff Sandel", "phone": "(832) 741-4125" }]
   },
   {
     "id": "83013",
