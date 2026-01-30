@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.4] - 2026-01-30
+
+- Code formatting and cleanup
+
 ## [1.3] - 2026-01-30
 
 - Simplified README.md content by removing detailed sections on development setup, design guidelines, and project structure details.
