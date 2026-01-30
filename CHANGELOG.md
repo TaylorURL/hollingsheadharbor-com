@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.5] - 2026-01-30
+
+- Updated logo image in public/logo.jpg with a new version (file size increased from 219599 to 497692 bytes)
+
 ## [1.4] - 2026-01-30
 
 - Code formatting and cleanup
