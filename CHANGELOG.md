@@ -2,6 +2,15 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.1] - 2026-02-02
+
+- Added new dependency `turl-release` from GitHub repository `bradley-t-t/turl-release` in `package.json` and `package-lock.json`
+- Updated `release` script in `package.json` to use `turl-release` instead of the previous custom script
+- Removed custom scripts `cleanup.js` and `release.js` from the `scripts` directory
+- Removed `cleanup` script from `package.json`
+- Added new file `public/turl.json` with version and project metadata
+- Removed file `public/version.json` with old version metadata
+
 ## [1.6] - 2026-02-01
 
 - Added new vercel.json configuration file
