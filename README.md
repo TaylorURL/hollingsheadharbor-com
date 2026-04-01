@@ -5,12 +5,12 @@
 <p align="center"><strong>Marine Transportation & Port Services — A Division of SRM Concrete</strong></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.1-blue?style=flat-square" alt="Version 1.1" />
-  <img src="https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=white" alt="React 19.2" />
-  <img src="https://img.shields.io/badge/Vite-7.2-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 7.2" />
-  <img src="https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind 3.4" />
-  <img src="https://img.shields.io/badge/React_Router-7-CA4245?style=flat-square&logo=reactrouter&logoColor=white" alt="React Router 7" />
-  <img src="https://img.shields.io/badge/Leaflet-OpenStreetMap-199900?style=flat-square&logo=leaflet&logoColor=white" alt="Leaflet / OpenStreetMap" />
+  <img src="https://img.shields.io/badge/v1.2-release-1e3a5f" alt="v1.2" />
+  <img src="https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white" alt="React 19.2" />
+  <img src="https://img.shields.io/badge/Vite-7.2-646CFF?logo=vite&logoColor=white" alt="Vite 7.2" />
+  <img src="https://img.shields.io/badge/Tailwind-3.4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind 3.4" />
+  <img src="https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=white" alt="React Router 7" />
+  <img src="https://img.shields.io/badge/Leaflet-OpenStreetMap-199900?logo=leaflet&logoColor=white" alt="Leaflet / OpenStreetMap" />
 </p>
 
 ---
@@ -76,7 +76,7 @@ Leadership is presented via cards driven by `team.json`: Mike Hollingshead (Chai
 
 ## Project Stats
 
-| Metric | Count |
+| Metric | Value |
 |---|---|
 | Routes | 7 |
 | Harbor Locations | 13 |
