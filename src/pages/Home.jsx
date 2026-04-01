@@ -8,6 +8,7 @@ import services from '../data/services.json';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const SECTION_CONTAINER = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
+const FEATURED_SERVICES_COUNT = 3;
 
 const PORT_STATES = [
   { abbreviation: 'AL', color: 'bg-blue-800' },
@@ -16,6 +17,8 @@ const PORT_STATES = [
   { abbreviation: 'TN', color: 'bg-red-600' },
   { abbreviation: 'TX', color: 'bg-blue-800' },
 ];
+
+const RELIABLE_SERVICE_ICON_PATH = 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z';
 
 const FEATURE_CARDS = [
   {
@@ -35,24 +38,39 @@ const FEATURE_CARDS = [
   },
 ];
 
+const STAT_STYLES = {
+  outline: {
+    container: 'bg-white border-2 border-gray-100 shadow-sm',
+    label: 'text-gray-500 text-sm',
+  },
+  red: {
+    container: 'bg-red-600 text-white flex flex-col justify-end',
+    label: 'text-red-100 text-xs',
+  },
+  blue: {
+    container: 'bg-blue-800 text-white',
+    label: 'text-blue-200 text-xs',
+  },
+};
+
 const STATS = [
-  { value: '5', label: 'Strategic Ports', span: 2, variant: 'outline', textColor: 'text-blue-800' },
-  { value: '24/7', label: 'Operations', span: 1, variant: 'red' },
-  { value: '100+', label: 'Acquisitions', span: 1, variant: 'blue' },
-  { value: '1999', label: 'SRM Founded', span: 2, variant: 'outline', textColor: 'text-gray-900' },
+  {
+    value: '5',
+    label: 'Strategic Ports',
+    columnSpan: 2,
+    variant: 'outline',
+    textColor: 'text-blue-800',
+  },
+  { value: '24/7', label: 'Operations', columnSpan: 1, variant: 'red' },
+  { value: '100+', label: 'Acquisitions', columnSpan: 1, variant: 'blue' },
+  {
+    value: '1999',
+    label: 'SRM Founded',
+    columnSpan: 2,
+    variant: 'outline',
+    textColor: 'text-gray-900',
+  },
 ];
-
-const STAT_VARIANTS = {
-  outline: 'bg-white border-2 border-gray-100 shadow-sm',
-  red: 'bg-red-600 text-white',
-  blue: 'bg-blue-800 text-white',
-};
-
-const STAT_LABEL_COLORS = {
-  outline: 'text-gray-500 text-sm',
-  red: 'text-red-100 text-xs',
-  blue: 'text-blue-200 text-xs',
-};
 
 const ACCENT_STYLES = {
   'red-600': {
@@ -69,6 +87,15 @@ const ACCENT_STYLES = {
   },
 };
 
+/** Reusable outline-stroke SVG icon for feature and hero cards */
+function StrokeIcon({ path, className = 'w-7 h-7' }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={path} />
+    </svg>
+  );
+}
+
 function FeatureCard({ title, description, iconPath, accentColor, staggerIndex }) {
   const { borderHover, iconBg, iconHoverBg, iconColor } = ACCENT_STYLES[accentColor];
 
@@ -79,14 +106,10 @@ function FeatureCard({ title, description, iconPath, accentColor, staggerIndex }
       <div
         className={`w-14 h-14 ${iconBg} rounded-2xl flex items-center justify-center mb-6 ${iconHoverBg} transition-colors`}
       >
-        <svg
+        <StrokeIcon
+          path={iconPath}
           className={`w-7 h-7 ${iconColor} group-hover:text-white transition-colors`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPath} />
-        </svg>
+        />
       </div>
       <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
       <p className="text-gray-500 text-sm">{description}</p>
@@ -94,26 +117,66 @@ function FeatureCard({ title, description, iconPath, accentColor, staggerIndex }
   );
 }
 
-function StatCard({ value, label, span, variant, textColor }) {
-  const isLargeValue = value.length <= 2;
+function StatCard({ value, label, columnSpan, variant, textColor }) {
+  const { container, label: labelClass } = STAT_STYLES[variant];
+  const valueSize = value.length <= 2 ? 'text-5xl mb-2' : 'text-3xl mb-1';
 
   return (
-    <div
-      className={`${span === 2 ? 'col-span-2' : ''} ${STAT_VARIANTS[variant]} rounded-2xl p-6 ${variant === 'red' ? 'flex flex-col justify-end' : ''}`}
-    >
-      <div
-        className={`${isLargeValue ? 'text-5xl mb-2' : 'text-3xl mb-1'} font-black ${textColor ?? ''}`}
-      >
-        {value}
+    <div className={`${columnSpan === 2 ? 'col-span-2' : ''} ${container} rounded-2xl p-6`}>
+      <div className={`${valueSize} font-black ${textColor ?? ''}`}>{value}</div>
+      <div className={labelClass}>{label}</div>
+    </div>
+  );
+}
+
+/** External link to the sales rep page with consistent styling */
+function SalesRepLink({ children, className }) {
+  return (
+    <a href={SALES_REP_URL} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </a>
+  );
+}
+
+function ReliableServiceCard() {
+  return (
+    <div className="group relative bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl p-8 text-white overflow-hidden scroll-animate stagger-1 hover:scale-[1.02] transition-transform duration-500">
+      <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-red-600/20 rounded-full translate-y-1/2 -translate-x-1/2" />
+      <div className="relative">
+        <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <StrokeIcon path={RELIABLE_SERVICE_ICON_PATH} className="w-7 h-7 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold mb-3">Reliable Service</h3>
+        <p className="text-blue-100 leading-relaxed">
+          On-time delivery and professional maritime logistics you can count on, backed by decades
+          of industry experience.
+        </p>
       </div>
-      <div className={STAT_LABEL_COLORS[variant]}>{label}</div>
+    </div>
+  );
+}
+
+function ReadyToShipCard() {
+  return (
+    <div className="group relative bg-gray-900 rounded-3xl p-8 overflow-hidden scroll-animate stagger-4 hover:scale-[1.02] transition-transform duration-500">
+      <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-blue-800/20" />
+      <div className="relative flex items-center justify-between">
+        <div>
+          <h3 className="text-2xl font-bold text-white mb-2">Ready to Ship?</h3>
+          <p className="text-gray-400">Connect with our team today.</p>
+        </div>
+        <SalesRepLink className="flex items-center justify-center w-14 h-14 bg-red-600 rounded-2xl hover:bg-red-700 transition-colors">
+          <ArrowIcon className="w-6 h-6 text-white" />
+        </SalesRepLink>
+      </div>
     </div>
   );
 }
 
 function Home() {
   useScrollAnimation();
-  const featuredServices = services.slice(0, 3);
+  const featuredServices = services.slice(0, FEATURED_SERVICES_COUNT);
 
   return (
     <div>
@@ -126,7 +189,7 @@ function Home() {
 
       {/* Why Hollingshead Harbor */}
       <section className="py-28 bg-white relative">
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent" />
         <div className={SECTION_CONTAINER}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 lg:sticky lg:top-32 scroll-animate-left">
@@ -160,59 +223,15 @@ function Home() {
             </div>
 
             <div className="lg:col-span-7 space-y-6">
-              {/* Reliable Service hero card */}
-              <div className="group relative bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl p-8 text-white overflow-hidden scroll-animate stagger-1 hover:scale-[1.02] transition-transform duration-500">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-red-600/20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-                <div className="relative">
-                  <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <svg
-                      className="w-7 h-7 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">Reliable Service</h3>
-                  <p className="text-blue-100 leading-relaxed">
-                    On-time delivery and professional maritime logistics you can count on, backed by
-                    decades of industry experience.
-                  </p>
-                </div>
-              </div>
+              <ReliableServiceCard />
 
-              {/* Feature cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {FEATURE_CARDS.map((card) => (
                   <FeatureCard key={card.title} {...card} />
                 ))}
               </div>
 
-              {/* Ready to Ship CTA */}
-              <div className="group relative bg-gray-900 rounded-3xl p-8 overflow-hidden scroll-animate stagger-4 hover:scale-[1.02] transition-transform duration-500">
-                <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-blue-800/20"></div>
-                <div className="relative flex items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Ready to Ship?</h3>
-                    <p className="text-gray-400">Connect with our team today.</p>
-                  </div>
-                  <a
-                    href={SALES_REP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-14 h-14 bg-red-600 rounded-2xl hover:bg-red-700 transition-colors"
-                  >
-                    <ArrowIcon className="w-6 h-6 text-white" />
-                  </a>
-                </div>
-              </div>
+              <ReadyToShipCard />
             </div>
           </div>
         </div>
@@ -221,7 +240,7 @@ function Home() {
       {/* Services */}
       <section className="py-28 bg-gray-50 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-800/5 to-red-600/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-800/5 to-red-600/5 rounded-full blur-3xl" />
         </div>
         <div className={`${SECTION_CONTAINER} relative`}>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 scroll-animate">
@@ -256,12 +275,12 @@ function Home() {
       <section className="py-28 bg-white">
         <div className={SECTION_CONTAINER}>
           <div className="relative bg-gray-50 rounded-[3rem] p-12 md:p-20 overflow-hidden scroll-animate">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(42,61,99,0.08),transparent_50%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(220,38,38,0.08),transparent_50%)]"></div>
-            <div className="absolute top-10 right-10 w-32 h-32 border-2 border-blue-800/10 rounded-full"></div>
-            <div className="absolute bottom-10 left-10 w-20 h-20 border-2 border-red-600/10 rounded-full"></div>
-            <div className="absolute top-1/2 right-1/4 w-4 h-4 bg-blue-800 rounded-full"></div>
-            <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-red-600 rounded-full"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(42,61,99,0.08),transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(220,38,38,0.08),transparent_50%)]" />
+            <div className="absolute top-10 right-10 w-32 h-32 border-2 border-blue-800/10 rounded-full" />
+            <div className="absolute bottom-10 left-10 w-20 h-20 border-2 border-red-600/10 rounded-full" />
+            <div className="absolute top-1/2 right-1/4 w-4 h-4 bg-blue-800 rounded-full" />
+            <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-red-600 rounded-full" />
 
             <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -296,9 +315,9 @@ function Home() {
 
       {/* Get Started CTA */}
       <section className="py-28 bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-800/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-800/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-600/5 rounded-full blur-3xl" />
         <div className={`${SECTION_CONTAINER} relative`}>
           <div className="text-center max-w-3xl mx-auto mb-16 scroll-animate">
             <SectionBadge color="blue">Get Started</SectionBadge>
@@ -312,17 +331,12 @@ function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
-            <a
-              href={SALES_REP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-10 rounded-full transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40"
-            >
+            <SalesRepLink className="group inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-10 rounded-full transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40">
               Find a Sales Rep
               <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
                 <ArrowIcon className="w-4 h-4" />
               </div>
-            </a>
+            </SalesRepLink>
             <Link
               to="/story"
               className="inline-flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white font-bold py-5 px-10 rounded-full transition-colors"
