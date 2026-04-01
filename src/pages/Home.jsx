@@ -7,6 +7,8 @@ import { SALES_REP_URL } from '../constants/urls';
 import services from '../data/services.json';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
+const SECTION_CONTAINER = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
+
 const PORT_STATES = [
   { abbreviation: 'AL', color: 'bg-blue-800' },
   { abbreviation: 'FL', color: 'bg-red-600' },
@@ -52,12 +54,23 @@ const STAT_LABEL_COLORS = {
   blue: 'text-blue-200 text-xs',
 };
 
+const ACCENT_STYLES = {
+  'red-600': {
+    borderHover: 'hover:border-red-600',
+    iconBg: 'bg-red-600/10',
+    iconHoverBg: 'group-hover:bg-red-600',
+    iconColor: 'text-red-600',
+  },
+  'blue-800': {
+    borderHover: 'hover:border-blue-800',
+    iconBg: 'bg-blue-800/10',
+    iconHoverBg: 'group-hover:bg-blue-800',
+    iconColor: 'text-blue-800',
+  },
+};
+
 function FeatureCard({ title, description, iconPath, accentColor, staggerIndex }) {
-  const isRed = accentColor === 'red-600';
-  const borderHover = isRed ? 'hover:border-red-600' : 'hover:border-blue-800';
-  const iconBg = isRed ? 'bg-red-600/10' : 'bg-blue-800/10';
-  const iconHoverBg = isRed ? 'group-hover:bg-red-600' : 'group-hover:bg-blue-800';
-  const iconColor = isRed ? 'text-red-600' : 'text-blue-800';
+  const { borderHover, iconBg, iconHoverBg, iconColor } = ACCENT_STYLES[accentColor];
 
   return (
     <div
@@ -89,7 +102,7 @@ function StatCard({ value, label, span, variant, textColor }) {
       className={`${span === 2 ? 'col-span-2' : ''} ${STAT_VARIANTS[variant]} rounded-2xl p-6 ${variant === 'red' ? 'flex flex-col justify-end' : ''}`}
     >
       <div
-        className={`${isLargeValue ? 'text-5xl' : 'text-3xl'} font-black ${textColor ?? ''} mb-${isLargeValue ? '2' : '1'}`}
+        className={`${isLargeValue ? 'text-5xl mb-2' : 'text-3xl mb-1'} font-black ${textColor ?? ''}`}
       >
         {value}
       </div>
@@ -114,7 +127,7 @@ function Home() {
       {/* Why Hollingshead Harbor */}
       <section className="py-28 bg-white relative">
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={SECTION_CONTAINER}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 lg:sticky lg:top-32 scroll-animate-left">
               <SectionBadge>Why Hollingshead Harbor</SectionBadge>
@@ -210,7 +223,7 @@ function Home() {
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-800/5 to-red-600/5 rounded-full blur-3xl"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className={`${SECTION_CONTAINER} relative`}>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 scroll-animate">
             <div>
               <SectionBadge color="gray">Services</SectionBadge>
@@ -241,7 +254,7 @@ function Home() {
 
       {/* Our Network */}
       <section className="py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={SECTION_CONTAINER}>
           <div className="relative bg-gray-50 rounded-[3rem] p-12 md:p-20 overflow-hidden scroll-animate">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(42,61,99,0.08),transparent_50%)]"></div>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(220,38,38,0.08),transparent_50%)]"></div>
@@ -272,15 +285,8 @@ function Home() {
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                {STATS.map(({ value, label, span, variant, textColor }) => (
-                  <StatCard
-                    key={value}
-                    value={value}
-                    label={label}
-                    span={span}
-                    variant={variant}
-                    textColor={textColor}
-                  />
+                {STATS.map((stat) => (
+                  <StatCard key={stat.value} {...stat} />
                 ))}
               </div>
             </div>
@@ -293,7 +299,7 @@ function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-800/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-600/5 rounded-full blur-3xl"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className={`${SECTION_CONTAINER} relative`}>
           <div className="text-center max-w-3xl mx-auto mb-16 scroll-animate">
             <SectionBadge color="blue">Get Started</SectionBadge>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
