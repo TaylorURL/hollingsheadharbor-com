@@ -1,4 +1,12 @@
 import { Link } from 'react-router-dom';
+import {
+  SALES_REP_URL,
+  PHONE_NUMBER,
+  PHONE_DISPLAY,
+  TWITTER_URL,
+  LINKEDIN_URL,
+  FACEBOOK_URL,
+} from '../constants/urls';
 
 function Footer() {
   return (
@@ -13,7 +21,7 @@ function Footer() {
               </p>
             </div>
             <a
-              href="https://www.smyrnareadymix.com/customers/sales-rep"
+              href={SALES_REP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-white text-blue-800 font-semibold py-4 px-8 rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
@@ -39,7 +47,7 @@ function Footer() {
               <img src="/logo.jpg" alt="Hollingshead Harbor" className="h-16 w-auto mb-6" />
               <div className="flex space-x-3">
                 <a
-                  href="https://x.com/SRMCONCRETE"
+                  href={TWITTER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-800/10 rounded-xl flex items-center justify-center hover:bg-blue-800 hover:text-white text-blue-800 transition-all duration-300"
@@ -49,7 +57,7 @@ function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.linkedin.com/company/srmconcrete"
+                  href={LINKEDIN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-800/10 rounded-xl flex items-center justify-center hover:bg-blue-800 hover:text-white text-blue-800 transition-all duration-300"
@@ -59,7 +67,7 @@ function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.facebook.com/srmconcrete/"
+                  href={FACEBOOK_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-800/10 rounded-xl flex items-center justify-center hover:bg-blue-800 hover:text-white text-blue-800 transition-all duration-300"
@@ -233,7 +241,7 @@ function Footer() {
               <h3 className="font-bold text-gray-900 mb-6 text-lg">Contact Us</h3>
               <ul className="space-y-4 text-gray-600 text-sm">
                 <li>
-                  <a href="tel:6153551028" className="flex items-center space-x-3 group">
+                  <a href={`tel:${PHONE_NUMBER}`} className="flex items-center space-x-3 group">
                     <div className="w-10 h-10 bg-blue-800/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-800 transition-colors">
                       <svg
                         className="w-5 h-5 text-blue-800 group-hover:text-white transition-colors"
@@ -250,7 +258,7 @@ function Footer() {
                       </svg>
                     </div>
                     <span className="font-medium text-gray-900 group-hover:text-blue-800 transition-colors">
-                      (615) 355-1028
+                      {PHONE_DISPLAY}
                     </span>
                   </a>
                 </li>
