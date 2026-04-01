@@ -2,6 +2,14 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.1] - 2026-04-01
+
+- `package.json` — version bump
+- `public/nit.json` — new file
+- `src/components/Footer.jsx` — refactored with data-driven rendering
+- `src/components/Header.jsx` — social links refactored
+- `src/constants/socialLinks.js` — new shared constants file
+
 ## [1.1] - 2026-02-02
 
 - Added new dependency `turl-release` from GitHub repository `bradley-t-t/turl-release` in `package.json` and `package-lock.json`
