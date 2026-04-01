@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.1] - 2026-04-01
+
+- hollingsheadharbor-com Release v1.1
+
 ## [1.1] - 2026-02-02
 
 - Added new dependency `turl-release` from GitHub repository `bradley-t-t/turl-release` in `package.json` and `package-lock.json`
