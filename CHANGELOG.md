@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.5] - 2026-04-02
+
+- hollingsheadharbor-com Release v1.2.5
+
 ## [1.2.4] - 2026-04-01
 
 - hollingsheadharbor-com Release v1.2.4
