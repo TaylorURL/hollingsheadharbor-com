@@ -9,6 +9,7 @@ import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const SECTION_CONTAINER = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
 const FEATURED_SERVICES_COUNT = 3;
+const SHORT_VALUE_MAX_LENGTH = 2;
 
 const PORT_STATES = [
   { abbreviation: 'AL', color: 'bg-blue-800' },
@@ -119,7 +120,7 @@ function FeatureCard({ title, description, iconPath, accentColor, staggerIndex }
 
 function StatCard({ value, label, columnSpan, variant, textColor }) {
   const { container, label: labelClass } = STAT_STYLES[variant];
-  const valueSize = value.length <= 2 ? 'text-5xl mb-2' : 'text-3xl mb-1';
+  const valueSize = value.length <= SHORT_VALUE_MAX_LENGTH ? 'text-5xl mb-2' : 'text-3xl mb-1';
 
   return (
     <div className={`${columnSpan === 2 ? 'col-span-2' : ''} ${container} rounded-2xl p-6`}>
@@ -174,9 +175,186 @@ function ReadyToShipCard() {
   );
 }
 
+function PortStateBadges() {
+  return (
+    <div className="flex items-center gap-6">
+      <div className="flex -space-x-3">
+        {PORT_STATES.map(({ abbreviation, color }) => (
+          <div
+            key={abbreviation}
+            className={`w-12 h-12 rounded-full ${color} border-4 border-white flex items-center justify-center text-white font-bold text-sm`}
+          >
+            {abbreviation}
+          </div>
+        ))}
+      </div>
+      <span className="text-gray-500 text-sm font-medium">
+        {PORT_STATES.length} Strategic Ports
+      </span>
+    </div>
+  );
+}
+
+function WhyHollingsheadSection() {
+  return (
+    <section className="py-28 bg-white relative">
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent" />
+      <div className={SECTION_CONTAINER}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-5 lg:sticky lg:top-32 scroll-animate-left">
+            <SectionBadge>Why Hollingshead Harbor</SectionBadge>
+            <h2 className="text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6">
+              We Move
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-600">
+                What Matters
+              </span>
+            </h2>
+            <p className="text-gray-500 text-lg leading-relaxed mb-8">
+              From Alabama to Texas, our network of strategic ports ensures your bulk dry cargo
+              reaches its destination efficiently and on time.
+            </p>
+            <PortStateBadges />
+          </div>
+
+          <div className="lg:col-span-7 space-y-6">
+            <ReliableServiceCard />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {FEATURE_CARDS.map((card) => (
+                <FeatureCard key={card.title} {...card} />
+              ))}
+            </div>
+            <ReadyToShipCard />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedServicesSection() {
+  const featuredServices = services.slice(0, FEATURED_SERVICES_COUNT);
+
+  return (
+    <section className="py-28 bg-gray-50 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-800/5 to-red-600/5 rounded-full blur-3xl" />
+      </div>
+      <div className={`${SECTION_CONTAINER} relative`}>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 scroll-animate">
+          <div>
+            <SectionBadge color="gray">Services</SectionBadge>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900">
+              What We <span className="text-red-600">Offer</span>
+            </h2>
+          </div>
+          <Link
+            to="/services"
+            className="group inline-flex items-center gap-2 text-gray-900 font-bold hover:text-blue-800 transition-colors"
+          >
+            All Services
+            <div className="w-10 h-10 rounded-full bg-gray-900 group-hover:bg-blue-800 flex items-center justify-center transition-colors">
+              <ArrowIcon className="w-5 h-5 text-white" />
+            </div>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {featuredServices.map((service, index) => (
+            <div key={service.id} className={`scroll-animate stagger-${index + 1}`}>
+              <ServiceCard service={service} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NetworkSection() {
+  return (
+    <section className="py-28 bg-white">
+      <div className={SECTION_CONTAINER}>
+        <div className="relative bg-gray-50 rounded-[3rem] p-12 md:p-20 overflow-hidden scroll-animate">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(42,61,99,0.08),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(220,38,38,0.08),transparent_50%)]" />
+          <div className="absolute top-10 right-10 w-32 h-32 border-2 border-blue-800/10 rounded-full" />
+          <div className="absolute bottom-10 left-10 w-20 h-20 border-2 border-red-600/10 rounded-full" />
+          <div className="absolute top-1/2 right-1/4 w-4 h-4 bg-blue-800 rounded-full" />
+          <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-red-600 rounded-full" />
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <SectionBadge className="mb-6">Our Network</SectionBadge>
+              <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
+                Five Ports.
+                <br />
+                One Mission.
+              </h2>
+              <p className="text-gray-500 text-lg leading-relaxed mb-8">
+                Strategic locations across the nation providing access to major inland waterways and
+                coastal shipping routes for efficient cargo transportation.
+              </p>
+              <Link
+                to="/locations"
+                className="inline-flex items-center gap-3 bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 px-8 rounded-full transition-colors"
+              >
+                Explore Locations
+                <ArrowIcon />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {STATS.map((stat) => (
+                <StatCard key={stat.value} {...stat} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GetStartedSection() {
+  return (
+    <section className="py-28 bg-gray-50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-800/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-600/5 rounded-full blur-3xl" />
+      <div className={`${SECTION_CONTAINER} relative`}>
+        <div className="text-center max-w-3xl mx-auto mb-16 scroll-animate">
+          <SectionBadge color="blue">Get Started</SectionBadge>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+            Let's Move Your <span className="text-red-600">Cargo</span>
+          </h2>
+          <p className="text-gray-500 text-lg">
+            Connect with our maritime logistics team to discuss your bulk cargo transportation needs
+            and discover how we can help.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
+          <SalesRepLink className="group inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-10 rounded-full transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40">
+            Find a Sales Rep
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+              <ArrowIcon className="w-4 h-4" />
+            </div>
+          </SalesRepLink>
+          <Link
+            to="/story"
+            className="inline-flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white font-bold py-5 px-10 rounded-full transition-colors"
+          >
+            Our Story
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   useScrollAnimation();
-  const featuredServices = services.slice(0, FEATURED_SERVICES_COUNT);
 
   return (
     <div>
@@ -186,166 +364,10 @@ function Home() {
         ctaText="View Our Services"
         ctaLink="/services"
       />
-
-      {/* Why Hollingshead Harbor */}
-      <section className="py-28 bg-white relative">
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent" />
-        <div className={SECTION_CONTAINER}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5 lg:sticky lg:top-32 scroll-animate-left">
-              <SectionBadge>Why Hollingshead Harbor</SectionBadge>
-              <h2 className="text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6">
-                We Move
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-600">
-                  What Matters
-                </span>
-              </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-8">
-                From Alabama to Texas, our network of strategic ports ensures your bulk dry cargo
-                reaches its destination efficiently and on time.
-              </p>
-              <div className="flex items-center gap-6">
-                <div className="flex -space-x-3">
-                  {PORT_STATES.map(({ abbreviation, color }) => (
-                    <div
-                      key={abbreviation}
-                      className={`w-12 h-12 rounded-full ${color} border-4 border-white flex items-center justify-center text-white font-bold text-sm`}
-                    >
-                      {abbreviation}
-                    </div>
-                  ))}
-                </div>
-                <span className="text-gray-500 text-sm font-medium">
-                  {PORT_STATES.length} Strategic Ports
-                </span>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 space-y-6">
-              <ReliableServiceCard />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {FEATURE_CARDS.map((card) => (
-                  <FeatureCard key={card.title} {...card} />
-                ))}
-              </div>
-
-              <ReadyToShipCard />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="py-28 bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-800/5 to-red-600/5 rounded-full blur-3xl" />
-        </div>
-        <div className={`${SECTION_CONTAINER} relative`}>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 scroll-animate">
-            <div>
-              <SectionBadge color="gray">Services</SectionBadge>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900">
-                What We <span className="text-red-600">Offer</span>
-              </h2>
-            </div>
-            <Link
-              to="/services"
-              className="group inline-flex items-center gap-2 text-gray-900 font-bold hover:text-blue-800 transition-colors"
-            >
-              All Services
-              <div className="w-10 h-10 rounded-full bg-gray-900 group-hover:bg-blue-800 flex items-center justify-center transition-colors">
-                <ArrowIcon className="w-5 h-5 text-white" />
-              </div>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredServices.map((service, index) => (
-              <div key={service.id} className={`scroll-animate stagger-${index + 1}`}>
-                <ServiceCard service={service} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Network */}
-      <section className="py-28 bg-white">
-        <div className={SECTION_CONTAINER}>
-          <div className="relative bg-gray-50 rounded-[3rem] p-12 md:p-20 overflow-hidden scroll-animate">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(42,61,99,0.08),transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(220,38,38,0.08),transparent_50%)]" />
-            <div className="absolute top-10 right-10 w-32 h-32 border-2 border-blue-800/10 rounded-full" />
-            <div className="absolute bottom-10 left-10 w-20 h-20 border-2 border-red-600/10 rounded-full" />
-            <div className="absolute top-1/2 right-1/4 w-4 h-4 bg-blue-800 rounded-full" />
-            <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-red-600 rounded-full" />
-
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <SectionBadge className="mb-6">Our Network</SectionBadge>
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
-                  Five Ports.
-                  <br />
-                  One Mission.
-                </h2>
-                <p className="text-gray-500 text-lg leading-relaxed mb-8">
-                  Strategic locations across the nation providing access to major inland waterways
-                  and coastal shipping routes for efficient cargo transportation.
-                </p>
-                <Link
-                  to="/locations"
-                  className="inline-flex items-center gap-3 bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 px-8 rounded-full transition-colors"
-                >
-                  Explore Locations
-                  <ArrowIcon />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                {STATS.map((stat) => (
-                  <StatCard key={stat.value} {...stat} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Get Started CTA */}
-      <section className="py-28 bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-800/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-600/5 rounded-full blur-3xl" />
-        <div className={`${SECTION_CONTAINER} relative`}>
-          <div className="text-center max-w-3xl mx-auto mb-16 scroll-animate">
-            <SectionBadge color="blue">Get Started</SectionBadge>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              Let's Move Your <span className="text-red-600">Cargo</span>
-            </h2>
-            <p className="text-gray-500 text-lg">
-              Connect with our maritime logistics team to discuss your bulk cargo transportation
-              needs and discover how we can help.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
-            <SalesRepLink className="group inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-10 rounded-full transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40">
-              Find a Sales Rep
-              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
-                <ArrowIcon className="w-4 h-4" />
-              </div>
-            </SalesRepLink>
-            <Link
-              to="/story"
-              className="inline-flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white font-bold py-5 px-10 rounded-full transition-colors"
-            >
-              Our Story
-            </Link>
-          </div>
-        </div>
-      </section>
+      <WhyHollingsheadSection />
+      <FeaturedServicesSection />
+      <NetworkSection />
+      <GetStartedSection />
     </div>
   );
 }
