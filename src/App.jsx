@@ -8,6 +8,7 @@ import Story from './pages/Story';
 import Services from './pages/Services';
 import Locations from './pages/Locations';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="locations" element={<Locations />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
