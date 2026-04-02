@@ -2,6 +2,11 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.6] - 2026-04-02
+
+- Add NotFound page with 404 catch-all route
+- Undefined URLs now show a styled 404 page instead of blank content
+
 ## [1.2.5] - 2026-04-02
 
 - hollingsheadharbor-com Release v1.2.5
