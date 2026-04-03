@@ -288,7 +288,7 @@ function NetworkSection() {
             <div>
               <SectionBadge className="mb-6">Our Network</SectionBadge>
               <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
-                Five Ports.
+                Thirteen Ports.
                 <br />
                 One Mission.
               </h2>
