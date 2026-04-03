@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import LocationMap from '../components/LocationMap';
+import { SALES_REP_URL } from '../constants/urls';
 import locations from '../data/locations.json';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
@@ -281,7 +282,7 @@ function Locations() {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
                 <a
-                  href="https://www.smyrnareadymix.com/customers/sales-rep"
+                  href={SALES_REP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 shadow-lg shadow-red-600/20"

@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.11] - 2026-04-03
+
+- Replace hardcoded sales rep URL with a shared `SALES_REP_URL` constant across `ServiceCard`, `Locations`, and `Services`
+
 ## [1.2.10] - 2026-04-03
 
 - hollingsheadharbor-com Release v1.2.10
