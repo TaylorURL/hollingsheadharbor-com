@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.8] - 2026-04-03
+
+- hollingsheadharbor-com Release v1.2.8
+
 ## [1.2.7] - 2026-04-03
 
 - `package.json` — version bump to 1.2.7
