@@ -15,8 +15,9 @@ const PORT_STATES = [
   { abbreviation: 'AL', color: 'bg-blue-800' },
   { abbreviation: 'FL', color: 'bg-red-600' },
   { abbreviation: 'MI', color: 'bg-blue-800' },
-  { abbreviation: 'TN', color: 'bg-red-600' },
-  { abbreviation: 'TX', color: 'bg-blue-800' },
+  { abbreviation: 'OH', color: 'bg-red-600' },
+  { abbreviation: 'TN', color: 'bg-blue-800' },
+  { abbreviation: 'TX', color: 'bg-red-600' },
 ];
 
 const RELIABLE_SERVICE_ICON_PATH = 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z';
@@ -56,7 +57,7 @@ const STAT_STYLES = {
 
 const STATS = [
   {
-    value: '5',
+    value: '6',
     label: 'Strategic Ports',
     columnSpan: 2,
     variant: 'outline',
