@@ -91,7 +91,7 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
     }
   }, [selectedLocation]);
 
-  return <div ref={mapRef} className="w-full h-full rounded-2xl" style={{ minHeight: '400px' }} />;
+  return <div ref={mapRef} className="w-full h-full min-h-[400px] rounded-2xl" />;
 }
 
 export default LocationMap;
