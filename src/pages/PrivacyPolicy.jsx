@@ -16,9 +16,9 @@ function PrivacyPolicy() {
           <div className="prose prose-lg max-w-none">
             <div className="scroll-animate">
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                This privacy notice discloses the privacy practices for (www.smyrnareadymix.com).
-                This privacy notice applies solely to information collected by this website. It will
-                notify you of the following:
+                This privacy notice discloses the privacy practices for
+                (www.hollingsheadharbor.com). This privacy notice applies solely to information
+                collected by this website. It will notify you of the following:
               </p>
 
               <ul className="space-y-3 text-gray-600 mb-12">
