@@ -25,7 +25,7 @@ function About() {
               </h2>
               <p className="text-gray-500 text-xl leading-relaxed mb-10">
                 Hollingshead Harbor offers efficient marine transportation of bulk dry cargo from
-                our network of ports in Alabama, Florida, Michigan, Tennessee, and Texas.
+                our network of ports in Alabama, Florida, Michigan, Ohio, Tennessee, and Texas.
               </p>
 
               <div className="space-y-4">
