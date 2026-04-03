@@ -2,6 +2,11 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.12] - 2026-04-03
+
+- Consolidated the `SOCIAL_LINKS` array (Twitter, LinkedIn, Facebook) into a single shared definition in `src/constants/urls.js`, removing the duplicate copies that previously existed in both `Header.jsx` and `Footer.jsx`
+- Updated both components to import `SOCIAL_LINKS` from the shared constants file instead of defining them locally
+
 ## [1.2.11] - 2026-04-03
 
 - Replace hardcoded sales rep URL with a shared `SALES_REP_URL` constant across `ServiceCard`, `Locations`, and `Services`
