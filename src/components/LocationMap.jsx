@@ -41,14 +41,7 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
     locations.forEach((location) => {
       const markerIcon = L.divIcon({
         className: 'custom-marker',
-        html: `<div style="
-          width: 24px;
-          height: 24px;
-          background-color: #dc2626;
-          border: 3px solid white;
-          border-radius: 50%;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        "></div>`,
+        html: `<div class="w-6 h-6 bg-red-600 border-[3px] border-white rounded-full shadow-lg"></div>`,
         iconSize: [24, 24],
         iconAnchor: [12, 12],
       });
@@ -56,11 +49,11 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
       const marker = L.marker([location.lat, location.lng], { icon: markerIcon }).addTo(
         mapInstanceRef.current
       ).bindPopup(`
-          <div style="padding: 4px; min-width: 180px;">
-            <h3 style="font-weight: bold; font-size: 14px; margin: 0 0 6px 0; color: #1e3a5f;">${location.name}</h3>
-            <p style="margin: 0 0 2px 0; color: #666; font-size: 12px;">${location.address}</p>
-            <p style="margin: 0 0 6px 0; color: #666; font-size: 12px;">${location.city}, ${location.state} ${location.zip}</p>
-            ${location.phone ? `<p style="margin: 0; color: #dc2626; font-weight: 600; font-size: 12px;">${location.phone}</p>` : ''}
+          <div class="p-1 min-w-[180px]">
+            <h3 class="font-bold text-sm m-0 mb-1.5 text-[#1e3a5f]">${location.name}</h3>
+            <p class="m-0 mb-0.5 text-gray-500 text-xs">${location.address}</p>
+            <p class="m-0 mb-1.5 text-gray-500 text-xs">${location.city}, ${location.state} ${location.zip}</p>
+            ${location.phone ? `<p class="m-0 text-red-600 font-semibold text-xs">${location.phone}</p>` : ''}
           </div>
         `);
 
