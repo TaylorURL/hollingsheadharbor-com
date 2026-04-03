@@ -2,6 +2,13 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.7] - 2026-04-03
+
+- `package.json` — version bump to 1.2.7
+- `public/nit.json` — metadata update
+- `src/components/GoogleMap.jsx` — inline style to Tailwind
+- `src/components/LocationMap.jsx` — inline style to Tailwind
+
 ## [1.2.6] - 2026-04-02
 
 - Add NotFound page with 404 catch-all route

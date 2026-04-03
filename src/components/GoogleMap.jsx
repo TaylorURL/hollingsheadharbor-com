@@ -221,10 +221,7 @@ function GoogleMap({ locations, selectedLocation, onMarkerClick }) {
 
   if (mapError) {
     return (
-      <div
-        className="w-full h-full rounded-2xl bg-gray-100 flex flex-col items-center justify-center p-8 text-center"
-        style={{ minHeight: '400px' }}
-      >
+      <div className="w-full h-full min-h-[400px] rounded-2xl bg-gray-100 flex flex-col items-center justify-center p-8 text-center">
         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
           <svg
             className="w-8 h-8 text-blue-800"
@@ -265,7 +262,7 @@ function GoogleMap({ locations, selectedLocation, onMarkerClick }) {
     );
   }
 
-  return <div ref={mapRef} className="w-full h-full rounded-2xl" style={{ minHeight: '400px' }} />;
+  return <div ref={mapRef} className="w-full h-full min-h-[400px] rounded-2xl" />;
 }
 
 export default GoogleMap;
