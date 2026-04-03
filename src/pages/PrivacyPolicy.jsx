@@ -115,7 +115,7 @@ function PrivacyPolicy() {
                 <div className="space-y-4 text-blue-100">
                   <p>
                     By opting into SMS from a web form or other medium, you are agreeing to receive
-                    SMS messages from SRM Concrete.
+                    SMS messages from Hollingshead Harbor.
                   </p>
                   <p>
                     This includes SMS messages for conversations (external), conversations (between
@@ -124,12 +124,12 @@ function PrivacyPolicy() {
                   <p>
                     See privacy policy at{' '}
                     <a
-                      href="https://www.smyrnareadymix.com/privacy-policy"
+                      href="https://www.hollingsheadharbor.com/privacy"
                       className="text-white underline hover:no-underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      https://www.smyrnareadymix.com/privacy-policy
+                      https://www.hollingsheadharbor.com/privacy
                     </a>
                   </p>
                   <div className="bg-white/10 rounded-xl p-4 mt-6">
@@ -314,7 +314,7 @@ function PrivacyPolicy() {
                     (615) 355-1028
                   </a>
                   <a
-                    href="mailto:info@smyrnareadymix.com"
+                    href="mailto:info@hollingsheadharbor.com"
                     className="inline-flex items-center justify-center bg-blue-800 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-xl transition-colors"
                   >
                     <svg

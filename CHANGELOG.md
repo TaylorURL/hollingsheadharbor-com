@@ -2,6 +2,10 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.13] - 2026-04-03
+
+- hollingsheadharbor-com Release v1.2.13
+
 ## [1.2.12] - 2026-04-03
 
 - Consolidated the `SOCIAL_LINKS` array (Twitter, LinkedIn, Facebook) into a single shared definition in `src/constants/urls.js`, removing the duplicate copies that previously existed in both `Header.jsx` and `Footer.jsx`
