@@ -102,7 +102,7 @@ function Story() {
               <div className="text-gray-500 text-sm font-medium">Acquisitions</div>
             </div>
             <div className="bg-red-600 rounded-3xl p-8 text-center">
-              <div className="text-5xl font-black text-white mb-2">5</div>
+              <div className="text-5xl font-black text-white mb-2">13</div>
               <div className="text-red-100 text-sm font-medium">Port Locations</div>
             </div>
             <div className="bg-gray-900 rounded-3xl p-8 text-center">
