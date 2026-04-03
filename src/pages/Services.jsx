@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import ServiceCard from '../components/ServiceCard';
+import { SALES_REP_URL } from '../constants/urls';
 import services from '../data/services.json';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
@@ -75,7 +76,7 @@ function Services() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="https://www.smyrnareadymix.com/customers/sales-rep"
+                  href={SALES_REP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-10 rounded-full transition-colors shadow-lg shadow-red-600/20"

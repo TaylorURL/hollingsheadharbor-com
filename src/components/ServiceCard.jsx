@@ -1,3 +1,5 @@
+import { SALES_REP_URL } from '../constants/urls';
+
 function ServiceCard({ service }) {
   const getIcon = (iconPlaceholder) => {
     switch (iconPlaceholder) {
@@ -97,7 +99,7 @@ function ServiceCard({ service }) {
           {service.description}
         </p>
         <a
-          href="https://www.smyrnareadymix.com/customers/sales-rep"
+          href={SALES_REP_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-6 flex items-center gap-2 text-blue-800 group-hover:text-white font-semibold transition-colors duration-500"
