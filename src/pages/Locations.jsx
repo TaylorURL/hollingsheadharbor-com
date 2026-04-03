@@ -34,7 +34,10 @@ function Locations() {
 
   return (
     <div>
-      <HeroSection title="Our Locations" subtitle="13 strategic harbor locations across 6 states" />
+      <HeroSection
+        title="Our Locations"
+        subtitle={`${locations.length} strategic harbor locations across ${states.length} states`}
+      />
 
       <section className="py-12 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
