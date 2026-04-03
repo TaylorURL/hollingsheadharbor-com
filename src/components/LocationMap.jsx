@@ -2,6 +2,15 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function LocationMap({ locations, selectedLocation, onMarkerClick }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -50,10 +59,10 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
         mapInstanceRef.current
       ).bindPopup(`
           <div class="p-1 min-w-[180px]">
-            <h3 class="font-bold text-sm m-0 mb-1.5 text-[#1e3a5f]">${location.name}</h3>
-            <p class="m-0 mb-0.5 text-gray-500 text-xs">${location.address}</p>
-            <p class="m-0 mb-1.5 text-gray-500 text-xs">${location.city}, ${location.state} ${location.zip}</p>
-            ${location.phone ? `<p class="m-0 text-red-600 font-semibold text-xs">${location.phone}</p>` : ''}
+            <h3 class="font-bold text-sm m-0 mb-1.5 text-[#1e3a5f]">${escapeHtml(location.name)}</h3>
+            <p class="m-0 mb-0.5 text-gray-500 text-xs">${escapeHtml(location.address)}</p>
+            <p class="m-0 mb-1.5 text-gray-500 text-xs">${escapeHtml(location.city)}, ${escapeHtml(location.state)} ${escapeHtml(location.zip)}</p>
+            ${location.phone ? `<p class="m-0 text-red-600 font-semibold text-xs">${escapeHtml(location.phone)}</p>` : ''}
           </div>
         `);
 
