@@ -124,12 +124,12 @@ function PrivacyPolicy() {
                   <p>
                     See privacy policy at{' '}
                     <a
-                      href="https://www.hollingsheadharbor.com/privacy"
+                      href="https://www.hollingsheadharbor.com/privacy-policy"
                       className="text-white underline hover:no-underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      https://www.hollingsheadharbor.com/privacy
+                      https://www.hollingsheadharbor.com/privacy-policy
                     </a>
                   </p>
                   <div className="bg-white/10 rounded-xl p-4 mt-6">
