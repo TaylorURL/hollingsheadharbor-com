@@ -11,6 +11,12 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+const COORD_EPSILON = 1e-6;
+
+function coordsMatch(a, b) {
+  return Math.abs(a.lat - b.lat) < COORD_EPSILON && Math.abs(a.lng - b.lng) < COORD_EPSILON;
+}
+
 function LocationMap({ locations, selectedLocation, onMarkerClick }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -26,7 +32,7 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
+      attribution: '\u00a9 OpenStreetMap contributors',
     }).addTo(map);
 
     mapInstanceRef.current = map;
@@ -83,7 +89,7 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
     if (selectedLocation && mapInstanceRef.current) {
       const marker = markersRef.current.find((m) => {
         const latLng = m.getLatLng();
-        return latLng.lat === selectedLocation.lat && latLng.lng === selectedLocation.lng;
+        return coordsMatch(latLng, selectedLocation);
       });
 
       if (marker) {
