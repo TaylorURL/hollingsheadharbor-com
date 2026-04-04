@@ -2,6 +2,13 @@
 
 All notable changes to Hollingshead Harbor will be documented in this file.
 
+## [1.2.19] - 2026-04-04
+
+- `package.json`
+- `package-lock.json`
+- `public/nit.json`
+- `src/data/locations.json`
+
 ## [1.2.18] - 2026-04-03
 
 - hollingsheadharbor-com Release v1.2.18
