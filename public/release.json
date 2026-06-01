@@ -2,8 +2,5 @@
   "version": "1.2.19",
   "projectName": "hollingsheadharbor-com",
   "branch": "main",
-  "provider": "claude-code",
-  "cleanLogs": true,
-  "cleanCss": false,
-  "hooks": {}
+  "provider": "claude-code"
 }
