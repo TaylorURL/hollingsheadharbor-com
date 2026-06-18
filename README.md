@@ -5,7 +5,7 @@
 <p align="center"><strong>Marine Transportation & Port Services — A Division of SRM Concrete</strong></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/v1.2-release-1e3a5f" alt="v1.2" />
+  <img src="https://img.shields.io/badge/v1.2.20-release-1e3a5f" alt="v1.2.20" />
   <img src="https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white" alt="React 19.2" />
   <img src="https://img.shields.io/badge/Vite-7.2-646CFF?logo=vite&logoColor=white" alt="Vite 7.2" />
   <img src="https://img.shields.io/badge/Tailwind-3.4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind 3.4" />
