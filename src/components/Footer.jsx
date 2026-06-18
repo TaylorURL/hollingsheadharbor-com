@@ -251,6 +251,17 @@ function Footer() {
               <span className="font-semibold text-gray-700">Smyrna Ready Mix</span>
             </div>
           </div>
+          <p className="text-gray-400 text-xs text-center mt-4">
+            Site made by{' '}
+            <a
+              href="https://taylorurl.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-blue-800 transition-colors"
+            >
+              TaylorURL.com
+            </a>
+          </p>
         </div>
       </div>
     </footer>
