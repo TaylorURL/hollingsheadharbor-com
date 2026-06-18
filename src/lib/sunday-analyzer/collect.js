@@ -1,9 +1,9 @@
-import { resolveSessionId } from './session'
+import { resolveSessionId } from './session';
 
 /** Read a UTM param, returning null when absent so the server stores null. */
 function utm(params, key) {
-  const value = params.get(key)
-  return value && value.trim() ? value.trim() : null
+  const value = params.get(key);
+  return value && value.trim() ? value.trim() : null;
 }
 
 /**
@@ -15,8 +15,8 @@ function utm(params, key) {
  * @returns {Record<string, unknown>} the hit payload
  */
 export function collectPageview(siteKey) {
-  const { location, document, navigator, screen } = window
-  const params = new URLSearchParams(location.search)
+  const { location, document, navigator, screen } = window;
+  const params = new URLSearchParams(location.search);
   return {
     siteKey,
     sessionId: resolveSessionId(),
@@ -30,5 +30,5 @@ export function collectPageview(siteKey) {
     screen: screen ? `${screen.width}x${screen.height}` : null,
     language: navigator.language || null,
     userAgent: navigator.userAgent || null,
-  }
+  };
 }

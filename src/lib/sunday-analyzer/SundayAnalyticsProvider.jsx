@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { SundayAnalyticsContext } from './context'
-import { DEFAULT_API_URL } from './constants'
-import { collectPageview } from './collect'
-import { sendHit } from './transport'
-import { subscribeToRouteChanges } from './history'
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { SundayAnalyticsContext } from './context';
+import { DEFAULT_API_URL } from './constants';
+import { collectPageview } from './collect';
+import { sendHit } from './transport';
+import { subscribeToRouteChanges } from './history';
 
 /**
  * SundayAnalyticsProvider — drop-in, router-agnostic pageview tracking.
@@ -21,29 +21,29 @@ import { subscribeToRouteChanges } from './history'
 export function SundayAnalyticsProvider({ siteKey, apiUrl = DEFAULT_API_URL, children }) {
   // Dedupe consecutive hits for the same path — replaceState often fires for
   // in-place state updates that aren't real navigations.
-  const lastPathRef = useRef(null)
+  const lastPathRef = useRef(null);
 
   useEffect(() => {
-    if (!siteKey || typeof window === 'undefined') return undefined
+    if (!siteKey || typeof window === 'undefined') return undefined;
 
     const trackPageview = () => {
-      const path = `${window.location.pathname}${window.location.search}`
-      if (path === lastPathRef.current) return
-      lastPathRef.current = path
-      sendHit(apiUrl, collectPageview(siteKey))
-    }
+      const path = `${window.location.pathname}${window.location.search}`;
+      if (path === lastPathRef.current) return;
+      lastPathRef.current = path;
+      sendHit(apiUrl, collectPageview(siteKey));
+    };
 
-    trackPageview()
-    return subscribeToRouteChanges(trackPageview)
-  }, [siteKey, apiUrl])
+    trackPageview();
+    return subscribeToRouteChanges(trackPageview);
+  }, [siteKey, apiUrl]);
 
   // Reserved custom-event API. v1 stores pageviews only, so track() is an
   // intentional no-op exposed for forward-compatibility.
-  const track = useCallback(() => {}, [])
+  const track = useCallback(() => {}, []);
 
-  const api = useMemo(() => ({ track }), [track])
+  const api = useMemo(() => ({ track }), [track]);
 
-  return <SundayAnalyticsContext.Provider value={api}>{children}</SundayAnalyticsContext.Provider>
+  return <SundayAnalyticsContext.Provider value={api}>{children}</SundayAnalyticsContext.Provider>;
 }
 
-export default SundayAnalyticsProvider
+export default SundayAnalyticsProvider;

@@ -11,12 +11,12 @@
  * @param {Record<string, unknown>} payload - the hit payload
  */
 export function sendHit(apiUrl, payload) {
-  if (typeof window === 'undefined') return
-  const body = JSON.stringify(payload)
+  if (typeof window === 'undefined') return;
+  const body = JSON.stringify(payload);
 
   if (typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
-    const blob = new Blob([body], { type: 'text/plain;charset=UTF-8' })
-    if (navigator.sendBeacon(apiUrl, blob)) return
+    const blob = new Blob([body], { type: 'text/plain;charset=UTF-8' });
+    if (navigator.sendBeacon(apiUrl, blob)) return;
   }
 
   if (typeof fetch === 'function') {
@@ -27,6 +27,6 @@ export function sendHit(apiUrl, payload) {
       headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
     }).catch(() => {
       // Analytics is best-effort; a dropped hit must never surface to the host app.
-    })
+    });
   }
 }
