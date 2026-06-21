@@ -3,36 +3,32 @@ import { SALES_REP_URL } from '../constants/urls';
 
 function ServiceCard({ service }) {
   return (
-    <div className="group relative overflow-hidden rounded-3xl border-2 border-gray-100 bg-white transition-all duration-500 hover:border-transparent hover:shadow-2xl">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative p-8">
-        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 transition-colors duration-500 group-hover:bg-white/20">
-          <Icon
-            name={service.icon}
-            className="h-8 w-8 text-blue-800 transition-colors duration-500 group-hover:text-white"
-            strokeWidth={1.5}
-          />
-        </div>
-        <h3 className="mb-3 text-xl font-bold text-gray-900 transition-colors duration-500 group-hover:text-white">
-          {service.title}
-        </h3>
-        <p className="leading-relaxed text-gray-500 transition-colors duration-500 group-hover:text-blue-100">
-          {service.description}
-        </p>
-        <a
-          href={SALES_REP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 flex items-center gap-2 font-semibold text-blue-800 transition-colors duration-500 group-hover:text-white"
-        >
-          <span className="text-sm">Learn more</span>
-          <Icon
-            name="arrow-right"
-            className="h-4 w-4 transition-transform group-hover:translate-x-1"
-          />
-        </a>
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white p-8 transition-all duration-300 ease-out-quint hover:-translate-y-1 hover:border-navy-200 hover:shadow-card-hover">
+      <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-red-600 transition-transform duration-300 ease-out-quint group-hover:scale-x-100" />
+
+      <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-xl bg-navy-50 text-navy-800 transition-colors duration-300 group-hover:bg-navy-800 group-hover:text-white">
+        <Icon name={service.icon} className="h-7 w-7" strokeWidth={1.5} />
       </div>
-    </div>
+
+      <h3 className="font-display text-2xl font-bold tracking-tight text-ink">{service.title}</h3>
+
+      <p className="mt-3 flex-grow text-[15px] leading-relaxed text-gray-600">
+        {service.description}
+      </p>
+
+      <a
+        href={SALES_REP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-7 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-eyebrow text-red-600 transition-colors duration-200 hover:text-red-700"
+      >
+        Talk to a rep
+        <Icon
+          name="arrow-right"
+          className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+        />
+      </a>
+    </article>
   );
 }
 
