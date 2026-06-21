@@ -1,150 +1,319 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import LocationMap from '../components/LocationMap';
+import SectionBadge from '../components/SectionBadge';
+import Icon from '../components/Icon';
 import { SALES_REP_URL } from '../constants/urls';
 import locations from '../data/locations.json';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
+const STATE_NAMES = {
+  AL: 'Alabama',
+  FL: 'Florida',
+  MI: 'Michigan',
+  OH: 'Ohio',
+  TN: 'Tennessee',
+  TX: 'Texas',
+};
+
+function normalize(value) {
+  return value.toLowerCase();
+}
+
+function filterLocations(rows, { stateCode, query }) {
+  const needle = normalize(query.trim());
+  return rows.filter((loc) => {
+    const stateMatch = stateCode === 'all' || loc.state === stateCode;
+    if (!stateMatch) return false;
+    if (!needle) return true;
+    return normalize(loc.name).includes(needle) || normalize(loc.city).includes(needle);
+  });
+}
+
+function StateChip({ label, count, isActive, onClick, tone }) {
+  const activeClasses =
+    tone === 'red'
+      ? 'bg-red-600 text-white shadow-card'
+      : 'bg-navy-800 text-white shadow-card';
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-eyebrow transition-colors duration-200 ${
+        isActive ? activeClasses : 'bg-white text-navy-800 hover:bg-navy-50 border border-navy-100'
+      }`}
+    >
+      {label}
+      <span className={`text-[10px] ${isActive ? 'text-white/70' : 'text-gray-400'}`}>
+        ({count})
+      </span>
+    </button>
+  );
+}
+
+function SearchAndFilterBar({ query, onQueryChange, stateCode, onStateChange, states, totals }) {
+  const hasFilter = stateCode !== 'all' || query !== '';
+  return (
+    <section className="border-b border-navy-100 bg-white py-10">
+      <div className="container-page">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative w-full max-w-md">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+              <Icon name="search" className="h-5 w-5" />
+            </span>
+            <input
+              type="search"
+              placeholder="Search by harbor name or city"
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
+              className="w-full rounded-full border border-navy-100 bg-mist-50/60 py-3 pl-12 pr-12 text-sm text-ink placeholder-gray-400 transition-all duration-200 focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-navy-800"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => onQueryChange('')}
+                aria-label="Clear search"
+                className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-navy-800"
+              >
+                <Icon name="close" className="h-5 w-5" />
+              </button>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <StateChip
+              label="All"
+              count={totals.all}
+              isActive={stateCode === 'all'}
+              onClick={() => onStateChange('all')}
+              tone="navy"
+            />
+            {states.map((state) => (
+              <StateChip
+                key={state}
+                label={state}
+                count={totals.byState[state]}
+                isActive={stateCode === state}
+                onClick={() => onStateChange(state)}
+                tone="red"
+              />
+            ))}
+          </div>
+        </div>
+
+        {hasFilter && (
+          <div className="mt-5 flex items-center gap-4 text-sm text-gray-500">
+            <span>
+              Showing <span className="font-semibold text-ink">{totals.filtered}</span> of{' '}
+              {totals.all}
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                onStateChange('all');
+                onQueryChange('');
+              }}
+              className="inline-flex items-center gap-1 font-semibold text-red-600 hover:text-red-700"
+            >
+              <Icon name="close" className="h-4 w-4" />
+              Clear
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function LocationRow({ location, isSelected, onSelect }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(location)}
+      className={`group relative block w-full border-b border-navy-50 px-5 py-4 text-left transition-colors duration-200 ${
+        isSelected ? 'bg-red-50' : 'bg-white hover:bg-mist-50'
+      }`}
+    >
+      {isSelected && (
+        <span className="absolute inset-y-0 left-0 w-[3px] bg-red-600" aria-hidden="true" />
+      )}
+      <div className="flex items-start gap-3">
+        <span
+          className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${
+            isSelected ? 'bg-red-600 text-white' : 'bg-navy-50 text-navy-800 group-hover:bg-navy-800 group-hover:text-white'
+          }`}
+        >
+          <Icon name="pin" className="h-5 w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h4 className="truncate font-display text-base font-bold tracking-tight text-ink">
+            {location.name}
+          </h4>
+          <p className="text-sm text-gray-500">
+            {location.city}, {location.state}
+          </p>
+          {location.phone && (
+            <a
+              href={`tel:${location.phone.replace(/[^\d]/g, '')}`}
+              onClick={(event) => event.stopPropagation()}
+              className="mt-1 inline-block text-sm font-semibold text-red-600 transition-colors hover:text-red-700"
+            >
+              {location.phone}
+            </a>
+          )}
+        </div>
+        <Icon
+          name="chevron-right"
+          className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
+            isSelected ? 'text-red-600 translate-x-0.5' : 'text-gray-300 group-hover:text-navy-800'
+          }`}
+        />
+      </div>
+    </button>
+  );
+}
+
+function HarborSidebar({ stateCode, filteredLocations, selectedLocation, onSelect, onReset }) {
+  return (
+    <div className="overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-card">
+      <div className="bg-navy-900 px-5 py-4 text-white">
+        <div className="flex items-baseline justify-between">
+          <h3 className="font-display text-lg font-bold tracking-tight">
+            {stateCode === 'all' ? 'All harbors' : STATE_NAMES[stateCode] ?? stateCode}
+          </h3>
+          <span className="text-xs font-semibold uppercase tracking-eyebrow text-white/65">
+            {filteredLocations.length}
+            {filteredLocations.length === 1 ? ' harbor' : ' harbors'}
+          </span>
+        </div>
+      </div>
+      <div className="max-h-[460px] overflow-y-auto">
+        {filteredLocations.length === 0 ? (
+          <div className="p-10 text-center">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-mist-50 text-gray-400">
+              <Icon name="pin" className="h-7 w-7" />
+            </div>
+            <p className="text-gray-500">No harbors match those filters.</p>
+            <button
+              type="button"
+              onClick={onReset}
+              className="mt-4 text-sm font-semibold text-red-600 hover:text-red-700"
+            >
+              Show all harbors
+            </button>
+          </div>
+        ) : (
+          filteredLocations.map((location) => (
+            <LocationRow
+              key={location.id}
+              location={location}
+              isSelected={selectedLocation?.id === location.id}
+              onSelect={onSelect}
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+function NeedShippingSection() {
+  return (
+    <section className="bg-white py-24 md:py-32">
+      <div className="container-page">
+        <div className="relative overflow-hidden rounded-4xl bg-hull-deep p-12 md:p-20 scroll-animate">
+          <div className="pattern-grid-dark absolute inset-0 opacity-40" aria-hidden="true" />
+          <div className="absolute -top-32 -right-32 h-72 w-72 rounded-full bg-red-600/15 blur-3xl" />
+
+          <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+            <div>
+              <SectionBadge color="light">Get started</SectionBadge>
+              <h2 className="mt-5 font-display text-4xl font-black tracking-tight text-white md:text-5xl">
+                Need shipping?
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-white/80">
+                Tell us about your cargo and your timeline. We'll get you talking with the
+                regional rep who knows the right harbor for the job.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+              <a
+                href={SALES_REP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-7 py-3.5 font-semibold text-white shadow-card transition-colors hover:bg-red-700"
+              >
+                Find a sales rep
+                <Icon
+                  name="arrow-right"
+                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                />
+              </a>
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+              >
+                View services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Locations() {
   useScrollAnimation();
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [filterState, setFilterState] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [stateCode, setStateCode] = useState('all');
+  const [query, setQuery] = useState('');
 
-  const states = [...new Set(locations.map((loc) => loc.state))].sort();
+  const states = useMemo(
+    () => [...new Set(locations.map((loc) => loc.state))].sort(),
+    []
+  );
 
-  const filteredLocations = locations.filter((loc) => {
-    const matchesState = filterState === 'all' || loc.state === filterState;
-    const matchesSearch =
-      searchQuery === '' ||
-      loc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      loc.city.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesState && matchesSearch;
-  });
+  const totals = useMemo(() => {
+    const byState = locations.reduce((acc, loc) => {
+      acc[loc.state] = (acc[loc.state] ?? 0) + 1;
+      return acc;
+    }, {});
+    return { all: locations.length, byState };
+  }, []);
 
-  const stateNames = {
-    AL: 'Alabama',
-    FL: 'Florida',
-    MI: 'Michigan',
-    OH: 'Ohio',
-    TN: 'Tennessee',
-    TX: 'Texas',
+  const filteredLocations = useMemo(
+    () => filterLocations(locations, { stateCode, query }),
+    [stateCode, query]
+  );
+
+  const resetFilters = () => {
+    setStateCode('all');
+    setQuery('');
   };
 
   return (
     <div>
       <HeroSection
-        title="Our Locations"
-        subtitle={`${locations.length} strategic harbor locations across ${states.length} states`}
+        title="Our harbors."
+        subtitle={`${locations.length} strategic harbor locations across ${states.length} states.`}
       />
 
-      <section className="py-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div className="relative flex-1 max-w-md">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-              <input
-                type="text"
-                placeholder="Search by harbor name or city..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-transparent focus:bg-white transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
+      <SearchAndFilterBar
+        query={query}
+        onQueryChange={setQuery}
+        stateCode={stateCode}
+        onStateChange={setStateCode}
+        states={states}
+        totals={{ ...totals, filtered: filteredLocations.length }}
+      />
 
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setFilterState('all')}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                  filterState === 'all'
-                    ? 'bg-blue-800 text-white shadow-lg shadow-blue-800/30'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                All ({locations.length})
-              </button>
-              {states.map((state) => (
-                <button
-                  key={state}
-                  onClick={() => setFilterState(state)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                    filterState === state
-                      ? 'bg-red-600 text-white shadow-lg shadow-red-600/30'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  {state} ({locations.filter((l) => l.state === state).length})
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {(filterState !== 'all' || searchQuery) && (
-            <div className="mt-6 flex items-center gap-4">
-              <span className="text-gray-500 text-sm">
-                Showing{' '}
-                <span className="font-semibold text-gray-900">{filteredLocations.length}</span> of{' '}
-                {locations.length} locations
-              </span>
-              {(filterState !== 'all' || searchQuery) && (
-                <button
-                  onClick={() => {
-                    setFilterState('all');
-                    setSearchQuery('');
-                  }}
-                  className="text-red-600 text-sm font-semibold hover:text-red-700 flex items-center gap-1"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                  Clear filters
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-      </section>
-
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <section className="bg-mist-50/60 py-12">
+        <div className="container-page">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8 order-2 lg:order-1">
-              <div className="bg-white rounded-3xl overflow-hidden shadow-xl h-[550px] border border-gray-100 relative z-0">
+              <div className="relative z-0 h-[560px] overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-card">
                 <LocationMap
                   locations={filteredLocations}
                   selectedLocation={selectedLocation}
@@ -152,170 +321,20 @@ function Locations() {
                 />
               </div>
             </div>
-
             <div className="lg:col-span-4 order-1 lg:order-2">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div className="bg-blue-800 p-4">
-                  <h3 className="text-white font-bold">
-                    {filterState === 'all' ? 'All Harbors' : stateNames[filterState] || filterState}
-                  </h3>
-                  <p className="text-blue-200 text-sm">
-                    {filteredLocations.length} location{filteredLocations.length !== 1 ? 's' : ''}
-                  </p>
-                </div>
-                <div className="max-h-[450px] overflow-y-auto">
-                  {filteredLocations.length === 0 ? (
-                    <div className="p-8 text-center">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg
-                          className="w-8 h-8 text-gray-400"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-gray-500">No locations found</p>
-                      <button
-                        onClick={() => {
-                          setFilterState('all');
-                          setSearchQuery('');
-                        }}
-                        className="mt-4 text-blue-800 font-semibold text-sm hover:underline"
-                      >
-                        Show all locations
-                      </button>
-                    </div>
-                  ) : (
-                    filteredLocations.map((location) => (
-                      <div
-                        key={location.id}
-                        onClick={() => setSelectedLocation(location)}
-                        className={`p-4 border-b border-gray-100 cursor-pointer transition-all hover:bg-gray-50 ${
-                          selectedLocation?.id === location.id
-                            ? 'bg-red-50 border-l-4 border-l-red-600'
-                            : ''
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                              selectedLocation?.id === location.id ? 'bg-red-600' : 'bg-blue-800'
-                            }`}
-                          >
-                            <svg
-                              className="w-5 h-5 text-white"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                              />
-                            </svg>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h4 className="font-bold text-gray-900 truncate">{location.name}</h4>
-                            <p className="text-gray-500 text-sm">
-                              {location.city}, {location.state}
-                            </p>
-                            {location.phone && (
-                              <a
-                                href={`tel:${location.phone.replace(/[^\d]/g, '')}`}
-                                onClick={(e) => e.stopPropagation()}
-                                className="text-red-600 text-sm font-medium hover:text-red-700 mt-1 inline-block"
-                              >
-                                {location.phone}
-                              </a>
-                            )}
-                          </div>
-                          <svg
-                            className={`w-5 h-5 text-gray-300 flex-shrink-0 transition-transform ${
-                              selectedLocation?.id === location.id ? 'text-red-600 rotate-90' : ''
-                            }`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
+              <HarborSidebar
+                stateCode={stateCode}
+                filteredLocations={filteredLocations}
+                selectedLocation={selectedLocation}
+                onSelect={setSelectedLocation}
+                onReset={resetFilters}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative bg-gray-50 rounded-[3rem] p-12 md:p-20 overflow-hidden scroll-animate">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(220,38,38,0.08),transparent_50%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(42,61,99,0.08),transparent_50%)]"></div>
-
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-block bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded mb-6 uppercase tracking-wider">
-                  Get Started
-                </div>
-                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">
-                  Need Shipping Solutions?
-                </h2>
-                <p className="text-gray-500 text-lg mb-8">
-                  Connect with our team to discuss your bulk cargo transportation needs. We offer
-                  customized shipping plans tailored to your requirements.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
-                <a
-                  href={SALES_REP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 shadow-lg shadow-red-600/20"
-                >
-                  Find a Sales Rep
-                  <svg
-                    className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </a>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center justify-center bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 px-8 rounded-full transition-colors"
-                >
-                  View Services
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <NeedShippingSection />
     </div>
   );
 }
