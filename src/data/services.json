@@ -1,38 +1,38 @@
 [
   {
-    "id": 1,
+    "id": "bulk-dry-cargo",
     "title": "Bulk Dry Cargo",
-    "description": "Efficient marine transportation of bulk dry cargo including aggregates, cement, and other construction materials across our port network.",
-    "iconPlaceholder": "Cargo Ship Icon"
+    "icon": "ship",
+    "description": "Efficient marine transportation of bulk dry cargo including aggregates, cement, and other construction materials across our port network."
   },
   {
-    "id": 2,
+    "id": "vessel-charter",
     "title": "Vessel Charter",
-    "description": "Vessels for hire to meet your specific shipping needs. Our fleet is maintained to the highest standards for reliable transportation.",
-    "iconPlaceholder": "Vessel Icon"
+    "icon": "vessel",
+    "description": "Vessels for hire to meet your specific shipping needs. Our fleet is maintained to the highest standards for reliable transportation."
   },
   {
-    "id": 3,
+    "id": "barge-charter",
     "title": "Barge Charter",
-    "description": "Barges available for charter for inland waterway transportation. Ideal for moving large quantities of materials efficiently.",
-    "iconPlaceholder": "Barge Icon"
+    "icon": "barge",
+    "description": "Barges available for charter for inland waterway transportation. Ideal for moving large quantities of materials efficiently."
   },
   {
-    "id": 4,
+    "id": "maritime-logistics",
     "title": "Maritime Logistics",
-    "description": "Our skilled team of maritime logistics professionals create catered shipping plans to keep your products moving and arriving on time.",
-    "iconPlaceholder": "Logistics Icon"
+    "icon": "logistics",
+    "description": "Our skilled team of maritime logistics professionals create catered shipping plans to keep your products moving and arriving on time."
   },
   {
-    "id": 5,
+    "id": "port-services",
     "title": "Port Services",
-    "description": "Full-service port operations at our six strategic locations in Alabama, Florida, Michigan, Ohio, Tennessee, and Texas.",
-    "iconPlaceholder": "Port Icon"
+    "icon": "port",
+    "description": "Full-service port operations at our six strategic locations in Alabama, Florida, Michigan, Ohio, Tennessee, and Texas."
   },
   {
-    "id": 6,
+    "id": "material-transport",
     "title": "Material Transport",
-    "description": "Specialized transportation solutions for construction materials with scheduling flexibility and competitive rates.",
-    "iconPlaceholder": "Transport Icon"
+    "icon": "transport",
+    "description": "Specialized transportation solutions for construction materials with scheduling flexibility and competitive rates."
   }
 ]
