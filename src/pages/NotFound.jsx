@@ -11,7 +11,7 @@ function NotFound() {
 
       <div className="container-page relative text-center text-white">
         <SectionBadge color="light">Off course</SectionBadge>
-        <h1 className="mt-6 font-display text-7xl font-black tracking-tight md:text-9xl">404</h1>
+        <h1 className="mt-6 font-display text-7xl font-black tracking-tight text-white md:text-9xl">404</h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-white/75">
           The page you were looking for has slipped its mooring. Let's get you back to home port.
         </p>
