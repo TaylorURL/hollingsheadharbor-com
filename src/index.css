@@ -2,174 +2,162 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------- */
+/* Design tokens — surface, ink, accent, and motion variables.      */
+/* ---------------------------------------------------------------- */
+:root {
+  --surface-canvas: #ffffff;
+  --surface-cool: #f4f6f9;
+  --surface-warm: #f6f1e7;
+  --surface-hull: #0a1228;
+
+  --ink-strong: #0f172a;
+  --ink-body: #4b5563;
+  --ink-muted: #94a3b8;
+
+  --accent-navy: #2a3163;
+  --accent-navy-deep: #1a1f42;
+  --accent-red: #dc2626;
+  --accent-red-deep: #b91c1c;
+  --accent-gold: #b48a3c;
+
+  --border-hairline: rgba(15, 23, 42, 0.08);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink-strong);
+    background-color: var(--surface-canvas);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-feature-settings: 'ss01', 'ss02';
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+
+  #root {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  ::selection {
+    background-color: var(--accent-navy);
+    color: #ffffff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--surface-cool);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-navy);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-navy-deep);
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Scroll-reveal entrance animations.                                */
+/* ---------------------------------------------------------------- */
 @layer utilities {
-  .scroll-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
-  }
-
-  .scroll-animate.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .scroll-animate-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
-  }
-
-  .scroll-animate-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .scroll-animate-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
-  }
-
-  .scroll-animate-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
+  .scroll-animate,
+  .scroll-animate-left,
+  .scroll-animate-right,
   .scroll-animate-scale {
     opacity: 0;
-    transform: scale(0.9);
     transition:
-      opacity 0.5s ease-out,
-      transform 0.5s ease-out;
+      opacity 0.7s var(--ease-out-quint),
+      transform 0.7s var(--ease-out-quint);
+    will-change: transform, opacity;
   }
-
+  .scroll-animate {
+    transform: translateY(20px);
+  }
+  .scroll-animate-left {
+    transform: translateX(-32px);
+  }
+  .scroll-animate-right {
+    transform: translateX(32px);
+  }
+  .scroll-animate-scale {
+    transform: scale(0.96);
+  }
+  .scroll-animate.visible,
+  .scroll-animate-left.visible,
+  .scroll-animate-right.visible,
   .scroll-animate-scale.visible {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 
   .stagger-1 {
-    transition-delay: 0.1s;
+    transition-delay: 0.08s;
   }
   .stagger-2 {
-    transition-delay: 0.2s;
+    transition-delay: 0.16s;
   }
   .stagger-3 {
-    transition-delay: 0.3s;
+    transition-delay: 0.24s;
   }
   .stagger-4 {
-    transition-delay: 0.4s;
+    transition-delay: 0.32s;
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slowZoom {
-  0% {
-    transform: scale(1);
-  }
+/* ---------------------------------------------------------------- */
+/* Hero & decorative motion.                                         */
+/* ---------------------------------------------------------------- */
+@keyframes slow-pan {
+  0%,
   100% {
-    transform: scale(1.1);
-  }
-}
-
-@keyframes slowPan {
-  0% {
-    transform: scale(1.1) translate(0, 0);
+    transform: scale(1.1) translate3d(0, 0, 0);
   }
   25% {
-    transform: scale(1.1) translate(-1%, -1%);
+    transform: scale(1.1) translate3d(-1%, -1%, 0);
   }
   50% {
-    transform: scale(1.1) translate(-2%, 0);
+    transform: scale(1.12) translate3d(-2%, 0, 0);
   }
   75% {
-    transform: scale(1.1) translate(-1%, 1%);
-  }
-  100% {
-    transform: scale(1.1) translate(0, 0);
+    transform: scale(1.1) translate3d(-1%, 1%, 0);
   }
 }
 
 .animate-slow-pan {
-  animation: slowPan 30s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  animation: slow-pan 32s var(--ease-in-out) infinite;
 }
 
 @keyframes pulse-soft {
@@ -178,54 +166,114 @@
     opacity: 1;
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.55;
   }
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+.animate-pulse-soft {
+  animation: pulse-soft 2.4s var(--ease-in-out) infinite;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+/* ---------------------------------------------------------------- */
+/* Brand utilities used across surfaces.                            */
+/* ---------------------------------------------------------------- */
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-eyebrow text-navy-800;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: currentColor;
+  }
+  .eyebrow-on-dark {
+    @apply text-white/80;
+  }
+  .eyebrow-red {
+    @apply text-red-600;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .pattern-grid {
+    background-image:
+      linear-gradient(to right, rgba(42, 49, 99, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(42, 49, 99, 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .pattern-grid-dark {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .pattern-dots {
+    background-image: radial-gradient(rgba(42, 49, 99, 0.18) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2.5 font-semibold rounded-full transition
+      duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-red-600 text-white px-7 py-3.5 shadow-card hover:bg-red-700
+      hover:shadow-card-hover focus-visible:ring-red-600 focus-visible:ring-offset-white;
+  }
+  .btn-navy {
+    @apply btn bg-navy-800 text-white px-7 py-3.5 shadow-card hover:bg-navy-900
+      hover:shadow-card-hover focus-visible:ring-navy-800 focus-visible:ring-offset-white;
+  }
+  .btn-ghost-dark {
+    @apply btn bg-white/10 text-white px-7 py-3.5 border border-white/20 backdrop-blur-sm
+      hover:bg-white/15 hover:border-white/40 focus-visible:ring-white/60;
+  }
+  .btn-outline {
+    @apply btn bg-white text-navy-800 px-7 py-3.5 border border-navy-100 hover:border-navy-300
+      hover:bg-navy-50 focus-visible:ring-navy-800;
+  }
+
+  .stat-figure {
+    @apply font-display font-black leading-none text-navy-800;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #2a3d63;
-  border-radius: 5px;
+/* ---------------------------------------------------------------- */
+/* Leaflet skin — wire popup typography to the brand.               */
+/* ---------------------------------------------------------------- */
+.leaflet-container {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #eaf0f6;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.35);
+}
+.leaflet-popup-tip {
+  box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.25);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #b91c1c;
-}
-
-::selection {
-  background-color: #2a3d63;
-  color: white;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    sans-serif;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ---------------------------------------------------------------- */
+/* Honor reduced-motion preferences.                                */
+/* ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-animate,
+  .scroll-animate-left,
+  .scroll-animate-right,
+  .scroll-animate-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

@@ -56,19 +56,18 @@ function LocationMap({ locations, selectedLocation, onMarkerClick }) {
     locations.forEach((location) => {
       const markerIcon = L.divIcon({
         className: 'custom-marker',
-        html: `<div class="w-6 h-6 bg-red-600 border-[3px] border-white rounded-full shadow-lg"></div>`,
-        iconSize: [24, 24],
-        iconAnchor: [12, 12],
+        html: `<div style="width:22px;height:22px;border-radius:9999px;background:#dc2626;border:3px solid #ffffff;box-shadow:0 6px 14px -4px rgba(15,23,42,0.45);"></div>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
       });
 
       const marker = L.marker([location.lat, location.lng], { icon: markerIcon }).addTo(
         mapInstanceRef.current
       ).bindPopup(`
-          <div class="p-1 min-w-[180px]">
-            <h3 class="font-bold text-sm m-0 mb-1.5 text-[#1e3a5f]">${escapeHtml(location.name)}</h3>
-            <p class="m-0 mb-0.5 text-gray-500 text-xs">${escapeHtml(location.address)}</p>
-            <p class="m-0 mb-1.5 text-gray-500 text-xs">${escapeHtml(location.city)}, ${escapeHtml(location.state)} ${escapeHtml(location.zip)}</p>
-            ${location.phone ? `<p class="m-0 text-red-600 font-semibold text-xs">${escapeHtml(location.phone)}</p>` : ''}
+          <div style="min-width:200px;font-family:Inter,system-ui,sans-serif;">
+            <div style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#0f172a;margin-bottom:6px;">${escapeHtml(location.name)}</div>
+            <div style="color:#6b7280;font-size:12px;line-height:1.45;">${escapeHtml(location.address)}<br/>${escapeHtml(location.city)}, ${escapeHtml(location.state)} ${escapeHtml(location.zip)}</div>
+            ${location.phone ? `<a href="tel:${escapeHtml(location.phone.replace(/[^\d]/g, ''))}" style="display:inline-block;margin-top:8px;color:#dc2626;font-weight:600;font-size:12px;text-decoration:none;">${escapeHtml(location.phone)}</a>` : ''}
           </div>
         `);
 
