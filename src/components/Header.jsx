@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Icon from './Icon';
-import ArrowIcon from './ArrowIcon';
 import { SITE_NAV } from '../constants/navigation';
 import {
   HQ_CITY,
@@ -16,43 +15,47 @@ const SCROLL_THRESHOLD_PX = 20;
 
 function desktopNavLinkClasses({ isActive }) {
   const base =
-    'relative py-2 px-4 font-medium text-sm uppercase tracking-wide transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full';
-  const state = isActive ? 'text-red-600 after:w-full' : 'text-gray-700 hover:text-blue-800';
+    'relative px-4 py-2 text-[13px] font-semibold uppercase tracking-eyebrow transition-colors duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-red-600 after:transition-[width] after:duration-300 after:ease-out-quint hover:after:w-2/3';
+  const state = isActive
+    ? 'text-red-600 after:w-2/3'
+    : 'text-navy-800/85 hover:text-navy-900';
   return `${base} ${state}`;
 }
 
 function mobileNavLinkClasses({ isActive }) {
   const state = isActive
-    ? 'text-red-600 bg-red-50'
-    : 'text-gray-700 hover:bg-blue-800/10 hover:text-blue-800';
-  return `block py-3 px-4 font-medium rounded-xl transition-all duration-200 mb-1 ${state}`;
+    ? 'bg-red-50 text-red-600'
+    : 'text-gray-700 hover:bg-navy-50 hover:text-navy-900';
+  return `mb-1 block rounded-xl px-4 py-3 text-base font-semibold transition-colors duration-200 ${state}`;
 }
 
 function TopBar({ isScrolled }) {
   return (
     <div
-      className={`hidden md:block bg-blue-800 text-white text-xs transition-all duration-300 ${
+      className={`hidden bg-navy-900 text-[12px] text-white/85 md:block transition-[padding] duration-300 ${
         isScrolled ? 'py-1.5' : 'py-2'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <div className="flex items-center space-x-6">
+      <div className="container-page flex items-center justify-between">
+        <div className="flex items-center gap-6">
           <a
             href={`tel:${PHONE_NUMBER}`}
-            className="flex items-center space-x-2 hover:text-blue-200 transition-colors"
+            className="flex items-center gap-2 transition-colors hover:text-white"
           >
-            <Icon name="phone" className="w-4 h-4" />
+            <Icon name="phone" className="h-4 w-4" />
             <span>{PHONE_DISPLAY}</span>
           </a>
-          <span className="flex items-center space-x-2">
-            <Icon name="pin" className="w-4 h-4" />
+          <span className="flex items-center gap-2 text-white/65">
+            <Icon name="pin" className="h-4 w-4" />
             <span>{HQ_CITY}</span>
           </span>
         </div>
-        <div className="flex items-center space-x-4">
-          <span className="font-semibold tracking-wide">SRM Marine Transportation</span>
-          <div className="w-px h-4 bg-blue-500" />
-          <div className="flex items-center space-x-3">
+        <div className="flex items-center gap-4">
+          <span className="text-[11px] font-semibold uppercase tracking-eyebrow text-white/70">
+            SRM Marine Transportation
+          </span>
+          <span className="h-4 w-px bg-white/15" />
+          <div className="flex items-center gap-2">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -60,19 +63,19 @@ function TopBar({ isScrolled }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="w-6 h-6 flex items-center justify-center rounded-full bg-blue-700/50 hover:bg-white hover:text-blue-800 transition-all duration-300"
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white hover:text-navy-900"
               >
-                <Icon name={link.icon} className="w-3 h-3" />
+                <Icon name={link.icon} className="h-3 w-3" />
               </a>
             ))}
-            <div className="w-px h-4 bg-blue-500 ml-1" />
+            <span className="ml-1 h-4 w-px bg-white/15" />
             <a
               href={MAIN_WEBSITE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold hover:text-blue-200 transition-colors"
+              className="text-[12px] font-semibold uppercase tracking-eyebrow transition-colors hover:text-white"
             >
-              Main Website
+              Main Site
             </a>
           </div>
         </div>
@@ -84,26 +87,27 @@ function TopBar({ isScrolled }) {
 function MobileMenu({ isOpen, onClose }) {
   return (
     <div
-      className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-        isOpen ? 'max-h-[600px]' : 'max-h-0'
+      className={`overflow-hidden transition-[max-height] duration-500 ease-out-quint lg:hidden ${
+        isOpen ? 'max-h-[640px]' : 'max-h-0'
       }`}
     >
-      <nav className="bg-white border-t border-gray-100 px-4 py-6 shadow-inner">
+      <nav className="border-t border-gray-100 bg-white px-4 py-6 shadow-inner">
         {SITE_NAV.map((link) => (
           <NavLink key={link.to} to={link.to} className={mobileNavLinkClasses} onClick={onClose}>
             {link.label}
           </NavLink>
         ))}
-        <div className="mt-6 pt-6 border-t border-gray-100">
-          <div className="flex items-center justify-between px-4 mb-4">
+
+        <div className="mt-6 border-t border-gray-100 pt-6">
+          <div className="mb-4 flex items-center justify-between px-2">
             <a
               href={`tel:${PHONE_NUMBER}`}
-              className="flex items-center space-x-2 text-sm text-gray-600 hover:text-blue-800 transition-colors"
+              className="flex items-center gap-2 text-sm font-semibold text-navy-800 transition-colors hover:text-red-600"
             >
-              <Icon name="phone" className="w-4 h-4 text-red-600" />
+              <Icon name="phone" className="h-4 w-4 text-red-600" />
               <span>{PHONE_DISPLAY}</span>
             </a>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-2">
               {SOCIAL_LINKS.slice(0, 2).map((link) => (
                 <a
                   key={link.href}
@@ -111,9 +115,9 @@ function MobileMenu({ isOpen, onClose }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-800/10 text-blue-800 hover:bg-blue-800 hover:text-white transition-all"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-navy-50 text-navy-800 transition-colors hover:bg-navy-800 hover:text-white"
                 >
-                  <Icon name={link.icon} className="w-4 h-4" />
+                  <Icon name={link.icon} className="h-4 w-4" />
                 </a>
               ))}
             </div>
@@ -122,8 +126,8 @@ function MobileMenu({ isOpen, onClose }) {
             href={MAIN_WEBSITE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="block bg-blue-800 hover:bg-blue-900 text-white text-center font-semibold py-4 px-4 rounded-xl transition-all shadow-md mb-3"
             onClick={onClose}
+            className="mb-3 block rounded-xl bg-navy-800 px-4 py-4 text-center font-semibold text-white shadow-card transition-colors hover:bg-navy-900"
           >
             Main Website
           </a>
@@ -131,8 +135,8 @@ function MobileMenu({ isOpen, onClose }) {
             href={SALES_REP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="block bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-center font-semibold py-4 px-4 rounded-xl transition-all shadow-md"
             onClick={onClose}
+            className="block rounded-xl bg-red-600 px-4 py-4 text-center font-semibold text-white shadow-card transition-colors hover:bg-red-700"
           >
             Find a Sales Rep
           </a>
@@ -149,22 +153,22 @@ function HamburgerButton({ isOpen, onToggle }) {
       onClick={onToggle}
       aria-label="Toggle menu"
       aria-expanded={isOpen}
-      className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-blue-800/10 transition-colors"
+      className="relative flex h-10 w-10 items-center justify-center rounded-lg text-navy-800 transition-colors duration-200 hover:bg-navy-50 lg:hidden"
     >
-      <div className="w-6 h-5 relative flex flex-col justify-between">
+      <div className="relative flex h-5 w-6 flex-col justify-between">
         <span
-          className={`w-full h-0.5 bg-gray-700 rounded-full transition-all duration-300 origin-center ${
-            isOpen ? 'rotate-45 translate-y-2' : ''
+          className={`block h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 ease-out-quint ${
+            isOpen ? 'translate-y-2 rotate-45' : ''
           }`}
         />
         <span
-          className={`w-full h-0.5 bg-gray-700 rounded-full transition-all duration-300 ${
-            isOpen ? 'opacity-0 scale-0' : ''
+          className={`block h-0.5 w-full rounded-full bg-current transition-opacity duration-200 ${
+            isOpen ? 'opacity-0' : ''
           }`}
         />
         <span
-          className={`w-full h-0.5 bg-gray-700 rounded-full transition-all duration-300 origin-center ${
-            isOpen ? '-rotate-45 -translate-y-2' : ''
+          className={`block h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 ease-out-quint ${
+            isOpen ? '-translate-y-2 -rotate-45' : ''
           }`}
         />
       </div>
@@ -185,32 +189,30 @@ function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'shadow-xl' : 'shadow-md'
+      className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${
+        isScrolled ? 'shadow-lg' : 'shadow-sm'
       }`}
     >
       <TopBar isScrolled={isScrolled} />
 
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-navy-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+        <div className="container-page">
           <div
-            className={`flex justify-between items-center transition-all duration-300 ${
+            className={`flex items-center justify-between transition-[height] duration-300 ${
               isScrolled ? 'h-16' : 'h-20'
             }`}
           >
-            <Link to="/" className="flex items-center group">
-              <div className="bg-white p-1 rounded">
-                <img
-                  src="/logo.jpg"
-                  alt="Hollingshead Harbor"
-                  className={`w-auto transition-all duration-300 group-hover:scale-105 ${
-                    isScrolled ? 'h-10' : 'h-14'
-                  }`}
-                />
-              </div>
+            <Link to="/" className="group flex items-center" aria-label="Hollingshead Harbor home">
+              <img
+                src="/logo.jpg"
+                alt="Hollingshead Harbor"
+                className={`w-auto rounded-md transition-[height] duration-300 group-hover:opacity-90 ${
+                  isScrolled ? 'h-10' : 'h-14'
+                }`}
+              />
             </Link>
 
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden items-center gap-1 lg:flex">
               {SITE_NAV.map((link) => (
                 <NavLink key={link.to} to={link.to} className={desktopNavLinkClasses}>
                   {link.label}
@@ -218,17 +220,18 @@ function Header() {
               ))}
             </nav>
 
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden items-center gap-3 lg:flex">
               <a
                 href={SALES_REP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 overflow-hidden"
+                className="group inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-card-hover"
               >
-                <span className="relative z-10 flex items-center">
-                  Find a Sales Rep
-                  <ArrowIcon className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
+                Find a Sales Rep
+                <Icon
+                  name="arrow-right"
+                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                />
               </a>
             </div>
 
