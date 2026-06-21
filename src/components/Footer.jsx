@@ -65,7 +65,7 @@ function CallToActionBanner() {
       <div className="container-page relative flex flex-col items-center justify-between gap-6 py-14 md:flex-row">
         <div className="text-center md:text-left">
           <span className="eyebrow eyebrow-on-dark">Ready to ship</span>
-          <h3 className="mt-3 font-display text-3xl font-black tracking-tight md:text-4xl">
+          <h3 className="mt-3 font-display text-3xl font-black tracking-tight text-white md:text-4xl">
             Let's move your cargo.
           </h3>
           <p className="mt-2 text-white/70">
