@@ -1,29 +1,41 @@
 import { Link } from 'react-router-dom';
-import ArrowIcon from '../components/ArrowIcon';
+import SectionBadge from '../components/SectionBadge';
+import Icon from '../components/Icon';
 
 function NotFound() {
   return (
-    <div>
-      <section className="relative bg-blue-800 pt-40 pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(220,38,38,0.15),transparent_60%)]" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded mb-6 uppercase tracking-wider">
-            Page Not Found
-          </span>
-          <h1 className="text-6xl md:text-8xl font-black text-white mb-4">404</h1>
-          <p className="text-xl text-blue-200 max-w-xl mx-auto mb-10">
-            The page you're looking for doesn't exist or has been moved.
-          </p>
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-hull-deep pt-32">
+      <div className="pattern-grid-dark absolute inset-0 opacity-40" aria-hidden="true" />
+      <div className="absolute -top-32 left-1/3 h-72 w-72 rounded-full bg-red-600/20 blur-3xl" />
+      <div className="absolute -bottom-32 right-1/4 h-72 w-72 rounded-full bg-navy-700/30 blur-3xl" />
+
+      <div className="container-page relative text-center text-white">
+        <SectionBadge color="light">Off course</SectionBadge>
+        <h1 className="mt-6 font-display text-7xl font-black tracking-tight md:text-9xl">404</h1>
+        <p className="mx-auto mt-4 max-w-xl text-lg text-white/75">
+          The page you were looking for has slipped its mooring. Let's get you back to home port.
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             to="/"
-            className="group inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-10 rounded-full transition-colors shadow-lg shadow-red-600/20"
+            className="group inline-flex items-center gap-2 rounded-full bg-red-600 px-8 py-4 font-semibold text-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700"
           >
-            Back to Home
-            <ArrowIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            Back to home
+            <Icon
+              name="arrow-right"
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </Link>
+          <Link
+            to="/locations"
+            className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+          >
+            <Icon name="pin" className="h-4 w-4" />
+            Find a harbor
           </Link>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 

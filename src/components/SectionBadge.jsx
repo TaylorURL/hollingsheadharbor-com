@@ -1,19 +1,23 @@
-const COLOR_CLASSES = {
-  red: 'bg-red-600',
-  blue: 'bg-blue-800',
-  gray: 'bg-gray-900',
+/**
+ * Eyebrow — a small uppercase section label with a 18px brand mark to its left.
+ *
+ * Replaces the project's old solid red pill. Color resolves through the design
+ * contract's eyebrow utility so it tracks the surface it sits on.
+ *
+ * Tone variants:
+ *   navy (default) — over light surfaces
+ *   red            — accent for hero/cta moments
+ *   light          — over hull / navy surfaces
+ */
+const TONE_CLASSES = {
+  navy: '',
+  red: 'eyebrow-red',
+  light: 'eyebrow-on-dark',
 };
 
-function SectionBadge({ children, color = 'red', className = '' }) {
-  const colorClass = COLOR_CLASSES[color] ?? COLOR_CLASSES.red;
-
-  return (
-    <div
-      className={`inline-block ${colorClass} text-white text-xs font-bold px-3 py-1 rounded mb-4 uppercase tracking-wider ${className}`}
-    >
-      {children}
-    </div>
-  );
+function SectionBadge({ children, color = 'navy', className = '' }) {
+  const tone = TONE_CLASSES[color] ?? TONE_CLASSES.navy;
+  return <span className={`eyebrow ${tone} ${className}`.trim()}>{children}</span>;
 }
 
 export default SectionBadge;

@@ -1,84 +1,64 @@
 import { Link } from 'react-router-dom';
+import Icon from './Icon';
 
 function HeroSection({ title, subtitle, ctaText, ctaLink }) {
   return (
-    <section className="relative min-h-[650px] lg:min-h-[750px] flex items-center pt-28 md:pt-32 overflow-hidden">
+    <section className="relative flex min-h-[640px] items-center overflow-hidden pt-28 lg:min-h-[760px] md:pt-32">
       <div className="absolute inset-0">
         <img
           src="/background.jpg"
           alt=""
-          className="w-full h-full object-cover scale-110 animate-slow-pan"
+          className="h-full w-full scale-110 object-cover animate-slow-pan"
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-hull/90 via-hull/60 to-hull/10" />
+      <div className="absolute inset-0 pattern-grid-dark opacity-50" />
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div className="container-page relative w-full py-20">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center bg-white/10 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full mb-6 border border-white/20">
-            <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
+          <span className="eyebrow eyebrow-on-dark mb-6">
+            <span className="relative ml-1 flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+            </span>
             SRM Marine Transportation
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          </span>
+
+          <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
             {title}
           </h1>
+
           {subtitle && (
-            <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed">{subtitle}</p>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 md:text-xl">
+              {subtitle}
+            </p>
           )}
-          <div className="flex flex-col sm:flex-row gap-4">
+
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             {ctaText && ctaLink && (
-              <Link
-                to={ctaLink}
-                className="group inline-flex items-center justify-center bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 text-lg shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-1"
-              >
+              <Link to={ctaLink} className="btn btn-primary group">
                 {ctaText}
-                <svg
-                  className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
+                <Icon
+                  name="arrow-right"
+                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                />
               </Link>
             )}
-            <Link
-              to="/locations"
-              className="group inline-flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white hover:text-blue-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 text-lg hover:-translate-y-1"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-              Find a Location
+            <Link to="/locations" className="btn btn-ghost-dark">
+              <Icon name="pin" className="h-4 w-4" />
+              Find a Harbor
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg className="w-full h-24 text-white" viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path fill="currentColor" d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path>
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 right-0 text-white"
+        aria-hidden="true"
+      >
+        <svg className="block h-20 w-full md:h-28" viewBox="0 0 1440 100" preserveAspectRatio="none">
+          <path fill="currentColor" d="M0,55 C320,100 760,10 1100,40 C1280,55 1380,40 1440,30 L1440,100 L0,100 Z" />
         </svg>
       </div>
     </section>
