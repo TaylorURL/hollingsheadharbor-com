@@ -249,7 +249,7 @@ function NetworkSection() {
           <div className="relative grid grid-cols-1 gap-14 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
               <SectionBadge color="light">Our network</SectionBadge>
-              <h2 className="mt-5 font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+              <h2 className="mt-5 font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
                 Thirteen ports.
                 <br />
                 <span className="text-red-500">One mission.</span>
