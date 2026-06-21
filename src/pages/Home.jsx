@@ -170,11 +170,11 @@ function WhyHollingsheadSection() {
                 </article>
               ))}
 
-              <article className="scroll-animate stagger-4 group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-hull-deep p-7 text-white">
+              <article className="scroll-animate stagger-4 group relative flex flex-col gap-6 overflow-hidden rounded-2xl bg-hull-deep p-7 text-white sm:col-span-2 sm:flex-row sm:items-center sm:justify-between sm:p-8">
                 <div className="pattern-grid-dark absolute inset-0 opacity-40" />
                 <div className="relative">
                   <span className="eyebrow eyebrow-on-dark">Talk to a rep</span>
-                  <h3 className="mt-3 font-display text-2xl font-bold tracking-tight">
+                  <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
                     Ready to ship?
                   </h3>
                   <p className="mt-2 text-sm text-white/70">
@@ -185,7 +185,7 @@ function WhyHollingsheadSection() {
                   href={SALES_REP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-700"
+                  className="relative inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-700"
                 >
                   Find a sales rep
                   <Icon name="arrow-right" className="h-4 w-4" />
