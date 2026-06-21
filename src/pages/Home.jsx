@@ -137,38 +137,43 @@ function WhyHollingsheadSection() {
 
           <div className="lg:col-span-7">
             <div className="grid gap-5 sm:grid-cols-2">
-              {VALUE_PILLARS.map((pillar, index) => (
-                <article
-                  key={pillar.title}
-                  className={`scroll-animate stagger-${index + 1} group flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-7 transition-all duration-300 ease-out-quint hover:-translate-y-1 hover:border-navy-200 hover:shadow-card-hover ${
-                    index === 0 ? 'sm:col-span-2 bg-navy-900 text-white' : ''
-                  }`}
-                >
-                  <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-                      index === 0
-                        ? 'bg-white/10 text-white'
-                        : 'bg-navy-50 text-navy-800 group-hover:bg-navy-800 group-hover:text-white'
+              {VALUE_PILLARS.map((pillar, index) => {
+                const isHero = index === 0;
+                return (
+                  <article
+                    key={pillar.title}
+                    className={`scroll-animate stagger-${index + 1} group flex h-full flex-col rounded-2xl p-7 transition-all duration-300 ease-out-quint hover:-translate-y-1 hover:shadow-card-hover ${
+                      isHero
+                        ? 'sm:col-span-2 border border-white/10 bg-navy-900 text-white'
+                        : 'border border-navy-100 bg-white hover:border-navy-200'
                     }`}
                   >
-                    <Icon name={pillar.icon} className="h-6 w-6" strokeWidth={1.75} />
-                  </div>
-                  <h3
-                    className={`mt-5 font-display text-xl font-bold tracking-tight ${
-                      index === 0 ? 'text-white' : 'text-ink'
-                    }`}
-                  >
-                    {pillar.title}
-                  </h3>
-                  <p
-                    className={`mt-2 text-[15px] leading-relaxed ${
-                      index === 0 ? 'text-white/75' : 'text-gray-600'
-                    }`}
-                  >
-                    {pillar.body}
-                  </p>
-                </article>
-              ))}
+                    <div
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                        isHero
+                          ? 'bg-white/10 text-white'
+                          : 'bg-navy-50 text-navy-800 group-hover:bg-navy-800 group-hover:text-white'
+                      }`}
+                    >
+                      <Icon name={pillar.icon} className="h-6 w-6" strokeWidth={1.75} />
+                    </div>
+                    <h3
+                      className={`mt-5 font-display text-xl font-bold tracking-tight ${
+                        isHero ? 'text-white' : 'text-ink'
+                      }`}
+                    >
+                      {pillar.title}
+                    </h3>
+                    <p
+                      className={`mt-2 text-[15px] leading-relaxed ${
+                        isHero ? 'text-white/75' : 'text-gray-600'
+                      }`}
+                    >
+                      {pillar.body}
+                    </p>
+                  </article>
+                );
+              })}
 
               <article className="scroll-animate stagger-4 group relative flex flex-col gap-6 overflow-hidden rounded-2xl bg-hull-deep p-7 text-white sm:col-span-2 sm:flex-row sm:items-center sm:justify-between sm:p-8">
                 <div className="pattern-grid-dark absolute inset-0 opacity-40" />
