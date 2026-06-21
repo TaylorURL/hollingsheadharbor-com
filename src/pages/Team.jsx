@@ -121,10 +121,9 @@ function CareersSection() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-50 text-navy-800 transition-colors group-hover:bg-red-600 group-hover:text-white">
                     <Icon name={benefit.icon} className="h-6 w-6" strokeWidth={1.75} />
                   </div>
-                  <h4
-                    className="mt-5 font-display text-lg font-bold tracking-tight text-ink"
-                    dangerouslySetInnerHTML={{ __html: benefit.title }}
-                  />
+                  <h4 className="mt-5 font-display text-lg font-bold tracking-tight text-ink">
+                    {benefit.title}
+                  </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-600">{benefit.body}</p>
                 </div>
               ))}
