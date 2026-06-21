@@ -179,7 +179,7 @@ function HarborSidebar({ stateCode, filteredLocations, selectedLocation, onSelec
     <div className="overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-card">
       <div className="bg-navy-900 px-5 py-4 text-white">
         <div className="flex items-baseline justify-between">
-          <h3 className="font-display text-lg font-bold tracking-tight">
+          <h3 className="font-display text-lg font-bold tracking-tight text-white">
             {stateCode === 'all' ? 'All harbors' : STATE_NAMES[stateCode] ?? stateCode}
           </h3>
           <span className="text-xs font-semibold uppercase tracking-eyebrow text-white/65">
