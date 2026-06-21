@@ -9,7 +9,7 @@ import useScrollAnimation from '../hooks/useScrollAnimation';
 const BENEFITS = [
   {
     icon: 'heart',
-    title: 'Health &amp; dental',
+    title: 'Health & dental',
     body: 'Comprehensive coverage for you and your family.',
   },
   {
