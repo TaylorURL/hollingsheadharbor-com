@@ -198,15 +198,17 @@ function Footer() {
               <span className="font-semibold text-gray-700">Smyrna Ready Mix</span>
             </div>
           </div>
-          <p className="mt-4 text-center text-xs text-gray-400">
-            Site by{' '}
+          <p className="flex justify-center py-3 text-center">
             <a
-              href="https://taylorurl.com"
+              href="https://www.taylorurl.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-navy-800"
+              className="group text-xs tracking-wide text-gray-500 transition-colors duration-150 hover:text-red-600 focus-visible:text-red-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-600"
             >
-              TaylorURL.com
+              Built by{' '}
+              <span className="font-semibold text-gray-500 transition-colors duration-150 group-hover:text-red-600 group-focus-visible:text-red-600">
+                TaylorURL
+              </span>
             </a>
           </p>
         </div>
