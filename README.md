@@ -1,21 +1,25 @@
 <p align="center">
-  <img src="public/logo.jpg" alt="Hollingshead Harbor" width="200">
+  <img src="public/logo.jpg" width="200" alt="Hollingshead Harbor" />
 </p>
 
 <h1 align="center">Hollingshead Harbor</h1>
 
+<p align="center"><b>SRM Concrete's marine transportation division — bulk cargo, charter, and full-service ports.</b></p>
 <p align="center">
-  Official site for <a href="https://hollingsheadharbor.com">hollingsheadharbor.com</a> — SRM Concrete's marine transportation division: bulk cargo, vessel and barge charter, and full-service ports across a 13-harbor network. Puts customers in front of the map and a regional sales rep.
+  Vessel and barge charter across a 13-harbor network, putting customers in front of<br />
+  the map and a regional sales rep. Official site at <a href="https://hollingsheadharbor.com">hollingsheadharbor.com</a>.
 </p>
 
 <p align="center">
-  <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black&style=flat-square">
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&style=flat-square">
-  <img alt="React Router" src="https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=white&style=flat-square">
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white&style=flat-square">
-  <img alt="Leaflet" src="https://img.shields.io/badge/Leaflet-OpenStreetMap-199900?logo=leaflet&logoColor=white&style=flat-square">
-  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-deployed-000000?logo=vercel&logoColor=white&style=flat-square">
+  <img alt="React" src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=white" />
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=white" />
+  <img alt="React Router" src="https://img.shields.io/badge/React_Router-7-2a3163?style=for-the-badge&logo=reactrouter&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-2a3163?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img alt="Leaflet" src="https://img.shields.io/badge/Leaflet-OpenStreetMap-2a3163?style=for-the-badge&logo=leaflet&logoColor=white" />
+  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-deployed-2a3163?style=for-the-badge&logo=vercel&logoColor=white" />
 </p>
+
+<br />
 
 - **Static React SPA** — no backend or database; team, services, and all 13 harbors are served from local JSON files.
 - **Interactive harbor map** — a Leaflet + OpenStreetMap map plots every harbor as a marker, synced two-way with a searchable, state-filtered sidebar, and needs no API key.
