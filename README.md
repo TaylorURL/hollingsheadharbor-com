@@ -117,7 +117,7 @@ flowchart LR
 - **One shared hero.** Every page renders one `HeroSection` — a slow-panning background image masked by an SVG wave.
 - **Reveal on scroll.** A `useScrollAnimation` hook reveals sections as they enter the viewport via `IntersectionObserver`, with staggered timing.
 - **Sticky, responsive header.** A two-tier sticky bar compresses on scroll and collapses to a slide-down drawer on mobile, with a "Find a Sales Rep" call to action that hands off to SRM's rep finder.
-- **First-party analytics.** `lib/sunday-analyzer` collects lightweight page analytics without a third-party script.
+- **First-party analytics.** A `SundayAnalyticsProvider` (`lib/sunday-analyzer`) wraps the app and reports cookieless page views to a first-party ingest endpoint — no Google Analytics or third-party tracker.
 
 ## Project structure
 
