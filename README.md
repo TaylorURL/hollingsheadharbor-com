@@ -13,13 +13,13 @@
 </p>
 
 <p align="center">
-  <a href="https://hollingsheadharbor.com"><img alt="Website" src="https://img.shields.io/badge/hollingsheadharbor.com-2a3163?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
-  <img alt="React" src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=white" />
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=white" />
-  <img alt="React Router" src="https://img.shields.io/badge/React_Router-7-2a3163?style=for-the-badge&logo=reactrouter&logoColor=white" />
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-2a3163?style=for-the-badge&logo=tailwindcss&logoColor=white" />
-  <img alt="Leaflet" src="https://img.shields.io/badge/Leaflet-OpenStreetMap-2a3163?style=for-the-badge&logo=leaflet&logoColor=white" />
-  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-deployed-2a3163?style=for-the-badge&logo=vercel&logoColor=white" />
+  <a href="https://hollingsheadharbor.com"><img alt="Website" src="https://img.shields.io/badge/hollingsheadharbor.com-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
+  <img alt="React" src="https://img.shields.io/badge/React-19-2563eb?style=for-the-badge&logo=react&logoColor=white" />
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-2563eb?style=for-the-badge&logo=vite&logoColor=white" />
+  <img alt="React Router" src="https://img.shields.io/badge/React_Router-7-2563eb?style=for-the-badge&logo=reactrouter&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-1f56cf?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img alt="Leaflet" src="https://img.shields.io/badge/Leaflet-OpenStreetMap-1f56cf?style=for-the-badge&logo=leaflet&logoColor=white" />
+  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-deployed-3b82f6?style=for-the-badge&logo=vercel&logoColor=white" />
 </p>
 
 <br />
