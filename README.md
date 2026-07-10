@@ -5,7 +5,7 @@
 <h1 align="center">Hollingshead Harbor</h1>
 
 <p align="center">
-  <b>SRM Concrete's marine transportation division — bulk cargo, charter, and full-service ports.</b>
+  <b>The marine transportation division of the SRM family — bulk cargo, charter, and full-service ports.</b>
 </p>
 <p align="center">
   A static React marketing site for vessel and barge charter across a 13-harbor network,<br />
@@ -26,8 +26,8 @@
 
 ## Why Hollingshead Harbor
 
-Hollingshead Harbor is the marine transportation division of SRM Concrete, and its
-customers need two things fast: to see where the harbors are and to reach a rep who
+Hollingshead Harbor is the marine transportation arm of the SRM family (Smyrna Ready
+Mix), and its customers need two things fast: to see where the harbors are and to reach a rep who
 can move their cargo. This site answers both. It is a single-page React app with no
 backend — the team, six services, and all 13 harbors ship as local JSON — so an
 interactive OpenStreetMap map, a searchable harbor directory, and a "Find a Sales
@@ -117,7 +117,7 @@ flowchart LR
 - **One shared hero.** Every page renders one `HeroSection` — a slow-panning background image masked by an SVG wave.
 - **Reveal on scroll.** A `useScrollAnimation` hook reveals sections as they enter the viewport via `IntersectionObserver`, with staggered timing.
 - **Sticky, responsive header.** A two-tier sticky bar compresses on scroll and collapses to a slide-down drawer on mobile, with a "Find a Sales Rep" call to action that hands off to SRM's rep finder.
-- **First-party analytics.** A `SundayAnalyticsProvider` (`lib/sunday-analyzer`) wraps the app and reports cookieless page views to a first-party ingest endpoint — no Google Analytics or third-party tracker.
+- **Privacy-first analytics.** A `SundayAnalyticsProvider` (`lib/sunday-analyzer`) wraps the app and reports cookieless, session-based page views to a dedicated ingest endpoint — no Google Analytics or third-party ad tracker.
 
 ## Project structure
 
@@ -142,5 +142,5 @@ Private project — all rights reserved. Made by [TaylorURL](https://taylorurl.c
 <br />
 
 <p align="center">
-  <sub>13 harbors, one map, and a rep a click away — SRM Concrete on the water.</sub>
+  <sub>13 harbors, one map, and a rep a click away — the SRM family on the water.</sub>
 </p>
