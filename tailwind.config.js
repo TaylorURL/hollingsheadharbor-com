@@ -1,7 +1,10 @@
 /**
- * Every scale here is derived from the two Smyrna Ready Mix brand anchors —
- * navy #2a3163 and red #dc2626 — so 800/600 land exactly on the brand values.
- * Change an anchor and the whole ramp has to be regenerated around it.
+ * Hollingshead Harbor is the marine arm of Smyrna Ready Mix, so the navy and
+ * red ramps are pinned to the parent brand's values — navy #2a3163 at 800 and
+ * red #dc2626 at 600, not at the midpoint of their scales. Move either anchor
+ * and its whole ramp has to be regenerated so the surrounding steps stay
+ * evenly spaced. The sand/mist/hull scales are this site's own maritime
+ * accents and are not derived from the brand colors.
  */
 const navy = {
   DEFAULT: '#2a3163',
