@@ -1,11 +1,7 @@
 /**
- * Hollingshead Harbor design tokens.
- *
- * Palette anchored on the established SRM brand pair — navy `#2a3163` and
- * red `#dc2626`. Scales are tuned around those anchors with extra "hull"
- * depths for heroes and warm "sand" / cool "mist" surface tints.
- *
- * Display = Fraunces (serif heritage), body = Inter.
+ * Every scale here is derived from the two Smyrna Ready Mix brand anchors —
+ * navy #2a3163 and red #dc2626 — so 800/600 land exactly on the brand values.
+ * Change an anchor and the whole ramp has to be regenerated around it.
  */
 const navy = {
   DEFAULT: '#2a3163',

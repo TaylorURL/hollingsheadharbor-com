@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------------------------------------------------------------- */
-/* Design tokens — surface, ink, accent, and motion variables.      */
-/* ---------------------------------------------------------------- */
 :root {
   --surface-canvas: #ffffff;
   --surface-cool: #f4f6f9;
@@ -89,9 +86,7 @@
   }
 }
 
-/* ---------------------------------------------------------------- */
-/* Scroll-reveal entrance animations.                                */
-/* ---------------------------------------------------------------- */
+/* Scroll-reveal entrance animations */
 @layer utilities {
   .scroll-animate,
   .scroll-animate-left,
@@ -137,9 +132,7 @@
   }
 }
 
-/* ---------------------------------------------------------------- */
-/* Hero & decorative motion.                                         */
-/* ---------------------------------------------------------------- */
+/* Hero and decorative motion */
 @keyframes slow-pan {
   0%,
   100% {
@@ -174,9 +167,7 @@
   animation: pulse-soft 2.4s var(--ease-in-out) infinite;
 }
 
-/* ---------------------------------------------------------------- */
-/* Brand utilities used across surfaces.                            */
-/* ---------------------------------------------------------------- */
+/* Brand utilities */
 @layer components {
   .eyebrow {
     @apply inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-eyebrow text-navy-800;
@@ -242,9 +233,7 @@
   }
 }
 
-/* ---------------------------------------------------------------- */
-/* Leaflet skin — wire popup typography to the brand.               */
-/* ---------------------------------------------------------------- */
+/* Leaflet overrides — the plugin ships its own popup typography */
 .leaflet-container {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: #eaf0f6;
@@ -257,9 +246,6 @@
   box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.25);
 }
 
-/* ---------------------------------------------------------------- */
-/* Honor reduced-motion preferences.                                */
-/* ---------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

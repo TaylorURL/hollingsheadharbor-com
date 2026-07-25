@@ -1,7 +1,5 @@
-/**
- * Site navigation map — the single source of truth for header / footer /
- * sitemap link order and labels.
- */
+// Header, footer and sitemap all render from this list, so order changes here
+// propagate everywhere.
 export const SITE_NAV = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
