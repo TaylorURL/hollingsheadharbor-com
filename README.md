@@ -5,142 +5,134 @@
 <h1 align="center">Hollingshead Harbor</h1>
 
 <p align="center">
-  <b>The marine transportation division of the SRM family — bulk cargo, charter, and full-service ports.</b>
+  <b>Marine transportation — bulk cargo, vessel and barge charter, full-service ports.</b>
 </p>
 <p align="center">
-  A static React marketing site for vessel and barge charter across a 13-harbor network,<br />
-  putting customers in front of an interactive map and a regional sales rep.
+  The official site for SRM Concrete's marine division and its 13-harbor network.<br />
+  Live at <a href="https://hollingsheadharbor.com">hollingsheadharbor.com</a>.
 </p>
 
 <p align="center">
-  <a href="https://hollingsheadharbor.com"><img alt="Website" src="https://img.shields.io/badge/hollingsheadharbor.com-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
-  <img alt="React" src="https://img.shields.io/badge/React-19-2563eb?style=for-the-badge&logo=react&logoColor=white" />
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-2563eb?style=for-the-badge&logo=vite&logoColor=white" />
-  <img alt="React Router" src="https://img.shields.io/badge/React_Router-7-2563eb?style=for-the-badge&logo=reactrouter&logoColor=white" />
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-1f56cf?style=for-the-badge&logo=tailwindcss&logoColor=white" />
-  <img alt="Leaflet" src="https://img.shields.io/badge/Leaflet-OpenStreetMap-1f56cf?style=for-the-badge&logo=leaflet&logoColor=white" />
-  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-deployed-3b82f6?style=for-the-badge&logo=vercel&logoColor=white" />
+  <img src="https://img.shields.io/badge/version-1.2.28-2a3163?style=for-the-badge" alt="Version 1.2.28" />
+  <img src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
+  <img src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=white" alt="Vite 7" />
+  <img src="https://img.shields.io/badge/React_Router-7-dc2626?style=for-the-badge&logo=reactrouter&logoColor=white" alt="React Router 7" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3-2a3163?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 3" />
+  <img src="https://img.shields.io/badge/Leaflet-2a3163?style=for-the-badge&logo=leaflet&logoColor=white" alt="Leaflet" />
+  <img src="https://img.shields.io/badge/Vercel-1a1f42?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
 </p>
 
 <br />
 
 ## Why Hollingshead Harbor
 
-Hollingshead Harbor is the marine transportation arm of the SRM family (Smyrna Ready
-Mix), and its customers need two things fast: to see where the harbors are and to reach a rep who
-can move their cargo. This site answers both. It is a single-page React app with no
-backend — the team, six services, and all 13 harbors ship as local JSON — so an
-interactive OpenStreetMap map, a searchable harbor directory, and a "Find a Sales
-Rep" hand-off all run as static content on Vercel, with nothing to key or provision.
+A shipper's first question is "do you have a harbor near me, and who do I call?" The site is built around that answer: an interactive map of all 13 harbors, a searchable and state-filtered list synced to it, and a sales-rep handoff on every page. There is no backend and no map account — the content is JSON in the repo and the tiles come from OpenStreetMap.
 
 <table width="100%">
   <tr>
-    <td width="33%" valign="top">
-      <h3 align="center">Static React SPA</h3>
-      <p align="center">No backend or database. Team, services, and every harbor are served from local JSON, so content updates need no code changes.</p>
+    <td width="50%" valign="top">
+      <h3 align="center">Two-way map and list</h3>
+      <p align="center">Clicking a marker highlights its row; picking a row pans the map and opens the popup. Both views read the same filtered harbor list.</p>
     </td>
-    <td width="33%" valign="top">
-      <h3 align="center">Interactive harbor map</h3>
-      <p align="center">A Leaflet + OpenStreetMap map plots all 13 harbors, synced two-way with a searchable, state-filtered sidebar — and needs no API key.</p>
-    </td>
-    <td width="33%" valign="top">
-      <h3 align="center">One shared layout</h3>
-      <p align="center">A single nested React Router layout renders the two-tier sticky header, footer, and scroll restoration across every route.</p>
+    <td width="50%" valign="top">
+      <h3 align="center">Content without a CMS</h3>
+      <p align="center">Team, services, and harbors are three JSON files. Adding a harbor or a leader is a data edit, not a code change.</p>
     </td>
   </tr>
 </table>
 
 <br />
 
+## Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| UI | React 19 + React Router 7 |
+| Build & dev | Vite 7 |
+| Styling | Tailwind CSS 3 — SRM navy `#2a3163` / red `#dc2626`, Fraunces + Inter |
+| Map | Leaflet + OpenStreetMap tiles (no API key) |
+| Content | Static JSON — team, services, harbors |
+| Analytics | First-party, cookieless beacon (`src/lib/sunday-analyzer`) |
+| Hosting | Vercel (SPA rewrites in `vercel.json`) |
+
 ## Getting started
 
 ```bash
 npm install
-npm run dev        # Vite dev server
-npm run build      # production build to dist/
-npm run preview    # preview the production build
+npm run dev           # Vite dev server
+npm run build         # production build to dist/
 ```
 
-| Script           | What it does                                  |
-| :--------------- | :-------------------------------------------- |
-| `npm run dev`    | Start the Vite dev server                     |
-| `npm run build`  | Build the production bundle to `dist/`        |
-| `npm run preview`| Serve the built bundle locally                |
-| `npm run lint`   | Run ESLint over the project                   |
-| `npm run format` | Format `src/` with Prettier (`--write`)       |
+No environment configuration is required — the site has no backend, no database, and no map API key.
 
-## Stack
+### Scripts
 
-| Layer     | Choice                                                                  |
-| :-------- | :---------------------------------------------------------------------- |
-| Framework | React 19 + React Router 7                                               |
-| Build     | Vite 7                                                                   |
-| Styling   | Tailwind CSS 3 — SRM navy `#2a3163` / red `#dc2626`, Fraunces + Inter   |
-| Map       | Leaflet + OpenStreetMap tiles (no API key)                             |
-| Content   | Static JSON — team, services, harbors                                   |
-| Hosting   | Vercel (SPA rewrites in `vercel.json`)                                  |
+| Script | Does |
+| :--- | :--- |
+| `npm run dev` | Start the Vite dev server. |
+| `npm run build` | Production build to `dist/`. |
+| `npm run preview` | Serve the production build locally. |
+| `npm run lint` | Lint with ESLint. |
+| `npm run format` | Format `src/**` with Prettier. |
+| `npm run format:check` | Check formatting without writing. |
 
 ## Routes
 
-| Route             | What it is                                                         |
-| :---------------- | :---------------------------------------------------------------- |
-| `/`               | Home — hero, why Hollingshead, services preview, harbors, CTA     |
-| `/about`          | The division, its core services and values within the SRM family  |
-| `/story`          | Company history from Mike Hollingshead's 1999 founding of SRM      |
-| `/team`           | Leadership cards driven by `team.json`                            |
-| `/services`       | Six marine and port services from `services.json`                 |
-| `/locations`      | Interactive Leaflet map + searchable, filterable harbor sidebar   |
-| `/privacy-policy` | Privacy policy                                                    |
-| `*`               | 404 Not Found                                                     |
+Every route renders inside one nested `Layout` — two-tier sticky header, footer, and scroll restoration.
 
-## Locations & map
+| Route | Renders |
+| :--- | :--- |
+| `/` | Hero, why Hollingshead, services preview, harbor network, CTA |
+| `/about` | The division, its core services, and its place in the SRM family |
+| `/story` | Company history from Mike Hollingshead's 1999 founding of SRM |
+| `/team` | Leadership cards from `team.json` |
+| `/services` | Six marine and port services from `services.json` |
+| `/locations` | Leaflet map + searchable, state-filtered harbor sidebar |
+| `/privacy-policy` | Privacy policy |
+| `*` | Not found |
 
-The Locations page is the site's most interactive surface. Every harbor lives in
-`locations.json`; the page filters that list by search text (name or city) and by
-state, then feeds the result into both a Leaflet map and a sidebar. Selecting a
-harbor in either view syncs the other — clicking a marker highlights its row, and
-picking a row pans the map and opens the popup. Tiles come straight from
-OpenStreetMap, so there is no API key or map account to manage.
+## Architecture
 
 ```mermaid
 flowchart LR
-  J[locations.json - 13 harbors] --> F[Search + state filter]
-  F --> M[LocationMap - Leaflet]
-  F --> S[Harbor sidebar]
-  M <-->|marker click / row select| S
-  M --> T[(OpenStreetMap tiles)]
+    J["locations.json — 13 harbors"] --> F["Search + state filter"]
+    F --> M["LocationMap — Leaflet"]
+    F --> S["Harbor sidebar"]
+    M <-->|"marker click / row select"| S
+    M --> T[("OpenStreetMap tiles")]
 ```
 
 ## How it works
 
-- **Content is fully static.** `team.json`, `services.json`, and `locations.json` drive the team, services, and harbor pages, so updates need no code changes.
-- **One shared hero.** Every page renders one `HeroSection` — a slow-panning background image masked by an SVG wave.
-- **Reveal on scroll.** A `useScrollAnimation` hook reveals sections as they enter the viewport via `IntersectionObserver`, with staggered timing.
-- **Sticky, responsive header.** A two-tier sticky bar compresses on scroll and collapses to a slide-down drawer on mobile, with a "Find a Sales Rep" call to action that hands off to SRM's rep finder.
-- **Privacy-first analytics.** A `SundayAnalyticsProvider` (`lib/sunday-analyzer`) wraps the app and reports cookieless, session-based page views to a dedicated ingest endpoint — no Google Analytics or third-party ad tracker.
+- **The locations page is the product.** Harbors are filtered by search text (name or city) and by state, and the result feeds both the map and the sidebar from a single source.
+- **One hero, every page.** `HeroSection` renders a slow-panning background image masked by an SVG wave, so pages stay visually consistent without per-page art direction.
+- **Sections reveal on scroll.** `useScrollAnimation` wraps `IntersectionObserver` with staggered timing.
+- **The header adapts.** A two-tier sticky bar compresses on scroll and collapses to a slide-down drawer on mobile, with a "Find a Sales Rep" call to action that hands off to SRM's rep finder.
+- **The palette is anchored to the parent brand.** `tailwind.config.js` builds navy and red scales around SRM's `#2a3163` / `#dc2626`, plus warm "sand" and cool "mist" surface tints and a deep "hull" tone for heroes.
 
 ## Project structure
 
 ```
-src/
-  components/   Header, Footer, HeroSection, LocationMap, Layout, ScrollToTop, …
-  pages/        Home, About, Story, Team, Services, Locations, PrivacyPolicy, NotFound
-  data/         team.json · services.json · locations.json
-  constants/    navigation.js · urls.js
-  hooks/        useScrollAnimation.js (IntersectionObserver reveal)
-  lib/          sunday-analyzer — first-party page analytics
-  App.jsx       routes wrapped in the shared Layout
-  main.jsx      entry
-  index.css     Tailwind layers + keyframes
-public/         logo.jpg, background.jpg, team & harbor photos, fav.png
+hollingsheadharbor-com/
+├── public/                    Logo, hero background, team + operations photos, favicon
+└── src/
+    ├── App.jsx                Routes wrapped in the shared Layout
+    ├── main.jsx               Browser entry
+    ├── index.css              Tailwind layers + keyframes
+    ├── components/            Header, Footer, HeroSection, LocationMap, Layout, ScrollToTop, …
+    ├── pages/                 Home, About, Story, Team, Services, Locations, PrivacyPolicy, NotFound
+    ├── data/                  team.json · services.json · locations.json
+    ├── constants/             navigation.js · urls.js
+    ├── hooks/                 useScrollAnimation.js (IntersectionObserver reveal)
+    └── lib/sunday-analyzer/   First-party cookieless analytics provider
 ```
 
 ## License
 
-Private project — all rights reserved. Made by [TaylorURL](https://taylorurl.com).
+Copyright (c) 2026 Trenton Taylor. All rights reserved. See [LICENSE.md](LICENSE.md).
 
 <br />
 
 <p align="center">
-  <sub>13 harbors, one map, and a rep a click away — the SRM family on the water.</sub>
+  <sub>Built by <a href="https://taylorurl.com">TaylorURL</a> — custom sites for local businesses.</sub>
 </p>

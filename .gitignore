@@ -18,16 +18,23 @@ dist-ssr
 .env.production
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+.vscode/
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.idea/
-.vscode/
+
+# Secrets and local tooling state — never commit
+.env.*
+!.env.example
+.claude/
+.fleet/
 *.iml
-*.sql
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_ed25519
