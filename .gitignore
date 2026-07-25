@@ -18,9 +18,8 @@ dist-ssr
 .env.production
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+.vscode/
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
@@ -32,6 +31,8 @@ dist-ssr
 .env.*
 !.env.example
 .claude/
+.fleet/
+*.iml
 *.pem
 *.p12
 *.pfx
