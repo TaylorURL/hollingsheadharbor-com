@@ -1,14 +1,7 @@
 /**
- * Central icon registry.
- *
- * Every icon in the app — UI affordances, service glyphs, social marks — is
- * declared here so pages don't have to re-author SVG markup or memorize path
- * strings. `Icon` defaults to a 24-grid stroke glyph; entries flagged
- * `filled: true` switch the renderer to a solid-fill brand mark (used for
- * social icons whose paths describe filled shapes).
- *
- * Add new icons by extending `ICONS` — the React component picks them up
- * automatically.
+ * Central icon registry. Entries default to 24-grid stroke glyphs; `filled`
+ * ones render as solid currentColor shapes instead, because their SVG paths
+ * describe filled regions rather than outlines.
  */
 const STROKE = (...d) => ({ d });
 const FILLED = (...d) => ({ d, filled: true });
@@ -80,7 +73,7 @@ const ICONS = {
   ),
   transport: STROKE('M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4'),
 
-  /* Social — paths describe filled shapes, so renderer uses fill instead of stroke. */
+  /* Social */
   twitter: FILLED(
     'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'
   ),
@@ -94,10 +87,6 @@ const ICONS = {
 
 export const ICON_NAMES = Object.keys(ICONS);
 
-/**
- * Render a registered icon. Defaults to a 24×24 stroke glyph; entries flagged
- * filled render as solid currentColor shapes.
- */
 function Icon({ name, className = 'w-5 h-5', strokeWidth = 2, ariaLabel, ...rest }) {
   const entry = ICONS[name];
   if (!entry) return null;
