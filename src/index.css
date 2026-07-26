@@ -86,7 +86,6 @@
   }
 }
 
-/* Scroll-reveal entrance animations */
 @layer utilities {
   .scroll-animate,
   .scroll-animate-left,
@@ -132,7 +131,6 @@
   }
 }
 
-/* Hero and decorative motion */
 @keyframes slow-pan {
   0%,
   100% {
@@ -167,7 +165,6 @@
   animation: pulse-soft 2.4s var(--ease-in-out) infinite;
 }
 
-/* Brand utilities */
 @layer components {
   .eyebrow {
     @apply inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-eyebrow text-navy-800;
