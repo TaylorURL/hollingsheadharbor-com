@@ -1,5 +1,5 @@
-// Header, footer and sitemap all render from this list, so order changes here
-// propagate everywhere.
+// Both the header and the footer render from this list, so order changes here
+// propagate to both.
 export const SITE_NAV = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
