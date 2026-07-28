@@ -32,6 +32,7 @@ Thumbs.db
 .env.*
 !.env.example
 .claude/
+CLAUDE.md
 .fleet/
 *.iml
 *.pem
