@@ -84,7 +84,7 @@ Every route renders inside one nested `Layout` — two-tier sticky header, foote
 | :--- | :--- |
 | `/` | Hero, why Hollingshead, services preview, harbor network, CTA |
 | `/about` | The division, its core services, and its place in the SRM family |
-| `/story` | Company history from Mike Hollingshead's 1999 founding of SRM |
+| `/story` | Company history from Mike and Melissa Hollingshead's 1999 founding of SRM |
 | `/team` | Leadership cards from `team.json` |
 | `/services` | Six marine and port services from `services.json` |
 | `/locations` | Leaflet map + searchable, state-filtered harbor sidebar |
