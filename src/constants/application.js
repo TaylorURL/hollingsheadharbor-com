@@ -169,7 +169,6 @@ export const SUMMARY_SECTIONS = [
       ['injuryDisabled', 'Were you disabled'],
       ['injuryTimeOff', 'Approximate time off work'],
       ['abideSafetyRules', 'Will abide by safety rules'],
-      ['acceptMedicalFacilities', 'Will accept recommended medical facilities'],
       ['convicted', 'Convicted of a criminal offense'],
       ['convictionDate', 'Date of conviction'],
       ['convictionNature', 'Location and nature of conviction'],
