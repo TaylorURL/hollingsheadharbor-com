@@ -56,7 +56,6 @@ const INITIAL_VALUES = {
   injuryDisabled: '',
   injuryTimeOff: '',
   abideSafetyRules: '',
-  acceptMedicalFacilities: '',
   convicted: '',
   convictionDate: '',
   convictionNature: '',
@@ -91,7 +90,6 @@ const ALWAYS_REQUIRED = {
   hasCondition: 'Answer required.',
   hadInjury: 'Answer required.',
   abideSafetyRules: 'Answer required.',
-  acceptMedicalFacilities: 'Answer required.',
   convicted: 'Answer required.',
   signature: 'Type your full name as your signature.',
   signatureDate: 'Enter the date.',
@@ -712,22 +710,13 @@ function ApplicationForm({ defaultPosition = '' }) {
           </div>
         )}
 
-        <FieldGrid>
-          <ChoiceField
-            label="Will you abide by the safety rules of Hollingshead Harbor?"
-            value={values.abideSafetyRules}
-            onChange={set('abideSafetyRules')}
-            required
-            error={errors.abideSafetyRules}
-          />
-          <ChoiceField
-            label="If injured, will you accept the medical facilities recommended by Hollingshead Harbor?"
-            value={values.acceptMedicalFacilities}
-            onChange={set('acceptMedicalFacilities')}
-            required
-            error={errors.acceptMedicalFacilities}
-          />
-        </FieldGrid>
+        <ChoiceField
+          label="Will you abide by the safety rules of Hollingshead Harbor?"
+          value={values.abideSafetyRules}
+          onChange={set('abideSafetyRules')}
+          required
+          error={errors.abideSafetyRules}
+        />
 
         <ChoiceField
           label="Have you ever been convicted of a criminal offense?"
