@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
-import ServiceCard from '../components/ServiceCard';
 import SectionBadge from '../components/SectionBadge';
 import Icon from '../components/Icon';
-import { SALES_REP_URL } from '../constants/urls';
-import services from '../data/services.json';
 import useScrollAnimation from '../hooks/useScrollAnimation';
-
-const FEATURED_SERVICES_COUNT = 3;
 
 const PORT_STATES = [
   { code: 'AL', name: 'Alabama' },
@@ -22,17 +17,17 @@ const VALUE_PILLARS = [
   {
     icon: 'check-circle',
     title: 'Reliable service',
-    body: 'On-time delivery and professional maritime logistics you can count on, backed by decades of industry experience.',
+    body: 'Cargo arrives when we say it will, on routes our crews have run for over twenty years.',
   },
   {
     icon: 'clock',
     title: 'On-time shipping',
-    body: 'Custom shipping plans tailored to your schedule across our network of inland and coastal harbors.',
+    body: 'Shipping plans built around your schedule, across inland and coastal harbors.',
   },
   {
     icon: 'users',
     title: 'Expert crews',
-    body: 'Skilled maritime professionals dispatching, loading, and moving cargo every day of the year.',
+    body: 'Licensed crews dispatching and loading every day of the year, holidays included.',
   },
 ];
 
@@ -43,43 +38,37 @@ const NETWORK_STATS = [
   { figure: '100+', label: 'SRM acquisitions' },
 ];
 
-function HeroEyebrowFigure({ figure, suffix }) {
-  return (
-    <span className="stat-figure text-3xl md:text-4xl">
-      {figure}
-      {suffix && <span className="text-red-600">{suffix}</span>}
-    </span>
-  );
-}
+const TRUST_FIGURES = [
+  { figure: '13', label: 'Harbors' },
+  { figure: '6', label: 'States' },
+  { figure: '24/7', label: 'Operations' },
+  { figure: '1999', label: 'Family founded' },
+];
 
-function MarqueeTrustBar() {
+/**
+ * Figure over label in equal columns, divided by hairlines. The labels differ
+ * in length, so setting one beside its figure lets the longer ones wrap and
+ * pulls the row out of alignment; stacking keeps every column the same height.
+ */
+function TrustBar() {
   return (
-    <section className="border-y border-navy-100 bg-mist-50/60">
-      <div className="container-page grid grid-cols-2 gap-y-6 py-8 sm:grid-cols-4">
-        <div className="flex items-baseline gap-3">
-          <HeroEyebrowFigure figure="13" />
-          <span className="text-xs font-semibold uppercase tracking-eyebrow text-gray-500">
-            Harbors
-          </span>
-        </div>
-        <div className="flex items-baseline gap-3">
-          <HeroEyebrowFigure figure="6" />
-          <span className="text-xs font-semibold uppercase tracking-eyebrow text-gray-500">
-            States
-          </span>
-        </div>
-        <div className="flex items-baseline gap-3">
-          <HeroEyebrowFigure figure="24/7" />
-          <span className="text-xs font-semibold uppercase tracking-eyebrow text-gray-500">
-            Operations
-          </span>
-        </div>
-        <div className="flex items-baseline gap-3">
-          <HeroEyebrowFigure figure="1999" />
-          <span className="text-xs font-semibold uppercase tracking-eyebrow text-gray-500">
-            Family founded
-          </span>
-        </div>
+    <section className="border-b border-navy-100 bg-mist-50/60">
+      <div className="container-page">
+        <dl className="grid grid-cols-2 sm:grid-cols-4">
+          {TRUST_FIGURES.map((item, index) => (
+            <div
+              key={item.label}
+              className={`px-2 py-7 text-center sm:px-4 ${
+                index > 0 ? 'border-l border-navy-100' : ''
+              } ${index === 2 ? 'border-l-0 sm:border-l' : ''}`}
+            >
+              <dt className="stat-figure text-3xl md:text-4xl">{item.figure}</dt>
+              <dd className="mt-2 text-[11px] font-semibold uppercase tracking-eyebrow text-gray-500">
+                {item.label}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
@@ -92,7 +81,7 @@ function PortStateChips() {
         <span
           key={state.code}
           title={state.name}
-          className="inline-flex items-center gap-2 rounded-full border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-eyebrow text-navy-800"
+          className="inline-flex items-center gap-2 rounded-md border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-eyebrow text-navy-800"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
           {state.code}
@@ -104,19 +93,17 @@ function PortStateChips() {
 
 function WhyHollingsheadSection() {
   return (
-    <section className="relative bg-white py-24 md:py-32">
+    <section className="relative bg-white py-20 md:py-24">
       <div className="container-page">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5 lg:sticky lg:top-32 scroll-animate-left">
             <SectionBadge>Why Hollingshead</SectionBadge>
-            <h2 className="mt-5 font-display text-4xl font-black leading-[1.1] tracking-tight text-ink md:text-5xl lg:text-6xl">
-              We move what
-              <br />
-              <span className="text-red-600">matters</span> by water.
+            <h2 className="mt-5 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink md:text-4xl ">
+              We move what matters by water
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-gray-600">
-              From Alabama to Texas, our harbors keep bulk dry cargo moving — efficiently, on
-              schedule, and on terms that work for your operation.
+              From Alabama to Texas, our harbors keep bulk dry cargo moving on schedule and on terms
+              that work for your operation.
             </p>
 
             <div className="mt-8">
@@ -125,10 +112,10 @@ function WhyHollingsheadSection() {
             </div>
 
             <Link
-              to="/services"
+              to="/equipment"
               className="group mt-10 inline-flex items-center gap-3 font-semibold text-navy-800 transition-colors hover:text-red-600"
             >
-              See what we ship
+              See our equipment
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy-800 text-white transition-colors group-hover:bg-red-600">
                 <Icon name="arrow-right" className="h-4 w-4" />
               </span>
@@ -142,7 +129,7 @@ function WhyHollingsheadSection() {
                 return (
                   <article
                     key={pillar.title}
-                    className={`scroll-animate stagger-${index + 1} group flex h-full flex-col rounded-2xl p-7 transition-all duration-300 ease-out-quint hover:-translate-y-1 hover:shadow-card-hover ${
+                    className={`scroll-animate stagger-${index + 1} group flex h-full flex-col rounded-lg p-7 transition-all duration-300 ease-out-quint hover:-translate-y-0.5 hover:shadow-card-hover ${
                       isHero
                         ? 'sm:col-span-2 border border-white/10 bg-navy-900 text-white'
                         : 'border border-navy-100 bg-white hover:border-navy-200'
@@ -175,26 +162,24 @@ function WhyHollingsheadSection() {
                 );
               })}
 
-              <article className="scroll-animate stagger-4 group relative flex flex-col gap-6 overflow-hidden rounded-2xl bg-hull-deep p-7 text-white sm:col-span-2 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+              <article className="scroll-animate stagger-4 group relative flex flex-col gap-6 overflow-hidden rounded-lg bg-hull-deep p-7 text-white sm:col-span-2 sm:flex-row sm:items-center sm:justify-between sm:p-8">
                 <div className="pattern-grid-dark absolute inset-0 opacity-40" />
                 <div className="relative">
-                  <span className="eyebrow eyebrow-on-dark">Talk to a rep</span>
+                  <span className="eyebrow eyebrow-on-dark">Now hiring</span>
                   <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
-                    Ready to ship?
+                    Wheelmen and deckhands
                   </h3>
                   <p className="mt-2 text-sm text-white/70">
-                    Connect with the regional rep who knows your harbor.
+                    Applications go straight to our hiring office.
                   </p>
                 </div>
-                <a
-                  href={SALES_REP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-700"
+                <Link
+                  to="/careers"
+                  className="relative inline-flex w-fit shrink-0 items-center gap-2 rounded-md bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-700"
                 >
-                  Find a sales rep
+                  Open positions
                   <Icon name="arrow-right" className="h-4 w-4" />
-                </a>
+                </Link>
               </article>
             </div>
           </div>
@@ -204,70 +189,28 @@ function WhyHollingsheadSection() {
   );
 }
 
-function FeaturedServicesSection() {
-  const featured = services.slice(0, FEATURED_SERVICES_COUNT);
-  return (
-    <section className="relative bg-mist-50/60 py-24 md:py-32">
-      <div className="container-page">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between scroll-animate">
-          <div>
-            <SectionBadge color="red">Services</SectionBadge>
-            <h2 className="mt-5 font-display text-4xl font-black tracking-tight text-ink md:text-5xl">
-              What we do best
-            </h2>
-            <p className="mt-4 max-w-xl text-lg text-gray-600">
-              Six core services that keep aggregates, cement, and construction materials moving
-              across the inland river system and the Gulf.
-            </p>
-          </div>
-          <Link
-            to="/services"
-            className="group inline-flex items-center gap-3 self-start text-sm font-semibold uppercase tracking-eyebrow text-navy-800 transition-colors hover:text-red-600"
-          >
-            All services
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-800 text-white transition-colors group-hover:bg-red-600">
-              <Icon name="arrow-right" className="h-4 w-4" />
-            </span>
-          </Link>
-        </div>
-
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {featured.map((service, index) => (
-            <div key={service.id} className={`scroll-animate stagger-${index + 1}`}>
-              <ServiceCard service={service} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function NetworkSection() {
   return (
-    <section className="bg-white py-24 md:py-32">
+    <section className="bg-mist-50/60 py-20 md:py-24">
       <div className="container-page">
-        <div className="relative overflow-hidden rounded-4xl bg-hull-deep px-8 py-16 text-white md:px-16 md:py-24 scroll-animate">
+        <div className="relative overflow-hidden rounded-xl bg-hull-deep px-8 py-16 text-white md:px-16 md:py-24 scroll-animate">
           <div className="pattern-grid-dark absolute inset-0 opacity-40" aria-hidden="true" />
-          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-red-600/15 blur-3xl" aria-hidden="true" />
 
           <div className="relative grid grid-cols-1 gap-14 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
               <SectionBadge color="light">Our network</SectionBadge>
-              <h2 className="mt-5 font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
-                Thirteen ports.
-                <br />
-                <span className="text-red-500">One mission.</span>
+              <h2 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-4xl">
+                Thirteen ports across six states
               </h2>
               <p className="mt-6 max-w-lg text-lg text-white/75">
-                Strategic harbors across six states give your cargo direct access to major inland
-                waterways and Gulf shipping routes.
+                Harbors in six states put your cargo on the major inland waterways and Gulf shipping
+                routes without a long haul first.
               </p>
               <Link
-                to="/locations"
-                className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-navy-900 transition-colors hover:bg-red-600 hover:text-white"
+                to="/contact"
+                className="group mt-8 inline-flex items-center gap-2 rounded-md bg-white px-7 py-3.5 font-semibold text-navy-900 transition-colors hover:bg-red-600 hover:text-white"
               >
-                Explore the map
+                Contact us
                 <Icon
                   name="arrow-right"
                   className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
@@ -280,9 +223,9 @@ function NetworkSection() {
                 {NETWORK_STATS.map((stat, index) => (
                   <div
                     key={stat.label}
-                    className={`rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm scroll-animate stagger-${index + 1}`}
+                    className={`rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm scroll-animate stagger-${index + 1}`}
                   >
-                    <div className="stat-figure text-white text-4xl md:text-5xl">{stat.figure}</div>
+                    <div className="stat-figure text-3xl text-white md:text-4xl">{stat.figure}</div>
                     <div className="mt-2 text-xs font-semibold uppercase tracking-eyebrow text-white/65">
                       {stat.label}
                     </div>
@@ -299,36 +242,27 @@ function NetworkSection() {
 
 function GetStartedSection() {
   return (
-    <section className="relative bg-sand-100 py-24 md:py-32">
+    <section className="relative bg-sand-100 py-20 md:py-24">
       <div className="container-page">
         <div className="mx-auto max-w-3xl text-center scroll-animate">
           <SectionBadge color="red">Get started</SectionBadge>
-          <h2 className="mt-5 font-display text-4xl font-black tracking-tight text-ink md:text-5xl">
-            Let's move your <span className="text-red-600">cargo</span>.
+          <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            Talk to us about your cargo
           </h2>
           <p className="mt-5 text-lg text-gray-600">
-            Connect with a regional rep who knows your harbor. We'll talk volumes, schedule, and
-            the most efficient way to get your material from quay to job.
+            Call us with your route and tonnage. We will tell you what we can move and when.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={SALES_REP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-red-600 px-8 py-4 font-semibold text-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-card-hover"
-            >
-              Find a sales rep
+            <Link to="/contact" className="btn btn-primary group">
+              Contact us
               <Icon
                 name="arrow-right"
                 className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
               />
-            </a>
-            <Link
-              to="/story"
-              className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-8 py-4 font-semibold text-navy-800 transition-colors hover:border-navy-800 hover:bg-navy-800 hover:text-white"
-            >
-              Read our story
+            </Link>
+            <Link to="/about" className="btn btn-outline">
+              About Hollingshead Harbor
             </Link>
           </div>
         </div>
@@ -343,14 +277,15 @@ function Home() {
   return (
     <div>
       <HeroSection
-        title="Marine transportation, built on hard work."
-        subtitle="Bulk dry cargo, vessel and barge charter, and full-service ports — the marine arm of SRM, family-owned since 1999."
-        ctaText="See our services"
-        ctaLink="/services"
+        title="Marine transportation, built on hard work"
+        subtitle="Bulk dry cargo, vessel and barge charter, and full-service ports. The marine arm of SRM, family-owned since 1999."
+        ctaText="See our equipment"
+        ctaLink="/equipment"
+        secondaryText="Careers"
+        secondaryLink="/careers"
       />
-      <MarqueeTrustBar />
+      <TrustBar />
       <WhyHollingsheadSection />
-      <FeaturedServicesSection />
       <NetworkSection />
       <GetStartedSection />
     </div>

@@ -1,7 +1,7 @@
 {
   "name": "hollingsheadharbor-com",
   "private": true,
-  "version": "1.2.36",
+  "version": "1.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,10 +12,10 @@
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "dependencies": {
-    "leaflet": "^1.9.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.1.1"
+    "react-router-dom": "^7.1.1",
+    "resend": "^6.18.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

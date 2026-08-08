@@ -7,7 +7,6 @@ import {
   MAIN_WEBSITE_URL,
   PHONE_DISPLAY,
   PHONE_NUMBER,
-  SALES_REP_URL,
   SOCIAL_LINKS,
 } from '../constants/urls';
 
@@ -16,9 +15,7 @@ const SCROLL_THRESHOLD_PX = 20;
 function desktopNavLinkClasses({ isActive }) {
   const base =
     'relative px-4 py-2 text-[13px] font-semibold uppercase tracking-eyebrow transition-colors duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-red-600 after:transition-[width] after:duration-300 after:ease-out-quint hover:after:w-2/3';
-  const state = isActive
-    ? 'text-red-600 after:w-2/3'
-    : 'text-navy-800/85 hover:text-navy-900';
+  const state = isActive ? 'text-red-600 after:w-2/3' : 'text-navy-800/85 hover:text-navy-900';
   return `${base} ${state}`;
 }
 
@@ -127,19 +124,17 @@ function MobileMenu({ isOpen, onClose }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={onClose}
-            className="mb-3 block rounded-xl bg-navy-800 px-4 py-4 text-center font-semibold text-white shadow-card transition-colors hover:bg-navy-900"
+            className="mb-3 block rounded-xl bg-navy-800 px-4 py-4 text-center font-semibold text-white transition-colors hover:bg-navy-900"
           >
             Main Website
           </a>
-          <a
-            href={SALES_REP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/careers"
             onClick={onClose}
-            className="block rounded-xl bg-red-600 px-4 py-4 text-center font-semibold text-white shadow-card transition-colors hover:bg-red-700"
+            className="block rounded-xl bg-red-600 px-4 py-4 text-center font-semibold text-white transition-colors hover:bg-red-700"
           >
-            Find a Sales Rep
-          </a>
+            Apply for a Job
+          </Link>
         </div>
       </nav>
     </div>
@@ -221,24 +216,19 @@ function Header() {
             </nav>
 
             <div className="hidden items-center gap-3 lg:flex">
-              <a
-                href={SALES_REP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-card-hover"
+              <Link
+                to="/careers"
+                className="group inline-flex items-center gap-2 rounded-md bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-red-700"
               >
-                Find a Sales Rep
+                Apply for a Job
                 <Icon
                   name="arrow-right"
                   className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
                 />
-              </a>
+              </Link>
             </div>
 
-            <HamburgerButton
-              isOpen={isMenuOpen}
-              onToggle={() => setIsMenuOpen((prev) => !prev)}
-            />
+            <HamburgerButton isOpen={isMenuOpen} onToggle={() => setIsMenuOpen((prev) => !prev)} />
           </div>
         </div>
       </div>

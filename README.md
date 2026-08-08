@@ -13,12 +13,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.2.36-2a3163?style=for-the-badge" alt="Version 1.2.36" />
+  <img src="https://img.shields.io/badge/version-1.3.0-2a3163?style=for-the-badge" alt="Version 1.3.0" />
   <img src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
   <img src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=white" alt="Vite 7" />
   <img src="https://img.shields.io/badge/React_Router-7-dc2626?style=for-the-badge&logo=reactrouter&logoColor=white" alt="React Router 7" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-3-2a3163?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 3" />
-  <img src="https://img.shields.io/badge/Leaflet-2a3163?style=for-the-badge&logo=leaflet&logoColor=white" alt="Leaflet" />
   <img src="https://img.shields.io/badge/Vercel-1a1f42?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
 </p>
 
@@ -26,17 +25,17 @@
 
 ## Why Hollingshead Harbor
 
-A shipper's first question is "do you have a harbor near me, and who do I call?" The site is built around that answer: an interactive map of all 13 harbors, a searchable and state-filtered list synced to it, and a sales-rep handoff on every page. There is no backend and no map account — the content is JSON in the repo and the tiles come from OpenStreetMap.
+Most applicants fill this out on a phone, standing on a dock, and they will not come back for a second attempt. So the whole employment application sits on one page, checks itself before it submits, and lands in the hiring inbox as a formatted email with the resume attached. The other four pages cover who the company is, what it runs, and who to call.
 
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <h3 align="center">Two-way map and list</h3>
-      <p align="center">Clicking a marker highlights its row; picking a row pans the map and opens the popup. Both views read the same filtered harbor list.</p>
+      <h3 align="center">The application, in one page</h3>
+      <p align="center">Position, contact details, four employers, personal history, and a signed acknowledgment. Checked in the browser, then checked again on the server before anything is sent.</p>
     </td>
     <td width="50%" valign="top">
       <h3 align="center">Content without a CMS</h3>
-      <p align="center">Team, services, and harbors are three JSON files. Adding a harbor or a leader is a data edit, not a code change.</p>
+      <p align="center">Job postings and fleet equipment are two JSON files. Adding a boat or a job description is a data edit, not a code change.</p>
     </td>
   </tr>
 </table>
@@ -49,9 +48,9 @@ A shipper's first question is "do you have a harbor near me, and who do I call?"
 | :--- | :--- |
 | UI | React 19 + React Router 7 |
 | Build & dev | Vite 7 |
-| Styling | Tailwind CSS 3 — SRM navy `#2a3163` / red `#dc2626`, Fraunces + Inter |
-| Map | Leaflet + OpenStreetMap tiles (no API key) |
-| Content | Static JSON — team, services, harbors |
+| Styling | Tailwind CSS 3, Inter, SRM navy `#2a3163` and red `#dc2626` |
+| Application delivery | Vercel Function (`api/apply.js`) + Resend |
+| Content | Static JSON: job postings, fleet equipment |
 | Analytics | First-party, cookieless beacon (`src/lib/sunday-analyzer`) |
 | Hosting | Vercel (SPA rewrites in `vercel.json`) |
 
@@ -63,7 +62,17 @@ npm run dev           # Vite dev server
 npm run build         # production build to dist/
 ```
 
-No environment configuration is required — the site has no backend, no database, and no map API key.
+`npm run dev` serves the site but not `api/`. To exercise the application endpoint locally, run `vercel dev` instead, which serves both.
+
+### Environment
+
+Three variables, set in Vercel and required only by `api/apply.js`. Without them the endpoint returns a 500 and the form shows its error state.
+
+| Variable | Holds |
+| :--- | :--- |
+| `RESEND_API_KEY` | Resend key, send-only scope |
+| `CAREERS_INBOX` | Where applications are delivered; comma-separate for more than one recipient |
+| `CAREERS_FROM` | Sending address on a Resend-verified domain |
 
 ### Scripts
 
@@ -78,16 +87,15 @@ No environment configuration is required — the site has no backend, no databas
 
 ## Routes
 
-Every route renders inside one nested `Layout` — two-tier sticky header, footer, and scroll restoration.
+Every route renders inside one nested `Layout`: two-tier sticky header, footer, and scroll restoration.
 
 | Route | Renders |
 | :--- | :--- |
-| `/` | Hero, why Hollingshead, services preview, harbor network, CTA |
-| `/about` | The division, its core services, and its place in the SRM family |
-| `/story` | Company history from Mike and Melissa Hollingshead's 1999 founding of SRM |
-| `/team` | Leadership cards from `team.json` |
-| `/services` | Six marine and port services from `services.json` |
-| `/locations` | Leaflet map + searchable, state-filtered harbor sidebar |
+| `/` | Hero, why Hollingshead, harbor network, hiring and contact CTAs |
+| `/about` | What the division does, the 1999 founding story, core values, the SRM family |
+| `/equipment` | Fleet cards from `equipment.json`, or a specs-on-request panel while it is empty |
+| `/careers` | Job postings from `positions.json` and the full employment application |
+| `/contact` | Direct lines, the Murfreesboro and San Leon offices, and a careers handoff |
 | `/privacy-policy` | Privacy policy |
 | `*` | Not found |
 
@@ -95,34 +103,40 @@ Every route renders inside one nested `Layout` — two-tier sticky header, foote
 
 ```mermaid
 flowchart LR
-    J["locations.json — 13 harbors"] --> F["Search + state filter"]
-    F --> M["LocationMap — Leaflet"]
-    F --> S["Harbor sidebar"]
-    M <-->|"marker click / row select"| S
-    M --> T[("OpenStreetMap tiles")]
+    F["Application form"] -->|"validate in browser"| P["JSON + base64 resume"]
+    P -->|"POST /api/apply"| A["api/apply.js"]
+    A -->|"honeypot, required fields, file type + size"| R["Render HTML + text"]
+    R --> S(["Resend"])
+    S --> I[/"CAREERS_INBOX"/]
+    C["constants/application.js"] -.->|"one field schema"| F
+    C -.-> R
 ```
 
 ## How it works
 
-- **The locations page is the product.** Harbors are filtered by search text (name or city) and by state, and the result feeds both the map and the sidebar from a single source.
-- **One hero, every page.** `HeroSection` renders a slow-panning background image masked by an SVG wave, so pages stay visually consistent without per-page art direction.
+- **One schema drives the form and the email.** `constants/application.js` declares the sections and the employer field list once. The form renders from it and the email prints from it, which keeps a field from existing on one side and not the other.
+- **Validation runs twice.** The browser blocks submission and marks every offending field in red. The endpoint then re-checks the fields it refuses to send without, since anything reaching a public URL can skip the browser entirely.
+- **Applicant data is never logged.** Applications carry a Social Security number and a date of birth, so `api/apply.js` logs failure messages only. The payload goes to the outbound email and nowhere else.
+- **A hidden honeypot field returns success.** Bots that fill it get a 200 and no email is sent, so a scraper cannot tell rejection from delivery.
+- **One hero component, every page.** `HeroSection` renders a photographic band under a navy wash with a red rule beneath it, so pages stay consistent without per-page art direction.
 - **Sections reveal on scroll.** `useScrollAnimation` wraps `IntersectionObserver` with staggered timing.
-- **The header adapts.** A two-tier sticky bar compresses on scroll and collapses to a slide-down drawer on mobile, with a "Find a Sales Rep" call to action that hands off to SRM's rep finder.
-- **The palette is anchored to the parent brand.** `tailwind.config.js` builds navy and red scales around SRM's `#2a3163` / `#dc2626`, plus warm "sand" and cool "mist" surface tints and a deep "hull" tone for heroes.
+- **The palette is anchored to the parent brand.** `tailwind.config.js` builds navy and red scales around SRM's `#2a3163` and `#dc2626`, plus warm "sand" and cool "mist" surface tints and a deep "hull" tone for heroes.
 
 ## Project structure
 
 ```
 hollingsheadharbor-com/
-├── public/                    Logo, hero background, team + operations photos, favicon
+├── api/
+│   └── apply.js               Vercel Function: validates and mails an application
+├── public/                    Logo, hero background, operations photos, favicon
 └── src/
     ├── App.jsx                Routes wrapped in the shared Layout
     ├── main.jsx               Browser entry
-    ├── index.css              Tailwind layers + keyframes
-    ├── components/            Header, Footer, HeroSection, LocationMap, Layout, ScrollToTop, …
-    ├── pages/                 Home, About, Story, Team, Services, Locations, PrivacyPolicy, NotFound
-    ├── data/                  team.json · services.json · locations.json
-    ├── constants/             navigation.js · urls.js
+    ├── index.css              Tailwind layers, buttons, scroll-reveal utilities
+    ├── components/            Header, Footer, HeroSection, ApplicationForm, FormControls, …
+    ├── pages/                 Home, About, Equipment, Careers, Contact, PrivacyPolicy, NotFound
+    ├── data/                  positions.json · equipment.json
+    ├── constants/             application.js · navigation.js · urls.js
     ├── hooks/                 useScrollAnimation.js (IntersectionObserver reveal)
     └── lib/sunday-analyzer/   First-party cookieless analytics provider
 ```

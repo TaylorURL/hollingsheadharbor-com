@@ -17,7 +17,7 @@ export function useScrollAnimation() {
     }, observerOptions);
 
     const animatedElements = document.querySelectorAll(
-      '.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale'
+      '.scroll-animate, .scroll-animate-left, .scroll-animate-right'
     );
 
     animatedElements.forEach((el) => observer.observe(el));
