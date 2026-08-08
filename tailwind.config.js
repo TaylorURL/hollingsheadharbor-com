@@ -56,7 +56,6 @@ export default {
     extend: {
       colors: {
         red,
-        blue: navy,
         navy,
         gray,
         sand: {
@@ -75,33 +74,27 @@ export default {
         hull: '#0a1228',
         ink: '#0f172a',
       },
+      // Headings and body share one family. The site sits alongside the
+      // established inland-marine operators, which all run a single neutral
+      // sans, and a display serif reads as consumer-facing next to them.
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Fraunces', 'Georgia', 'serif'],
+        display: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       letterSpacing: {
-        eyebrow: '0.18em',
+        eyebrow: '0.14em',
       },
-      borderRadius: {
-        '4xl': '2rem',
-      },
-      maxWidth: {
-        prose: '68ch',
-      },
+      // Short spreads, so a raised surface reads as a panel edge rather than a
+      // soft consumer card. Widening the blur undoes that.
       boxShadow: {
-        card: '0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.12)',
-        'card-hover': '0 4px 6px rgba(15, 23, 42, 0.06), 0 18px 40px -16px rgba(15, 23, 42, 0.22)',
-        ring: '0 0 0 1px rgba(42, 49, 99, 0.08)',
+        card: '0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 12px -6px rgba(15, 23, 42, 0.10)',
+        'card-hover': '0 2px 4px rgba(15, 23, 42, 0.07), 0 10px 24px -10px rgba(15, 23, 42, 0.18)',
       },
       transitionTimingFunction: {
-        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
         'out-quint': 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
       backgroundImage: {
         'hull-deep': 'linear-gradient(135deg, #0a1228 0%, #141d3f 45%, #1a1f42 100%)',
-        'navy-rise': 'linear-gradient(180deg, #1a1f42 0%, #2a3163 100%)',
-        'wave-stripes':
-          'repeating-linear-gradient(135deg, rgba(42,49,99,0.06) 0 1px, transparent 1px 14px)',
       },
     },
   },

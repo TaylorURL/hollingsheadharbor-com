@@ -2,9 +2,8 @@
 // propagate to both.
 export const SITE_NAV = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/story', label: 'Our Story' },
-  { to: '/team', label: 'Our Team' },
-  { to: '/services', label: 'Services' },
-  { to: '/locations', label: 'Locations' },
+  { to: '/about', label: 'About Us' },
+  { to: '/equipment', label: 'Equipment' },
+  { to: '/careers', label: 'Careers' },
+  { to: '/contact', label: 'Contact Us' },
 ];

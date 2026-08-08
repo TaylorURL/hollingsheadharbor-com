@@ -3,10 +3,9 @@ import Icon from './Icon';
 import { SITE_NAV } from '../constants/navigation';
 import {
   CONTACT_EMAIL,
-  HQ_ADDRESS_LINES,
+  OFFICES,
   PHONE_DISPLAY,
   PHONE_NUMBER,
-  SALES_REP_URL,
   SOCIAL_LINKS,
 } from '../constants/urls';
 
@@ -64,26 +63,22 @@ function CallToActionBanner() {
       <div className="pattern-grid-dark absolute inset-0 opacity-60" aria-hidden="true" />
       <div className="container-page relative flex flex-col items-center justify-between gap-6 py-14 md:flex-row">
         <div className="text-center md:text-left">
-          <span className="eyebrow eyebrow-on-dark">Ready to ship</span>
-          <h3 className="mt-3 font-display text-3xl font-black tracking-tight text-white md:text-4xl">
-            Let's move your cargo.
+          <span className="eyebrow eyebrow-on-dark">Now hiring</span>
+          <h3 className="mt-3 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+            Wheelmen and deckhands
           </h3>
-          <p className="mt-2 text-white/70">
-            Talk to a regional rep about your bulk freight, charter, or port-side needs.
-          </p>
+          <p className="mt-2 text-white/70">Apply online in about fifteen minutes.</p>
         </div>
-        <a
-          href={SALES_REP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2 rounded-full bg-red-600 px-7 py-4 font-semibold text-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-card-hover"
+        <Link
+          to="/careers"
+          className="group inline-flex items-center gap-2 rounded-md bg-red-600 px-7 py-4 font-semibold text-white transition-all duration-200 hover:bg-red-700"
         >
-          Find a Sales Rep
+          Apply for a Job
           <Icon
             name="arrow-right"
             className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -93,7 +88,7 @@ function ContactSection() {
   return (
     <div>
       <h4 className="font-display text-lg font-bold text-ink">Get in Touch</h4>
-      <ul className="mt-6 space-y-4 text-sm">
+      <ul className="mt-6 space-y-5 text-sm">
         <li>
           <a
             href={`tel:${PHONE_NUMBER}`}
@@ -105,6 +100,20 @@ function ContactSection() {
             <span className="font-semibold">{PHONE_DISPLAY}</span>
           </a>
         </li>
+        {OFFICES.map((office) => (
+          <li key={office.id} className="flex items-start gap-3 text-gray-700">
+            <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-navy-800">
+              <Icon name="pin" className="h-5 w-5" />
+            </span>
+            <span>
+              {office.addressLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </span>
+          </li>
+        ))}
         <li>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
@@ -115,19 +124,6 @@ function ContactSection() {
             </span>
             <span>{CONTACT_EMAIL}</span>
           </a>
-        </li>
-        <li className="flex items-start gap-3 text-gray-700">
-          <span className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-800">
-            <Icon name="pin" className="h-5 w-5" />
-          </span>
-          <span>
-            {HQ_ADDRESS_LINES.map((line, index) => (
-              <span key={line}>
-                {line}
-                {index < HQ_ADDRESS_LINES.length - 1 && <br />}
-              </span>
-            ))}
-          </span>
         </li>
       </ul>
     </div>
@@ -145,7 +141,7 @@ function Footer() {
             <div>
               <img src="/logo.jpg" alt="Hollingshead Harbor" className="h-16 w-auto rounded-md" />
               <p className="mt-5 max-w-xs text-sm leading-relaxed text-gray-600">
-                Moving bulk cargo through 13 harbors across 6 states. The marine arm of SRM —
+                Moving bulk cargo through 13 harbors across 6 states. The marine arm of SRM,
                 family-owned since 1999.
               </p>
               <div className="mt-6 flex gap-3">
@@ -182,7 +178,9 @@ function Footer() {
         <div className="container-page py-6">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
-              <span>&copy; {new Date().getFullYear()} Hollingshead Harbor. All rights reserved.</span>
+              <span>
+                &copy; {new Date().getFullYear()} Hollingshead Harbor. All rights reserved.
+              </span>
               <span className="hidden text-gray-300 md:inline">|</span>
               <Link
                 to="/privacy-policy"
@@ -192,8 +190,7 @@ function Footer() {
               </Link>
             </div>
             <div className="text-sm text-gray-500">
-              The marine arm of{' '}
-              <span className="font-semibold text-navy-800">SRM</span>
+              The marine arm of <span className="font-semibold text-navy-800">SRM</span>
               <span className="mx-2 text-red-600">·</span>
               <span className="font-semibold text-gray-700">Smyrna Ready Mix</span>
             </div>
