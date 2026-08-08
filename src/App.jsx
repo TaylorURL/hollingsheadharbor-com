@@ -3,10 +3,9 @@ import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
-import Team from './pages/Team';
-import Story from './pages/Story';
-import Services from './pages/Services';
-import Locations from './pages/Locations';
+import Equipment from './pages/Equipment';
+import Careers from './pages/Careers';
+import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
 
@@ -18,10 +17,9 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="team" element={<Team />} />
-          <Route path="story" element={<Story />} />
-          <Route path="services" element={<Services />} />
-          <Route path="locations" element={<Locations />} />
+          <Route path="equipment" element={<Equipment />} />
+          <Route path="careers" element={<Careers />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Route>

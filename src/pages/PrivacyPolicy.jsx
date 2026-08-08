@@ -54,7 +54,7 @@ const POLICY_SECTIONS = [
             hollingsheadharbor.com/privacy-policy
           </a>
         </p>
-        <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-4 text-sm font-semibold text-white">
+        <div className="mt-6 rounded-lg border border-white/15 bg-white/10 p-4 text-sm font-semibold text-white">
           Message HELP for help. Reply STOP to any message to opt out.
         </div>
       </>
@@ -101,7 +101,7 @@ const SECTION_TONES = {
 function PolicySection({ section }) {
   const tone = SECTION_TONES[section.tone] ?? SECTION_TONES.navy;
   return (
-    <article className={`scroll-animate mb-8 rounded-3xl p-8 md:p-10 ${tone.card}`}>
+    <article className={`scroll-animate mb-8 rounded-lg p-8 md:p-10 ${tone.card}`}>
       <h2 className="flex items-center gap-4 font-display text-2xl font-bold tracking-tight md:text-3xl">
         <span
           className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${tone.iconWrap}`}
@@ -140,7 +140,10 @@ function PrivacyPolicy() {
 
   return (
     <div>
-      <HeroSection title="Privacy policy." subtitle="How we collect, use, and protect your information." />
+      <HeroSection
+        title="Privacy policy"
+        subtitle="How we collect, use, and protect your information."
+      />
 
       <section className="bg-white py-20 md:py-28">
         <div className="container-page max-w-4xl">
@@ -169,7 +172,7 @@ function PrivacyPolicy() {
             <PolicySection key={section.title} section={section} />
           ))}
 
-          <div className="scroll-animate rounded-3xl border-2 border-red-200 bg-red-50 p-8 md:p-10">
+          <div className="scroll-animate rounded-lg border-2 border-red-200 bg-red-50 p-8 md:p-10">
             <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
               Questions or concerns?
             </h2>
@@ -180,14 +183,14 @@ function PrivacyPolicy() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
                 href={`tel:${PHONE_NUMBER}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-6 py-3 font-semibold text-white shadow-card transition-colors hover:bg-red-700"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-red-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-red-700"
               >
                 <Icon name="phone" className="h-5 w-5" />
                 {PHONE_DISPLAY}
               </a>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy-800 px-6 py-3 font-semibold text-white shadow-card transition-colors hover:bg-navy-900"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-navy-800 px-6 py-3 font-semibold text-white transition-colors hover:bg-navy-900"
               >
                 <Icon name="mail" className="h-5 w-5" />
                 Email us
