@@ -1,0 +1,742 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Inter is served from this origin rather than from a font host. A third-party
+ * stylesheet on the critical path costs a DNS lookup, a TLS handshake, and a
+ * second round trip before the face is even requested, and the first paint
+ * waits for all three.
+ *
+ * Two subsets: latin covers the copy, latin-ext covers the accented names that
+ * appear in employment history. The browser fetches whichever the page needs.
+ */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+/*
+ * Archivo carries the headings. It is a grotesque built for small sizes and
+ * dense setting, with flat terminals and tight apertures that read as plant
+ * signage rather than as a product interface — which is the register the rest
+ * of the inland-marine trade is written in. Only the weights the headings use
+ * are subset, and only latin: a heading is a company name, a vessel, or a
+ * state.
+ */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500 800;
+  font-display: swap;
+  src: url('/fonts/archivo-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * The face the reader sees for the first few hundred milliseconds. The
+ * overrides pull the system sans onto Inter's metrics, so the swap moves no
+ * line and shifts nothing on the page.
+ */
+@font-face {
+  font-family: 'Inter Fallback';
+  font-display: swap;
+  src: local('Helvetica Neue'), local('Arial'), local('Segoe UI'), local('Roboto');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22.4%;
+  line-gap-override: 0%;
+}
+
+/*
+ * Three layers, in this order: primitives hold raw channel triples, semantic
+ * tokens alias them by purpose, component tokens reference the semantic ones.
+ * Every colour in the project resolves through this block — Tailwind's palette
+ * is generated from it in tailwind.config.js, so a component never names a
+ * value of its own.
+ *
+ * Values are space-separated RGB channels rather than hex so Tailwind's
+ * `rgb(var(--token) / <alpha-value>)` form can apply an opacity modifier to a
+ * token; `bg-surface/60` works, `bg-surface` on a hex string would not.
+ */
+:root {
+  /* Primitive: brand. Navy is pinned at 800 and red at 600 to Smyrna Ready
+     Mix, the parent brand; move either anchor and its whole ramp has to be
+     regenerated so the surrounding steps stay evenly spaced. */
+  --navy-50: 238 240 245;
+  --navy-100: 218 222 234;
+  --navy-200: 179 187 210;
+  --navy-300: 139 150 186;
+  --navy-400: 100 113 162;
+  --navy-500: 72 87 138;
+  --navy-600: 58 71 117;
+  --navy-700: 47 58 100;
+  --navy-800: 42 49 99;
+  --navy-900: 26 31 66;
+  --navy-950: 12 16 41;
+
+  --red-50: 254 242 242;
+  --red-100: 254 226 226;
+  --red-200: 254 202 202;
+  --red-300: 252 165 165;
+  --red-400: 248 113 113;
+  --red-500: 239 68 68;
+  --red-600: 220 38 38;
+  --red-700: 185 28 28;
+  --red-800: 153 27 27;
+  --red-900: 127 29 29;
+  --red-950: 69 10 10;
+
+  /* Primitive: neutral. */
+  --gray-50: 249 250 251;
+  --gray-100: 243 244 246;
+  --gray-200: 229 231 235;
+  --gray-300: 209 213 219;
+  --gray-400: 156 163 175;
+  --gray-500: 107 114 128;
+  --gray-600: 75 85 99;
+  --gray-700: 55 65 81;
+  --gray-800: 31 41 55;
+  --gray-900: 17 24 39;
+  --gray-950: 3 7 18;
+
+  /* Primitive: maritime accents. These belong to this site rather than to the
+     parent brand, so they are not derived from navy or red. */
+  --sand-50: 251 248 242;
+  --sand-100: 246 241 231;
+  --sand-200: 236 226 204;
+  --sand-300: 220 200 158;
+  --sand-400: 201 165 92;
+  --sand-500: 180 138 60;
+
+  --mist-50: 244 246 249;
+  --mist-100: 230 235 242;
+  --mist-200: 205 214 227;
+
+  --hull: 10 18 40;
+  --hull-mid: 20 29 63;
+
+  --white: 255 255 255;
+  --black: 0 0 0;
+  --slate-900: 15 23 42;
+
+  /* Semantic: light. The dark and gray blocks below redefine this same list,
+     so a token added here without a partner there resolves to the wrong ink in
+     two of the three themes — unless it is written in terms of another
+     semantic token, which the hairlines below are. */
+  --surface: var(--white);
+  --surface-raised: var(--white);
+  --surface-cool: 248 250 251;
+  --surface-sunken: 250 251 252;
+  --surface-warm: var(--sand-100);
+  --surface-accent: var(--navy-50);
+  --surface-field: var(--mist-50);
+
+  --ink: var(--slate-900);
+  --ink-body: var(--gray-700);
+  --ink-muted: var(--gray-600);
+  --ink-subtle: var(--gray-500);
+  /* The ink a control paints on its own accent ground. Under the dark themes
+     the accent is the pale end of the ramp, so white on it is unreadable and
+     each of those themes puts its own deep ground here instead. */
+  --ink-on-accent: var(--white);
+
+  --accent: var(--navy-800);
+  --accent-strong: var(--navy-900);
+  --accent-contrast: var(--red-600);
+
+  --danger: var(--red-600);
+  --danger-ink: var(--red-700);
+  --danger-surface: var(--red-50);
+
+  --shadow-ink: var(--slate-900);
+  --chrome-tint: var(--navy-900);
+
+  /* Every separator and 1px border in the project is the theme's own ink at low
+     alpha, mixed here once. An alpha hairline composites correctly over each of
+     the surfaces it crosses, which is what lets one value serve a card, a
+     panel, and all three themes; a picked opaque grey is right on one surface
+     and visibly wrong on the next. These carry no partner in the dark and gray
+     blocks on purpose — a custom property resolves where it is used, so
+     redefining --ink there carries the hairlines with it. */
+  --line: color-mix(in oklab, rgb(var(--ink)) 12%, transparent);
+  --line-strong: color-mix(in oklab, rgb(var(--ink)) 20%, transparent);
+  --line-field: color-mix(in oklab, rgb(var(--ink)) 30%, transparent);
+
+  /* The autofilled field's surface, put back over the ground Chrome paints for
+     itself. A 40rem inset spread is the whole field whatever its height. */
+  --shadow-autofill: 0 0 0 40rem rgb(var(--surface-field)) inset;
+
+  /* Component: controls. Every input, select, textarea, and button reads its
+     height and shape from here, which is what keeps a 38px field from landing
+     beside a 44px button. */
+  --control-height: 2.75rem;
+  --control-radius: 0.75rem;
+  --control-padding-x: 1rem;
+  --control-font-size: 1rem;
+  --control-line-height: 1.5;
+  --control-letter-spacing: 0em;
+  --control-font-weight: 400;
+
+  /* Shape. */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* One content width for the whole site, referenced by .container-page. */
+  --page-max-width: 80rem;
+
+  /* The width a paragraph is allowed to run to, in characters rather than
+     pixels, so the line holds its length as the type scale moves. Under 45
+     characters the eye returns too often; over 75 it loses the next line. */
+  --measure: 68ch;
+
+  /* The fixed bar's height, and what a page has to clear to sit under it. The
+     offset covers the utility strip above the bar, which only the wider
+     breakpoint shows. */
+  --header-height: 5rem;
+  --header-height-scrolled: 4rem;
+  --header-offset: 7rem;
+  --header-offset-wide: 8rem;
+
+  /* The bar pinned to the bottom edge of a phone. The offset adds whatever the
+     browser reserves for its own controls and the home indicator, so the rail
+     clears them instead of sitting under them, and so a page can reserve the
+     same distance beneath its last line. */
+  --rail-height: 3.75rem;
+  --rail-offset: calc(var(--rail-height) + env(safe-area-inset-bottom, 0px));
+
+  /* The mobile menu is measured against the visible viewport rather than the
+     layout one, so the rows at the bottom of a long menu stay above the
+     browser's own chrome instead of behind it. */
+  --mobile-menu-max-height: calc(100dvh - var(--header-height));
+
+  /* Motion. */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --stagger-step: 50ms;
+  /* Short enough to be over before a frame is drawn, long enough that the
+     transition still counts as one. Reduced motion runs on this. */
+  --duration-instant: 0.001ms;
+  /* The autofill background transition is never meant to arrive; the delay is
+     what keeps Chrome's own ground from painting back over the field. */
+  --duration-autofill-hold: 100000s;
+
+  /* Layers. The nav sits above in-page sticky elements; the back-to-top button
+     sits below the nav so it never covers the menu it scrolls past. */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-nav: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --surface: var(--hull);
+  --surface-raised: var(--navy-900);
+  --surface-cool: var(--navy-950);
+  --surface-sunken: var(--navy-950);
+  --surface-warm: var(--navy-900);
+  --surface-accent: var(--navy-800);
+  --surface-field: var(--navy-950);
+
+  --ink: var(--white);
+  --ink-body: var(--navy-100);
+  --ink-muted: var(--navy-200);
+  --ink-subtle: var(--navy-300);
+
+  --ink-on-accent: var(--hull);
+
+  --accent: var(--mist-100);
+  --accent-strong: var(--white);
+  --accent-contrast: var(--red-500);
+
+  --danger: var(--red-500);
+  --danger-ink: var(--red-300);
+  --danger-surface: var(--red-950);
+
+  --shadow-ink: 0 0 0;
+  --chrome-tint: var(--hull);
+
+  color-scheme: dark;
+}
+
+[data-theme='gray'] {
+  --surface: var(--gray-900);
+  --surface-raised: var(--gray-800);
+  --surface-cool: var(--gray-950);
+  --surface-sunken: var(--gray-950);
+  --surface-warm: var(--gray-800);
+  --surface-accent: var(--gray-700);
+  --surface-field: var(--gray-900);
+
+  --ink: var(--gray-50);
+  --ink-body: var(--gray-200);
+  --ink-muted: var(--gray-300);
+  --ink-subtle: var(--gray-400);
+
+  --ink-on-accent: var(--gray-900);
+
+  --accent: var(--gray-100);
+  --accent-strong: var(--white);
+  --accent-contrast: var(--red-400);
+
+  --danger: var(--red-500);
+  --danger-ink: var(--red-300);
+  --danger-surface: var(--red-950);
+
+  --shadow-ink: 0 0 0;
+  --chrome-tint: var(--gray-900);
+
+  color-scheme: dark;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* An in-page link lands under a fixed bar unless the page reserves its
+       height first. */
+    scroll-padding-top: var(--header-offset);
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: var(--header-offset-wide);
+    }
+  }
+
+  /* clip rather than hidden: hidden on the root turns the page into a scroll
+     container, which drops the fixed header out of its viewport anchoring. */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family:
+      'Inter',
+      'Inter Fallback',
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    color: rgb(var(--ink));
+    background-color: rgb(var(--surface));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Archivo', 'Inter', 'Inter Fallback', system-ui, sans-serif;
+    letter-spacing: -0.022em;
+    color: rgb(var(--ink));
+    /* Balance keeps a headline from stranding its last word on a line of its
+       own; pretty does the same for the widow at the end of a paragraph. */
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.032em;
+  }
+
+  /* A single long word at display size runs past its column and takes the page
+     sideways with it. `anywhere` also lets the word shrink the flex or grid
+     track it sits in, which break-word alone does not; min-width releases the
+     automatic minimum that would otherwise hold the track at the word's
+     unbroken width. */
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  #root {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--white));
+  }
+
+  /*
+   * What every clickable owes the hand, set on the elements rather than on a
+   * class, so a control that forgets the class still answers. Components layer
+   * their own colour and shadow on top; nothing here competes with that.
+   */
+  a,
+  button,
+  [role='button'],
+  summary {
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgb(var(--accent) / 0.14);
+  }
+
+  a:active,
+  button:active,
+  [role='button']:active,
+  summary:active {
+    transform: scale(0.97);
+  }
+
+  /* Labels on controls are read, not selected; body copy stays selectable. */
+  button,
+  [role='button'],
+  summary,
+  label,
+  nav a {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  [role='button']:focus-visible,
+  summary:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  input,
+  textarea,
+  select {
+    accent-color: rgb(var(--accent));
+  }
+
+  /* Chrome paints its own ground and ink into an autofilled field. The inset
+     shadow is the only way to put the field's surface back, since background
+     itself is overridden by the UA. */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-text-fill-color: rgb(var(--ink));
+    -webkit-box-shadow: var(--shadow-autofill);
+    caret-color: rgb(var(--ink));
+    transition: background-color var(--duration-autofill-hold) ease 0s;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--surface-cool));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--accent));
+    border-radius: var(--radius-sm);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--accent-strong));
+  }
+}
+
+@layer utilities {
+  /* Short travel, short duration. The reveal exists to stop sections popping
+     in, not to be noticed on its own. */
+  .scroll-animate,
+  .scroll-animate-left,
+  .scroll-animate-right {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out-quint),
+      transform var(--duration-slow) var(--ease-out-quint);
+    will-change: transform, opacity;
+  }
+  .scroll-animate.visible,
+  .scroll-animate-left.visible,
+  .scroll-animate-right.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stagger-1 {
+    transition-delay: var(--stagger-step);
+  }
+  .stagger-2 {
+    transition-delay: calc(var(--stagger-step) * 2);
+  }
+  .stagger-3 {
+    transition-delay: calc(var(--stagger-step) * 3);
+  }
+  .stagger-4 {
+    transition-delay: calc(var(--stagger-step) * 4);
+  }
+
+  /*
+   * The entrance a route uses when it arrives, whether it came straight from
+   * the bundle or from behind the loading placeholder. One rule on the page
+   * block rather than one per section, so the page arrives as a whole. Opacity
+   * only: a route that slides in moves everything the placeholder had already
+   * put in its final position.
+   */
+  .page-enter {
+    animation: page-enter var(--duration-slow) var(--ease-out-quint) both;
+  }
+
+  /*
+   * A section the reader has not reached yet costs style and layout on every
+   * load whether or not anybody scrolls to it. This hands the browser
+   * permission to skip both until the section is approached.
+   *
+   * A skipped section stands at its intrinsic height until it renders once, so
+   * it goes only on sections nothing links directly to: on a page with anchors,
+   * a jump lands short when the section above the target grows as it renders.
+   * The intrinsic size is a starting guess in the range the deferred sections
+   * actually measure, and the browser replaces it with each section's own
+   * height the first time it renders one.
+   */
+  .section-deferred {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 640px;
+  }
+
+  /* The measure a paragraph runs to. */
+  .measure {
+    max-width: var(--measure);
+  }
+
+  /* The mark a click leaves at the cursor. It is drawn on a fixed layer above
+     the page and stands off the pointer, so nothing underneath loses a click. */
+  .click-spark {
+    position: fixed;
+    z-index: var(--z-toast);
+    pointer-events: none;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 1px solid rgb(var(--accent-contrast) / 0.6);
+    border-radius: var(--radius-full);
+    animation: click-spark var(--duration-slow) var(--ease-out-quint) forwards;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes click-spark {
+  from {
+    opacity: 0.85;
+    transform: scale(0.35);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@layer components {
+  /* Anything that answers a click carries this: the cursor, the hover and
+     focus transition, and the press. Elements that add their own
+     transition-colors would override the transition half of it, so controls
+     take `transition` from here rather than declaring their own. */
+  .pressable {
+    @apply cursor-pointer touch-manipulation select-none transition duration-base ease-out-quint
+      active:scale-[0.97];
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-micro font-bold uppercase tracking-eyebrow text-accent;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+  }
+  .eyebrow-on-dark {
+    @apply text-white/80;
+  }
+  .eyebrow-red {
+    @apply text-accent-contrast;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8;
+  }
+
+  /*
+   * The bar is pinned, so the page runs underneath it and whatever is under it
+   * is part of how it reads.
+   */
+  .site-header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: var(--z-nav);
+  }
+
+  /*
+   * Its surface has two states and the swap between them lives here, beside
+   * both values. At rest the bar is alpha over a real blur, so the hero reads
+   * through it as glass rather than as a white strip laid over the picture;
+   * once anything has scrolled underneath it closes to near-opaque, which is
+   * what keeps body copy legible as it passes behind.
+   */
+  .site-header-surface {
+    background-color: rgb(var(--surface) / 0.82);
+    backdrop-filter: blur(20px) saturate(160%);
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+  .site-header-surface[data-scrolled='true'] {
+    background-color: rgb(var(--surface) / 0.96);
+  }
+
+  .pattern-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--accent) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--accent) / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .pattern-grid-dark {
+    background-image:
+      linear-gradient(to right, rgb(var(--white) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--white) / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Square-cornered buttons. Pills read consumer next to the industrial
+     subject matter, and --radius-md puts the corner on the same 8px the panel
+     edges use. */
+  .btn {
+    @apply pressable inline-flex min-h-control items-center justify-center gap-2 rounded-md
+      border border-transparent text-prose font-semibold focus-visible:outline-none
+      focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-red-600 px-6 py-3 text-white hover:bg-red-700
+      focus-visible:ring-red-600 focus-visible:ring-offset-surface;
+  }
+  .btn-ghost-dark {
+    @apply btn border border-white/25 bg-white/10 px-6 py-3 text-white backdrop-blur-sm
+      hover:border-white/50 hover:bg-white/15 focus-visible:ring-white/60;
+  }
+  .btn-outline {
+    @apply btn border border-line-strong bg-surface-raised px-6 py-3 text-accent
+      hover:border-accent hover:bg-surface-accent focus-visible:ring-accent;
+  }
+
+  /* One height, one shape, one type size for every field, so a select never
+     lands a few pixels short of the input beside it. 16px is the floor: below
+     it iOS zooms the page the moment the field takes focus. */
+  .field-control {
+    background-color: rgb(var(--surface-field));
+    @apply block min-h-control w-full rounded-control border border-line-field
+      px-control py-3 text-control text-ink transition duration-200 ease-out-quint
+      placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-offset-1
+      focus:ring-offset-surface-raised;
+  }
+
+  /* The one hero heading style, so a page owns its h1 without owning its type. */
+  .hero-title {
+    @apply font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl;
+  }
+
+  /* Tabular figures, because these sit in a row of columns that has to line up
+     down the page and stay put as a number changes width. */
+  .stat-figure {
+    @apply font-display font-bold leading-none tracking-tight text-accent;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A figure inside a line of copy or a specification row. Same figures, no
+     display treatment. */
+  .figure-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A single word longer than the hero column pushes the page sideways at
+     display size unless it is allowed to break anywhere. */
+  .hero-title {
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--duration-instant) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--duration-instant) !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-animate,
+  .scroll-animate-left,
+  .scroll-animate-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .page-enter {
+    animation: none !important;
+  }
+  .click-spark {
+    display: none !important;
+  }
+}

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hollingshead Harbor | Marine Transportation</title>
+    <meta
+      name="description"
+      content="Bulk dry cargo, vessel charter, and barge charter through 13 harbors in 6 states. The marine arm of Smyrna Ready Mix, family-owned since 1999."
+    />
+    <link rel="canonical" href="https://www.hollingsheadharbor.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hollingshead Harbor" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Hollingshead Harbor | Marine Transportation" />
+    <meta
+      property="og:description"
+      content="Bulk dry cargo, vessel charter, and barge charter through 13 harbors in 6 states. The marine arm of Smyrna Ready Mix, family-owned since 1999."
+    />
+    <meta property="og:url" content="https://www.hollingsheadharbor.com/" />
+    <meta property="og:image" content="https://www.hollingsheadharbor.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Hollingshead Harbor: marine transportation and harbor services"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hollingshead Harbor | Marine Transportation" />
+    <meta
+      name="twitter:description"
+      content="Bulk dry cargo, vessel charter, and barge charter through 13 harbors in 6 states. The marine arm of Smyrna Ready Mix, family-owned since 1999."
+    />
+    <meta name="twitter:image" content="https://www.hollingsheadharbor.com/og-image.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Hollingshead Harbor: marine transportation and harbor services"
+    />
+
+    <link rel="icon" type="image/png" href="/fav.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://gujgtjqqurildqurpffh.supabase.co" />
+    <link rel="dns-prefetch" href="https://sunday.tail1f78d7.ts.net" />
+    <!-- Inter is served from this origin, so the face is discoverable in the
+         document rather than behind a stylesheet on another host. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />
+    <!-- Archivo sets every heading, the h1 among them, so it is on the critical
+         path for the largest paint on the page. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-latin.woff2" crossorigin />
+    <!-- The hero backdrop is the largest paint on every route and is referenced
+         only by a component, so without this the request waits for the bundle to
+         parse before it is even discovered. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/background.webp"
+      imagesrcset="/background-768.webp 768w, /background-1280.webp 1280w, /background.webp 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <script>
+      (function () {
+        var endpoint = 'https://sunday.tail1f78d7.ts.net/report';
+        var site = 'Hollingshead Harbor';
+        var sent = 0;
+        var nativeFetch = window.fetch ? window.fetch.bind(window) : null;
+        var leaving = false;
+        window.addEventListener(
+          'pagehide',
+          function () {
+            leaving = true;
+          },
+          true
+        );
+        function report(kind, message, stack) {
+          if (sent >= 10) return;
+          sent += 1;
+          try {
+            var body = JSON.stringify({
+              site: site,
+              kind: kind,
+              message: String(message || 'Unknown error').slice(0, 1500),
+              stack: String(stack || '').slice(0, 4000),
+              url: location.href,
+              userAgent: navigator.userAgent,
+            });
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon(endpoint, body);
+            } else {
+              fetch(endpoint, { method: 'POST', body: body, keepalive: true }).catch(
+                function () {}
+              );
+            }
+          } catch (ignored) {}
+        }
+        // A subresource that never arrives raises the same error event whether the
+        // server does not have it or the browser cancelled the request, and a
+        // cancelled one is not a fault: leaving the page, losing signal, or a
+        // release rotating the hashed file out from under a document already in
+        // flight all abandon every outstanding link and image at once. Asking for
+        // the file a second time separates the two, since a file the server does
+        // not have answers the same way twice and a cancelled one answers normally.
+        // A cross-origin answer carries no status, so there the only evidence
+        // available is whether the request completes.
+        function reportIfStillMissing(message, url) {
+          if (!nativeFetch || !url) {
+            report('resource', message);
+            return;
+          }
+          var opaque = url.indexOf(location.origin + '/') !== 0;
+          nativeFetch(url, { cache: 'no-store', mode: opaque ? 'no-cors' : 'same-origin' }).then(
+            function (response) {
+              if (!opaque && !response.ok) report('resource', message);
+            },
+            function () {
+              // A page on its way out cancels this request too, which says nothing
+              // about the file.
+              if (!leaving) report('resource', message);
+            }
+          );
+        }
+        // A hashed chunk that a release rotated away is a failure the page is
+        // about to fix itself: src/lib/chunk-recovery.js reloads the document
+        // and announces the reload on its way out. The announcement arrives
+        // after the browser has already failed the request, so asset failures
+        // wait rather than reporting at once. The event drops whatever is held;
+        // anything still held when the wait elapses was a real failure and goes
+        // on to the second request that separates a missing file from a
+        // cancelled one.
+        var HOLD_MS = 1500;
+        var heldAssets = [];
+        function flushHeldAssets(verify) {
+          var pending = heldAssets.splice(0, heldAssets.length);
+          for (var i = 0; i < pending.length; i += 1) {
+            if (verify) {
+              reportIfStillMissing(pending[i].message, pending[i].url);
+            } else {
+              report('resource', pending[i].message);
+            }
+          }
+        }
+        window.addEventListener('hollingshead:build-refresh', function () {
+          heldAssets.length = 0;
+        });
+        // Leaving for any other reason ends the wait, so a page closed on a real
+        // failure still reports it. A second request cannot come back by then,
+        // so what is held goes straight out.
+        window.addEventListener('pagehide', function () {
+          flushHeldAssets(false);
+        });
+        // Capture phase, because element load failures fire error events that do not bubble.
+        window.addEventListener(
+          'error',
+          function (event) {
+            if (event.target && event.target !== window && event.target.tagName) {
+              var source = event.target.src || event.target.href || '';
+              heldAssets.push({
+                message: 'Failed to load ' + event.target.tagName.toLowerCase() + ': ' + source,
+                url: source,
+              });
+              setTimeout(function () {
+                flushHeldAssets(true);
+              }, HOLD_MS);
+            } else {
+              // An error that crosses a script boundary can arrive without an Error object,
+              // so fall back to the position the event itself carries.
+              var stack = (event.error && event.error.stack) || '';
+              if (!stack && event.filename) {
+                stack = 'at ' + event.filename + ':' + event.lineno + ':' + event.colno;
+              }
+              report('uncaught', event.message, stack);
+            }
+          },
+          true
+        );
+        window.addEventListener('unhandledrejection', function (event) {
+          var reason = event.reason;
+          report(
+            'rejection',
+            reason && reason.message ? reason.message : reason,
+            reason && reason.stack
+          );
+        });
+        var consoleError = console.error;
+        console.error = function () {
+          var parts = [];
+          for (var i = 0; i < arguments.length; i += 1) {
+            var piece = arguments[i];
+            if (piece && piece.stack) {
+              parts.push(piece.stack);
+            } else if (typeof piece === 'object') {
+              try {
+                parts.push(JSON.stringify(piece));
+              } catch (ignored) {
+                parts.push(String(piece));
+              }
+            } else {
+              parts.push(String(piece));
+            }
+          }
+          report('console', parts.join(' '));
+          return consoleError.apply(console, arguments);
+        };
+        if (window.fetch) {
+          var originalFetch = window.fetch;
+          window.fetch = function (input) {
+            var target = typeof input === 'string' ? input : (input && input.url) || '';
+            if (target.indexOf(endpoint) === 0) return originalFetch.apply(window, arguments);
+            return originalFetch.apply(window, arguments).then(
+              function (response) {
+                if (response.status >= 500)
+                  report('http', 'HTTP ' + response.status + ' from ' + target.split('?')[0]);
+                return response;
+              },
+              function (error) {
+                report(
+                  'network',
+                  (error && error.message ? error.message : String(error)) +
+                    ' fetching ' +
+                    target.split('?')[0]
+                );
+                throw error;
+              }
+            );
+          };
+        }
+      })();
+    </script>
+    <!-- Traffic analytics. The site key is public by design: it says which
+         site a hit belongs to, and the collector accepts it only from this
+         site's own origins.
+
+         The tag is appended after the load event rather than declared in the
+         document. Third-party code is the one script here whose cost nobody in
+         this repository controls, and a long task inside it lands on the same
+         main thread the page answers taps with; after load it runs in time the
+         reader is no longer waiting on. The idle callback pushes it further
+         still where the browser offers one.
+
+         crossorigin is what keeps a failure inside this script reportable. Without it
+         the browser withholds the message, file, and stack of any exception raised by
+         a script from another origin, and the reporter above receives only
+         "Script error." Supabase serves this file with Access-Control-Allow-Origin,
+         which is what the attribute requires. -->
+    <script>
+      (function () {
+        function loadAnalytics() {
+          var tag = document.createElement('script');
+          tag.src = 'https://gujgtjqqurildqurpffh.supabase.co/functions/v1/analytics-tracker';
+          tag.async = true;
+          tag.crossOrigin = 'anonymous';
+          tag.setAttribute('data-site', 'sa_f1519212695a8637fbb30c5b80427c55');
+          document.head.appendChild(tag);
+        }
+        function schedule() {
+          if (window.requestIdleCallback) {
+            window.requestIdleCallback(loadAnalytics, { timeout: 2000 });
+          } else {
+            setTimeout(loadAnalytics, 0);
+          }
+        }
+        if (document.readyState === 'complete') {
+          schedule();
+        } else {
+          window.addEventListener('load', schedule);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- The router replaces everything inside #root the moment the bundle runs.
+         Until then this is the whole document a reader that does not execute
+         JavaScript receives, so it carries the heading, the navigation, and the
+         name, address, and phone rather than an empty div. -->
+    <div id="root">
+      <div class="mx-auto flex min-h-dvh max-w-page flex-col justify-between gap-12 px-6 py-10">
+        <header>
+          <a
+            href="/"
+            class="pressable font-display text-xl font-bold tracking-tight text-accent hover:text-accent-contrast"
+          >
+            Hollingshead Harbor
+          </a>
+          <!-- The two pages with sections worth reaching directly open the same
+               panel here that the bar opens once the bundle runs, built from
+               details and summary so it works with no script at all. -->
+          <nav
+            aria-label="Primary"
+            class="mt-4 flex flex-wrap items-start gap-x-6 gap-y-2 text-sm font-semibold text-ink-muted"
+          >
+            <a href="/" class="pressable hover:text-accent">Home</a>
+            <details>
+              <summary class="pressable hover:text-accent">About Us</summary>
+              <div class="nav-panel mt-2 flex flex-col gap-1 border-l border-line pl-3 font-medium">
+                <a href="/about" class="pressable hover:text-accent">About Hollingshead Harbor</a>
+                <a href="/about#what-we-do" class="pressable hover:text-accent">What We Do</a>
+                <a href="/about#the-beginning" class="pressable hover:text-accent">The Beginning</a>
+                <a href="/about#core-values" class="pressable hover:text-accent">Core Values</a>
+                <a href="/about#srm-family" class="pressable hover:text-accent">The SRM Family</a>
+              </div>
+            </details>
+            <a href="/equipment" class="pressable hover:text-accent">Equipment</a>
+            <details>
+              <summary class="pressable hover:text-accent">Careers</summary>
+              <div class="nav-panel mt-2 flex flex-col gap-1 border-l border-line pl-3 font-medium">
+                <a href="/careers#open-positions" class="pressable hover:text-accent"
+                  >Open Positions</a
+                >
+                <a href="/careers#application" class="pressable hover:text-accent"
+                  >Employment Application</a
+                >
+              </div>
+            </details>
+            <details>
+              <summary class="pressable hover:text-accent">Contact Us</summary>
+              <div class="nav-panel mt-2 flex flex-col gap-1 border-l border-line pl-3 font-medium">
+                <a href="/contact#reach-us" class="pressable hover:text-accent"
+                  >Phone and Offices</a
+                >
+                <a href="/contact#hiring" class="pressable hover:text-accent">Hiring</a>
+              </div>
+            </details>
+          </nav>
+        </header>
+        <main>
+          <p class="eyebrow">SRM Marine Transportation</p>
+          <h1 class="mt-4 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+            Marine transportation, built on hard work
+          </h1>
+          <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
+            Bulk dry cargo, vessel and barge charter, and full-service ports. The marine arm of SRM,
+            family-owned since 1999.
+          </p>
+        </main>
+        <footer class="text-sm text-ink-muted">
+          <p class="font-semibold text-ink">Hollingshead Harbor, LLC</p>
+          <address class="not-italic">
+            <span class="block">1000 Hollingshead Circle</span>
+            <span class="block">Murfreesboro, TN 37129</span>
+          </address>
+          <p><a href="tel:8327414125" class="pressable hover:text-accent">(832) 741-4125</a></p>
+          <p class="mt-3 flex gap-4">
+            <a href="/privacy-policy" class="pressable hover:text-accent">Privacy Policy</a>
+            <a href="/terms" class="pressable hover:text-accent">Terms of Use</a>
+          </p>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
