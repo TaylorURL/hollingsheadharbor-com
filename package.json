@@ -1,7 +1,7 @@
 {
   "name": "hollingsheadharbor-com",
   "private": true,
-  "version": "2026.35.11",
+  "version": "2026.36.0",
   "type": "module",
   "engines": {
     "node": "22.x"
@@ -15,7 +15,7 @@
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "dependencies": {
-    "@taylorurl/split-rail": "github:TaylorURL/split-rail#v2026.35.4",
+    "@taylorurl/split-rail": "github:TaylorURL/split-rail#v2026.36.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.18.2",
