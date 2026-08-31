@@ -1,7 +1,7 @@
 {
   "name": "hollingsheadharbor-com",
   "private": true,
-  "version": "2026.36.0",
+  "version": "2026.36.2",
   "type": "module",
   "engines": {
     "node": "22.x"

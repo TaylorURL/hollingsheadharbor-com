@@ -178,13 +178,19 @@
           },
           true
         );
+        // A browser extension injects its own scripts into the page and its
+        // failures land in this handler with no stack: the extension's file
+        // URL is not exposed to the document. The message that follows is
+        // recognisable - the WebExtension API names it uses do not appear
+        // anywhere in this site's own code, so a rejection whose message
+        // starts with one of them belongs to the extension that raised it.
+        var extensionMessage =
+          /^(?:Invalid call to runtime\.|Extension context invalidated|The message port closed|Could not establish connection|Attempting to use a disconnected port|A listener indicated an asynchronous response|Receiving end does not exist)/;
         window.addEventListener('unhandledrejection', function (event) {
           var reason = event.reason;
-          report(
-            'rejection',
-            reason && reason.message ? reason.message : reason,
-            reason && reason.stack
-          );
+          var message = reason && reason.message ? reason.message : reason;
+          if (extensionMessage.test(String(message || ''))) return;
+          report('rejection', message, reason && reason.stack);
         });
         var consoleError = console.error;
         console.error = function () {
