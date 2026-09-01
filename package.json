@@ -1,7 +1,8 @@
 {
   "name": "hollingsheadharbor-com",
   "private": true,
-  "version": "2026.36.3",
+  "license": "UNLICENSED",
+  "version": "2026.36.4",
   "type": "module",
   "engines": {
     "node": "22.x"
