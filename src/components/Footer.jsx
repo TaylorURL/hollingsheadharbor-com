@@ -10,6 +10,7 @@ import {
   PHONE_NUMBER,
   SOCIAL_LINKS,
 } from '../constants/urls';
+import { currentYear } from '../lib/localTime';
 
 const LEGAL_LINKS = [
   { to: '/privacy-policy', label: 'Privacy Policy' },
@@ -146,7 +147,7 @@ function Footer({ children }) {
       <div className="border-t border-line bg-surface-cool">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-5 text-sm text-ink-subtle md:flex-row">
           <span>
-            &copy; {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.
+            &copy; {currentYear()} {BUSINESS_NAME}. All rights reserved.
           </span>
           <span>
             The marine arm of <span className="font-semibold text-ink-body">Smyrna Ready Mix</span>
