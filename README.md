@@ -11,6 +11,9 @@
   The official site for SRM Concrete's marine division and its 13-harbor network.<br />
   Live at <a href="https://hollingsheadharbor.com">hollingsheadharbor.com</a>.
 </p>
+<p align="center">
+  <sub>Published for reading. Proprietary — see <a href="LICENSE.md">LICENSE.md</a>. Outside contributions are not accepted.</sub>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-2026.36.5-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.36.5" />
@@ -122,7 +125,8 @@ flowchart LR
 ```
 hollingsheadharbor-com/
 ├── api/
-│   └── apply.js               Vercel Function: validates and mails an application
+│   ├── apply.js               Vercel Function: validates and mails an application
+│   └── version.js             Vercel Function: the commit this deployment was built from
 ├── public/                    Logo, hero background at three widths, operations
 │                              photos, self-hosted Archivo and Inter, icons,
 │                              robots.txt, sitemap.xml, llms.txt, share card,
@@ -137,7 +141,7 @@ hollingsheadharbor-com/
     ├── data/                  positions.json · equipment.json
     ├── constants/             application.js · navigation.js · seo.js · urls.js
     ├── hooks/                 useScrollAnimation.js · useScrolledPast.js · useClickSpark.js
-    └── lib/                   chunk-recovery.js
+    └── lib/                   chunk-recovery.js · localTime.js
 ```
 
 The footer rail is `@taylorurl/split-rail`, a dependency rather than a file here.
