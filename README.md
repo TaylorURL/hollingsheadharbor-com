@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.36.5-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.36.5" />
+  <img src="https://img.shields.io/badge/version-2026.36.6-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.36.6" />
   <img src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=fff" width="121" height="28" alt="React 19" />
   <img src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=fff" width="101" height="28" alt="Vite 7" />
   <img src="https://img.shields.io/badge/React_Router-7-dc2626?style=for-the-badge&logo=reactrouter&logoColor=fff" width="166" height="28" alt="React Router 7" />
