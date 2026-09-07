@@ -18,7 +18,7 @@ export const CONTACT_EMAIL = 'info@hollingsheadharbor.com';
 export const HQ_CITY = 'Murfreesboro, TN';
 export const HQ_ADDRESS_LINES = ['1000 Hollingshead Circle', 'Murfreesboro, TN 37129'];
 
-// `icon` must name an entry in the Icon registry (src/components/Icon.jsx).
+// `icon` must name an entry in the Icon registry (src/components/ui/Icon.jsx).
 export const SOCIAL_LINKS = [
   { href: TWITTER_URL, label: 'X (Twitter)', icon: 'twitter' },
   { href: LINKEDIN_URL, label: 'LinkedIn', icon: 'linkedin' },

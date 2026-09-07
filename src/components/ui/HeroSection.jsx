@@ -4,7 +4,7 @@ import Icon from './Icon';
 const CTA_ARROW = (
   <Icon
     name="arrow-right"
-    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+    className="h-4 w-4 transition-transform duration-base ease-out group-hover:translate-x-0.5"
   />
 );
 
@@ -46,38 +46,38 @@ function HeroSection({
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-hull/95 via-hull/75 to-hull/35" />
+      <div className="absolute inset-0 bg-gradient-to-r from-hull/95 via-hull/75 to-hull/45" />
 
       <div className="container-page relative w-full py-16 md:py-20">
         <div className="max-w-2xl">
-          <span data-hero="eyebrow" className="eyebrow eyebrow-on-dark mb-5">
+          <span data-hero="eyebrow" className="eyebrow eyebrow-on-dark mb-4">
             SRM Marine Transportation
           </span>
 
           {children}
 
           {subtitle && (
-            <p data-hero="subtitle" className="mt-5 max-w-xl text-lg leading-relaxed text-white/80">
+            <p data-hero="subtitle" className="mt-5 max-w-xl text-lead text-white/75">
               {subtitle}
             </p>
           )}
 
           {(ctaLink || onCtaClick || secondaryLink) && (
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               {ctaText && ctaLink && (
-                <Link to={ctaLink} className="btn btn-primary group">
+                <Link to={ctaLink} className="btn-primary group">
                   {ctaText}
                   {CTA_ARROW}
                 </Link>
               )}
               {ctaText && !ctaLink && onCtaClick && (
-                <button type="button" onClick={onCtaClick} className="btn btn-primary group">
+                <button type="button" onClick={onCtaClick} className="btn-primary group">
                   {ctaText}
                   {CTA_ARROW}
                 </button>
               )}
               {secondaryText && secondaryLink && (
-                <Link to={secondaryLink} className="btn btn-ghost-dark">
+                <Link to={secondaryLink} className="btn-ghost-dark">
                   {secondaryText}
                 </Link>
               )}

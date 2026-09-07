@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import HeroSection from '../components/HeroSection';
-import SectionBadge from '../components/SectionBadge';
-import Icon from '../components/Icon';
-import Breadcrumbs from '../components/Breadcrumbs';
-import Seo from '../components/Seo';
+import HeroSection from '../components/ui/HeroSection';
+import SectionBadge from '../components/ui/SectionBadge';
+import Icon from '../components/ui/Icon';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
+import Seo from '../components/ui/Seo';
 import { SHARE_IMAGE } from '../constants/seo';
 import {
   BUSINESS_LEGAL_NAME,
@@ -93,15 +93,15 @@ const TERMS_SECTIONS = [
 
 function TermsSection({ section }) {
   return (
-    <article className="scroll-animate mb-8 rounded-lg border border-line bg-surface-cool p-8 md:p-10">
-      <h2 className="flex items-center gap-4 font-display text-2xl font-bold tracking-tight md:text-3xl">
-        <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-navy-800 text-white">
-          <Icon name={section.icon} className="h-6 w-6" strokeWidth={1.75} />
+    <article className="scroll-animate panel-sunken mb-4 p-6 md:p-8">
+      <h2 className="flex items-center gap-4 font-display text-xl font-bold text-ink md:text-2xl">
+        <span className="icon-tile-solid">
+          <Icon name={section.icon} className="h-5 w-5" strokeWidth={1.5} />
         </span>
-        <span className="text-ink">{section.title}</span>
+        <span>{section.title}</span>
       </h2>
 
-      <div className="mt-6 space-y-4 leading-relaxed text-ink-body">
+      <div className="mt-5 space-y-4 text-lead text-ink-body">
         {section.paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -142,9 +142,9 @@ function Terms() {
       </HeroSection>
       <Breadcrumbs trail={[{ name: 'Terms of Use', path: '/terms' }]} />
 
-      <section className="bg-surface py-20 md:py-28">
-        <div className="container-page max-w-4xl">
-          <div className="scroll-animate mb-12">
+      <section className="bg-surface py-16 md:py-20">
+        <div className="container-page max-w-3xl">
+          <div className="scroll-animate mb-10">
             <SectionBadge>Overview</SectionBadge>
             <p className="mt-4 text-caption text-ink-subtle">
               Last updated{' '}
@@ -156,7 +156,7 @@ function Terms() {
                 })}
               </time>
             </p>
-            <p className="mt-5 text-lg leading-relaxed text-ink-body">
+            <p className="mt-5 text-lead text-ink-body">
               These terms cover the website itself. The terms of carriage for a shipment are agreed
               separately, in writing, when we quote the work.
             </p>
@@ -166,17 +166,19 @@ function Terms() {
             <TermsSection key={section.title} section={section} />
           ))}
 
-          <div className="scroll-animate rounded-lg border border-line bg-surface-raised p-8 shadow-card md:p-10">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+          <div className="scroll-animate panel p-6 md:p-8">
+            <h2 className="font-display text-xl font-bold text-ink md:text-2xl">
               Questions about these terms?
             </h2>
-            <p className="mt-3 text-ink-body">Call or email the office and we will answer them.</p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <a href={`tel:${PHONE_NUMBER}`} className="btn btn-primary">
+            <p className="mt-3 text-prose text-ink-body">
+              Call or email the office and we will answer them.
+            </p>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <a href={`tel:${PHONE_NUMBER}`} className="btn-primary">
                 <Icon name="phone" className="h-5 w-5" />
                 {PHONE_DISPLAY}
               </a>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-outline">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="btn-outline">
                 <Icon name="mail" className="h-5 w-5" />
                 Email Us
               </a>

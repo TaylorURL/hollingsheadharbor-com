@@ -2,6 +2,12 @@
  * Central icon registry. Entries default to 24-grid stroke glyphs; `filled`
  * ones render as solid currentColor shapes instead, because their SVG paths
  * describe filled regions rather than outlines.
+ *
+ * The default stroke is 1.75 rather than 2. A 2px stroke on a 24 grid is the
+ * weight a consumer icon set is drawn at, and beside 11px uppercase labels and
+ * hairline panel edges it is the heaviest mark on the page; 1.75 sits the glyph
+ * on the same line weight as the rules around it. A caller that needs a finer
+ * or heavier line still passes its own strokeWidth.
  */
 const STROKE = (...d) => ({ d });
 const FILLED = (...d) => ({ d, filled: true });
@@ -69,7 +75,7 @@ const ICONS = {
   ),
 };
 
-function Icon({ name, className = 'w-5 h-5', strokeWidth = 2, ariaLabel, ...rest }) {
+function Icon({ name, className = 'w-5 h-5', strokeWidth = 1.75, ariaLabel, ...rest }) {
   const entry = ICONS[name];
   if (!entry) return null;
 
