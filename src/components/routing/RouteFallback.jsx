@@ -21,6 +21,12 @@ const PLACEHOLDER_DELAY_MS = 200;
  * `withCta` reserves the button row for the routes whose hero carries one. The
  * band centres its contents, so a placeholder that is short by the height of
  * that row starts half of it too low and the whole hero jumps on arrival.
+ *
+ * The fractional figures below are not arbitrary: each one is the measured
+ * size or offset of the element it stands in for in HeroSection.jsx. They are
+ * only correct for as long as that file's own spacing holds, so a change to the
+ * hero's type step, leading or margins has to be carried across to the matching
+ * bar here in the same pass.
  */
 function RouteFallback({ withCta = false }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,11 +49,11 @@ function RouteFallback({ withCta = false }) {
         className="relative flex min-h-[440px] items-center overflow-hidden border-b-4 border-red-600 bg-hull pt-[var(--header-offset)] md:pt-[var(--header-offset-wide)] lg:min-h-[560px]"
       >
         <div className="container-page relative w-full py-16 md:py-20">
-          <div className={`max-w-2xl pt-[9.1px] ${isVisible ? 'animate-pulse' : 'opacity-0'}`}>
-            <div data-skeleton="eyebrow" className="h-4 w-[238.34px] bg-white/15" />
-            <div data-skeleton="headline" className="mt-5 h-12 w-full bg-white/15" />
-            <div data-skeleton="subtitle" className="mt-5 h-[58.5px] w-full max-w-xl bg-white/10" />
-            {withCta && <div data-skeleton="cta" className="mt-8 h-12 w-56 bg-white/15" />}
+          <div className={`max-w-2xl pt-[9.6px] ${isVisible ? 'animate-pulse' : 'opacity-0'}`}>
+            <div data-skeleton="eyebrow" className="h-4 w-[246.34px] bg-white/15" />
+            <div data-skeleton="headline" className="mt-4 h-12 w-full bg-white/15" />
+            <div data-skeleton="subtitle" className="mt-5 h-[52.7px] w-full max-w-xl bg-white/10" />
+            {withCta && <div data-skeleton="cta" className="mt-7 h-11 w-56 bg-white/15" />}
           </div>
         </div>
       </div>

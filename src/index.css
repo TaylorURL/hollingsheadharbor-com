@@ -120,13 +120,16 @@
   --gray-950: 3 7 18;
 
   /* Primitive: maritime accents. These belong to this site rather than to the
-     parent brand, so they are not derived from navy or red. */
-  --sand-50: 251 248 242;
-  --sand-100: 246 241 231;
-  --sand-200: 236 226 204;
-  --sand-300: 220 200 158;
-  --sand-400: 201 165 92;
-  --sand-500: 180 138 60;
+     parent brand, so they are not derived from navy or red. Sand is the dry
+     stone a barge carries rather than a beach: warm, but pulled most of the way
+     to neutral, because a cream band under an industrial subject reads as a
+     consumer page the moment it is put beside a steel one. */
+  --sand-50: 250 249 246;
+  --sand-100: 243 241 236;
+  --sand-200: 229 225 216;
+  --sand-300: 202 195 181;
+  --sand-400: 160 147 124;
+  --sand-500: 124 112 91;
 
   --mist-50: 244 246 249;
   --mist-100: 230 235 242;
@@ -149,7 +152,7 @@
   --surface-sunken: 250 251 252;
   --surface-warm: var(--sand-100);
   --surface-accent: var(--navy-50);
-  --surface-field: var(--mist-50);
+  --surface-field: var(--white);
 
   --ink: var(--slate-900);
   --ink-body: var(--gray-700);
@@ -190,18 +193,27 @@
      height and shape from here, which is what keeps a 38px field from landing
      beside a 44px button. */
   --control-height: 2.75rem;
-  --control-radius: 0.75rem;
-  --control-padding-x: 1rem;
+  --control-radius: 0.25rem;
+  --control-padding-x: 0.875rem;
   --control-font-size: 1rem;
   --control-line-height: 1.5;
   --control-letter-spacing: 0em;
   --control-font-weight: 400;
 
-  /* Shape. */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Shape. The ladder is short and shallow on purpose: a corner is here to take
+     the edge off a cut plate, not to round it into a pebble. Four steps of two
+     pixels each keep a 44px field, the button beside it, and the panel around
+     both reading as members of one fabrication, where a 12px corner on the
+     field and a 16px corner on the panel read as a consumer app. Nothing is
+     square, and nothing is soft.
+
+     --radius-full is for shapes that are genuinely circular — a status dot, a
+     rivet. A button or a tile wearing it is a pill, and a pill is the single
+     loudest consumer tell on an industrial page. */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
   --radius-full: 9999px;
 
   /* One content width for the whole site, referenced by .container-page. */
@@ -232,13 +244,17 @@
      browser's own chrome instead of behind it. */
   --mobile-menu-max-height: calc(100dvh - var(--header-height));
 
-  /* Motion. */
+  /* Motion. Short and nearly linear at the end. A long quintic ease-out glides
+     to a stop, which is the motion of a sheet of paper settling; the work here
+     is machinery, and machinery arrives and stops. Every duration is shorter
+     than it was for the same reason a control answers a switch rather than a
+     gesture. */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-base: 200ms;
-  --duration-slow: 300ms;
-  --stagger-step: 50ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 120ms;
+  --duration-base: 160ms;
+  --duration-slow: 240ms;
+  --stagger-step: 40ms;
   /* Short enough to be over before a frame is drawn, long enough that the
      transition still counts as one. Reduced motion runs on this. */
   --duration-instant: 0.001ms;
@@ -373,7 +389,10 @@
   h5,
   h6 {
     font-family: 'Archivo', 'Inter', 'Inter Fallback', system-ui, sans-serif;
-    letter-spacing: -0.022em;
+    /* Loosened from where it was. Archivo at 700 with heavy negative tracking
+       closes its counters and reads as a logotype; opened back out it reads as
+       set type, which is what a heading over a specification is. */
+    letter-spacing: -0.016em;
     color: rgb(var(--ink));
     /* Balance keeps a headline from stranding its last word on a line of its
        own; pretty does the same for the widow at the end of a paragraph. */
@@ -381,7 +400,7 @@
   }
 
   h1 {
-    letter-spacing: -0.032em;
+    letter-spacing: -0.024em;
   }
 
   /* A single long word at display size runs past its column and takes the page
@@ -424,11 +443,15 @@
     -webkit-tap-highlight-color: rgb(var(--accent) / 0.14);
   }
 
+  /* The press. A control that shrinks under the thumb is a toy; one that takes
+     a pixel of travel is a switch. The travel is on transform rather than on
+     margin so it costs no layout, and it is the same single pixel everywhere,
+     so a 44px field and a 32px chip answer identically. */
   a:active,
   button:active,
   [role='button']:active,
   summary:active {
-    transform: scale(0.97);
+    transform: translateY(1px);
   }
 
   /* Labels on controls are read, not selected; body copy stays selectable. */
@@ -481,7 +504,7 @@
   }
   ::-webkit-scrollbar-thumb {
     background: rgb(var(--accent));
-    border-radius: var(--radius-sm);
+    border-radius: 0;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(var(--accent-strong));
@@ -495,7 +518,7 @@
   .scroll-animate-left,
   .scroll-animate-right {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(8px);
     transition:
       opacity var(--duration-slow) var(--ease-out-quint),
       transform var(--duration-slow) var(--ease-out-quint);
@@ -553,20 +576,6 @@
   .measure {
     max-width: var(--measure);
   }
-
-  /* The mark a click leaves at the cursor. It is drawn on a fixed layer above
-     the page and stands off the pointer, so nothing underneath loses a click. */
-  .click-spark {
-    position: fixed;
-    z-index: var(--z-toast);
-    pointer-events: none;
-    width: 24px;
-    height: 24px;
-    margin: -12px 0 0 -12px;
-    border: 1px solid rgb(var(--accent-contrast) / 0.6);
-    border-radius: var(--radius-full);
-    animation: click-spark var(--duration-slow) var(--ease-out-quint) forwards;
-  }
 }
 
 @keyframes page-enter {
@@ -578,39 +587,34 @@
   }
 }
 
-@keyframes click-spark {
-  from {
-    opacity: 0.85;
-    transform: scale(0.35);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1);
-  }
-}
-
 @layer components {
   /* Anything that answers a click carries this: the cursor, the hover and
      focus transition, and the press. Elements that add their own
      transition-colors would override the transition half of it, so controls
      take `transition` from here rather than declaring their own. */
   .pressable {
-    @apply cursor-pointer touch-manipulation select-none transition duration-base ease-out-quint
-      active:scale-[0.97];
+    @apply cursor-pointer touch-manipulation select-none transition duration-base ease-out
+      active:translate-y-px;
   }
 
+  /*
+   * The rule before a label. One hairline rather than a bar: at 11px uppercase
+   * the label is already the heavy element, and a second heavy element beside
+   * it makes a badge, which is a thing a page decorates itself with. This is a
+   * leader line, which is a thing a drawing points with.
+   */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-micro font-bold uppercase tracking-eyebrow text-accent;
+    @apply inline-flex items-center gap-2.5 text-micro font-bold uppercase tracking-eyebrow text-accent;
   }
   .eyebrow::before {
     content: '';
     display: inline-block;
-    width: 16px;
-    height: 2px;
+    width: 22px;
+    height: 1px;
     background: currentColor;
   }
   .eyebrow-on-dark {
-    @apply text-white/80;
+    @apply text-white/75;
   }
   .eyebrow-red {
     @apply text-accent-contrast;
@@ -639,42 +643,69 @@
    * what keeps body copy legible as it passes behind.
    */
   .site-header-surface {
-    background-color: rgb(var(--surface) / 0.82);
-    backdrop-filter: blur(20px) saturate(160%);
+    background-color: rgb(var(--surface) / 0.86);
+    backdrop-filter: blur(20px) saturate(150%);
     transition: background-color var(--duration-base) var(--ease-out);
   }
   .site-header-surface[data-scrolled='true'] {
-    background-color: rgb(var(--surface) / 0.96);
+    background-color: rgb(var(--surface) / 0.97);
   }
 
-  .pattern-grid {
-    background-image:
-      linear-gradient(to right, rgb(var(--accent) / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(var(--accent) / 0.06) 1px, transparent 1px);
-    background-size: 64px 64px;
+  /*
+   * The texture behind a dark band: deck tread plate.
+   *
+   * Pairs of raised treads set in a checker, which is how the walking surface
+   * of a barge deck, a towboat's engine room and a pilothouse floor is actually
+   * rolled — it is the one piece of steel everybody who works for this company
+   * stands on all day. It runs on the diagonal, so it never resolves into the
+   * graph paper a square grid does or the courses a running bond does.
+   *
+   * It is drawn once as a mask rather than twice as an image, so the shape is
+   * carried by the mask and the colour by the background underneath it — which
+   * is what lets the same plate be navy on a white band and white on a hull one,
+   * and follow the dark and gray themes without a second copy of the art.
+   */
+  .pattern-deck,
+  .pattern-deck-dark {
+    --deck-art: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='%23000'%3E%3Cg transform='translate(16 16) rotate(-38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3Cg transform='translate(48 16) rotate(38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3Cg transform='translate(16 48) rotate(38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3Cg transform='translate(48 48) rotate(-38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    -webkit-mask-image: var(--deck-art);
+    mask-image: var(--deck-art);
+    -webkit-mask-size: 56px 56px;
+    mask-size: 56px 56px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
   }
-  .pattern-grid-dark {
-    background-image:
-      linear-gradient(to right, rgb(var(--white) / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(var(--white) / 0.06) 1px, transparent 1px);
-    background-size: 64px 64px;
+  /* On a white band the plate has to be almost gone. Dark ink on a light ground
+     carries far more weight than the reverse at the same alpha, and at anything
+     stronger than this the treads read as a pattern printed behind the copy
+     rather than as the material the band is cut from. */
+  .pattern-deck {
+    background-color: rgb(var(--accent) / 0.09);
+  }
+  .pattern-deck-dark {
+    background-color: rgb(var(--white) / 0.16);
   }
 
-  /* Square-cornered buttons. Pills read consumer next to the industrial
-     subject matter, and --radius-md puts the corner on the same 8px the panel
-     edges use. */
+  /* Buttons. --radius-md puts the corner on the same 4px every panel edge and
+     every field uses, so a button sits in a form rather than on top of one. */
   .btn {
     @apply pressable inline-flex min-h-control items-center justify-center gap-2 rounded-md
-      border border-transparent text-prose font-semibold focus-visible:outline-none
+      border border-transparent text-prose font-semibold leading-none focus-visible:outline-none
       focus-visible:ring-2 focus-visible:ring-offset-2;
   }
   .btn-primary {
     @apply btn bg-red-600 px-6 py-3 text-white hover:bg-red-700
       focus-visible:ring-red-600 focus-visible:ring-offset-surface;
   }
+  /* The quieter of the two solid buttons: brand navy, for the action that is
+     the obvious next step rather than the one the page is asking for. */
+  .btn-secondary {
+    @apply btn bg-navy-800 px-6 py-3 text-white hover:bg-navy-900
+      focus-visible:ring-accent focus-visible:ring-offset-surface;
+  }
   .btn-ghost-dark {
-    @apply btn border border-white/25 bg-white/10 px-6 py-3 text-white backdrop-blur-sm
-      hover:border-white/50 hover:bg-white/15 focus-visible:ring-white/60;
+    @apply btn border border-white/30 bg-white/[0.08] px-6 py-3 text-white
+      hover:border-white/60 hover:bg-white/[0.14] focus-visible:ring-white/60;
   }
   .btn-outline {
     @apply btn border border-line-strong bg-surface-raised px-6 py-3 text-accent
@@ -683,18 +714,69 @@
 
   /* One height, one shape, one type size for every field, so a select never
      lands a few pixels short of the input beside it. 16px is the floor: below
-     it iOS zooms the page the moment the field takes focus. */
+     it iOS zooms the page the moment the field takes focus.
+
+     The field is the page's own white with a drawn edge, not a tinted well. A
+     filled field reads as a slot on a form to be handed in; a ruled one reads
+     as a line on a document being filled out, which is what this is. */
   .field-control {
     background-color: rgb(var(--surface-field));
     @apply block min-h-control w-full rounded-control border border-line-field
-      px-control py-3 text-control text-ink transition duration-200 ease-out-quint
-      placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-offset-1
+      px-control py-3 text-control text-ink transition duration-fast ease-out
+      placeholder:text-ink-subtle focus:outline-none focus:ring-2 focus:ring-offset-1
       focus:ring-offset-surface-raised;
+  }
+
+  /* The panel every card is cut from: one edge, one corner, no drop shadow. A
+     card that floats needs a shadow to say how far off the page it is; a card
+     that is part of the page needs an edge to say where it stops.
+
+     It answers the pointer with nothing, and that is the decision rather than
+     an omission. Every card on this site is a piece of information — a vessel's
+     dimensions, an office address, one of four values — and not one of them
+     goes anywhere when it is clicked. A card that lifts, brightens or darkens
+     its edge under the cursor is offering a click it cannot honour, and a
+     grid of six of them turns a specification into a menu. Where something on
+     the page really is clickable, it is a link or a button, and it says so. */
+  .panel {
+    @apply rounded-md border border-line bg-surface-raised;
+  }
+  .panel-sunken {
+    @apply rounded-md border border-line bg-surface-cool;
+  }
+
+  /* The square an icon sits in. Same 2px corner as a chip, a drawn edge rather
+     than a filled blob, and one size, so a row of them reads as a legend. */
+  .icon-tile {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-line
+      bg-surface-cool text-accent;
+  }
+  .icon-tile-solid {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-accent
+      text-ink-on-accent;
+  }
+  .icon-tile-dark {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-white/20
+      bg-white/[0.08] text-white;
   }
 
   /* The one hero heading style, so a page owns its h1 without owning its type. */
   .hero-title {
-    @apply font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl;
+    @apply font-display text-4xl font-bold leading-[1.06] text-white sm:text-5xl;
+  }
+
+  /* The heading and the sentence under it that open a section. Written once
+     here because they open eleven sections across five pages, and eleven
+     restatements of the same four utilities drift apart by the third page. */
+  /* Neither of these names a tracking. The base layer already tracks every
+     heading, and both of these are applied to headings — restating
+     `tracking-tight` here would quietly tighten them past the base and undo the
+     loosening the whole type system was just moved onto. */
+  .section-title {
+    @apply font-display text-[1.75rem] font-bold leading-[1.14] text-ink md:text-[2.125rem];
+  }
+  .section-lead {
+    @apply text-lead text-ink-muted;
   }
 
   /* Tabular figures, because these sit in a row of columns that has to line up
@@ -735,8 +817,5 @@
   }
   .page-enter {
     animation: none !important;
-  }
-  .click-spark {
-    display: none !important;
   }
 }

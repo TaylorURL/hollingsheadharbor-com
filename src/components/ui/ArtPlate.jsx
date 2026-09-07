@@ -93,7 +93,7 @@ const PLATES = {
      window. */
   crew: (
     <>
-      <rect x="34" y="36" width="252" height="88" rx="6" fill="currentColor" fillOpacity={HAZE} />
+      <rect x="34" y="36" width="252" height="88" rx="2" fill="currentColor" fillOpacity={HAZE} />
       <rect x="44" y="48" width="72" height="64" fill="currentColor" fillOpacity={WASH} />
       <rect x="124" y="48" width="72" height="64" fill="currentColor" fillOpacity={WASH} />
       <rect x="204" y="48" width="72" height="64" fill="currentColor" fillOpacity={WASH} />
@@ -188,7 +188,11 @@ const PLATES = {
  * single row, so it carries no label and stays out of the reading order — the
  * heading beside it already says what the block is.
  *
- * The clip rounds the corners and holds the rivers, which run off the edge of
+ * The clip is cut at the panel corner off the radius ladder rather than at a
+ * tile's rounding, so a plate reads as one more plate in the set rather than as
+ * a soft card dropped into it. The radius is in the plate's own units, so it
+ * rides the viewBox and stays in proportion to the drawing at every size a
+ * plate is called at. The clip also holds the rivers, which run off the edge of
  * their plate on purpose. Its id comes from the render rather than the plate
  * name: waterways is drawn in the menu and again on the home page, and two
  * elements answering to one id send both clips to whichever landed first.
@@ -208,7 +212,7 @@ function ArtPlate({ name, className = '' }) {
     >
       <defs>
         <clipPath id={clipId}>
-          <rect width="320" height="200" rx="12" />
+          <rect width="320" height="200" rx="4" />
         </clipPath>
       </defs>
       <g clipPath={`url(#${clipId})`}>

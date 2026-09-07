@@ -55,7 +55,7 @@ const POLICY_SECTIONS = [
     ],
     footer: (
       <>
-        <p className="text-sm text-white/80">
+        <p className="text-prose text-white/80">
           See privacy policy at{' '}
           <a
             href={`${SITE_ORIGIN}/privacy-policy`}
@@ -64,7 +64,7 @@ const POLICY_SECTIONS = [
             hollingsheadharbor.com/privacy-policy
           </a>
         </p>
-        <div className="mt-6 rounded-lg border border-white/15 bg-white/10 p-4 text-sm font-semibold text-white">
+        <div className="mt-5 rounded-sm border border-white/15 bg-white/10 p-4 text-prose font-semibold text-white">
           Message HELP for help. Reply STOP to any message to opt out.
         </div>
       </>
@@ -91,17 +91,20 @@ const POLICY_SECTIONS = [
   },
 ];
 
+// A clause of the policy is a plate on the document, not a card floating over
+// it: the light tone is the sunken panel and the dark one is the same shape cut
+// from navy, and both are held by a hairline rather than by a shadow.
 const SECTION_TONES = {
   navy: {
-    card: 'border border-line bg-surface-cool',
-    iconWrap: 'bg-navy-800 text-white',
+    card: 'panel-sunken',
+    iconWrap: 'icon-tile-solid',
     title: 'text-ink',
     body: 'text-ink-body',
     emphasis: 'text-ink font-semibold',
   },
   red: {
-    card: 'bg-navy-900 text-white border border-navy-700',
-    iconWrap: 'bg-white/10 text-white',
+    card: 'rounded-md border border-navy-700 bg-navy-900 text-white',
+    iconWrap: 'icon-tile-dark',
     title: 'text-white',
     body: 'text-white/80',
     emphasis: 'text-white font-semibold',
@@ -111,17 +114,15 @@ const SECTION_TONES = {
 function PolicySection({ section }) {
   const tone = SECTION_TONES[section.tone] ?? SECTION_TONES.navy;
   return (
-    <article className={`scroll-animate mb-8 rounded-lg p-8 md:p-10 ${tone.card}`}>
-      <h2 className="flex items-center gap-4 font-display text-2xl font-bold tracking-tight md:text-3xl">
-        <span
-          className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${tone.iconWrap}`}
-        >
-          <Icon name={section.icon} className="h-6 w-6" strokeWidth={1.75} />
+    <article className={`scroll-animate mb-4 p-6 md:p-8 ${tone.card}`}>
+      <h2 className="flex items-center gap-4 font-display text-xl font-bold md:text-2xl">
+        <span className={tone.iconWrap}>
+          <Icon name={section.icon} className="h-5 w-5" strokeWidth={1.5} />
         </span>
         <span className={tone.title}>{section.title}</span>
       </h2>
 
-      <div className={`mt-6 space-y-4 leading-relaxed ${tone.body}`}>
+      <div className={`mt-5 space-y-4 text-lead ${tone.body}`}>
         {section.paragraphs.map((paragraph, index) => (
           <p key={paragraph} className={index === section.emphasizeIndex ? tone.emphasis : ''}>
             {paragraph}
@@ -130,17 +131,17 @@ function PolicySection({ section }) {
       </div>
 
       {section.bullets && (
-        <ul className="mt-6 space-y-3">
+        <ul className="mt-5 space-y-2.5">
           {section.bullets.map((bullet) => (
             <li key={bullet} className={`flex items-start gap-3 ${tone.body}`}>
-              <Icon name="check" className="mt-1 h-4 w-4 flex-shrink-0 text-accent-contrast" />
+              <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-accent-contrast" />
               <span>{bullet}</span>
             </li>
           ))}
         </ul>
       )}
 
-      {section.footer && <div className="mt-6">{section.footer}</div>}
+      {section.footer && <div className="mt-5">{section.footer}</div>}
     </article>
   );
 }
@@ -165,9 +166,9 @@ function PrivacyPolicy() {
       </HeroSection>
       <Breadcrumbs trail={[{ name: 'Privacy Policy', path: '/privacy-policy' }]} />
 
-      <section className="bg-surface py-20 md:py-28">
-        <div className="container-page max-w-4xl">
-          <div className="scroll-animate mb-12">
+      <section className="bg-surface py-16 md:py-20">
+        <div className="container-page max-w-3xl">
+          <div className="scroll-animate mb-10">
             <SectionBadge>Overview</SectionBadge>
             <p className="mt-4 text-caption text-ink-subtle">
               Last updated{' '}
@@ -179,15 +180,15 @@ function PrivacyPolicy() {
                 })}
               </time>
             </p>
-            <p className="mt-5 text-lg leading-relaxed text-ink-body">
+            <p className="mt-5 text-lead text-ink-body">
               This privacy notice discloses the privacy practices for{' '}
               <span className="font-semibold text-accent">hollingsheadharbor.com</span>. It applies
               solely to information collected by this website and notifies you of the following:
             </p>
-            <ul className="mt-6 space-y-3">
+            <ul className="mt-5 space-y-2.5">
               {OVERVIEW_POINTS.map((point) => (
                 <li key={point} className="flex items-start gap-3 text-ink-body">
-                  <span aria-hidden="true" className="mt-3 h-px w-4 flex-shrink-0 bg-red-600" />
+                  <span aria-hidden="true" className="mt-3 h-px w-4 shrink-0 bg-red-600" />
                   <span>{point}</span>
                 </li>
               ))}
@@ -198,23 +199,20 @@ function PrivacyPolicy() {
             <PolicySection key={section.title} section={section} />
           ))}
 
-          <div className="scroll-animate rounded-lg border-2 border-danger/40 bg-danger-surface p-8 md:p-10">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+          <div className="scroll-animate panel p-6 md:p-8">
+            <h2 className="font-display text-xl font-bold text-ink md:text-2xl">
               Questions or concerns?
             </h2>
-            <p className="mt-3 text-ink-body">
+            <p className="mt-3 text-prose text-ink-body">
               If you feel that we are not abiding by this privacy policy, please contact us
               directly:
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <a href={`tel:${PHONE_NUMBER}`} className="btn btn-primary">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <a href={`tel:${PHONE_NUMBER}`} className="btn-primary">
                 <Icon name="phone" className="h-5 w-5" />
                 {PHONE_DISPLAY}
               </a>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="pressable inline-flex min-h-control items-center justify-center gap-2 rounded-md bg-navy-800 px-6 py-3 font-semibold text-white hover:bg-navy-900"
-              >
+              <a href={`mailto:${CONTACT_EMAIL}`} className="btn-outline">
                 <Icon name="mail" className="h-5 w-5" />
                 Email Us
               </a>
