@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import HeroSection from '../components/HeroSection';
-import SectionBadge from '../components/SectionBadge';
-import Icon from '../components/Icon';
-import ArtPlate from '../components/ArtPlate';
+import HeroSection from '../components/ui/HeroSection';
+import SectionBadge from '../components/ui/SectionBadge';
+import Icon from '../components/ui/Icon';
+import ArtPlate from '../components/ui/ArtPlate';
 import useScrollAnimation from '../hooks/useScrollAnimation';
-import Seo from '../components/Seo';
+import Seo from '../components/ui/Seo';
 import { HOME_DESCRIPTION, HOME_TITLE, SHARE_IMAGE } from '../constants/seo';
 import { SERVICE_AREAS, SITE_ORIGIN } from '../constants/urls';
 

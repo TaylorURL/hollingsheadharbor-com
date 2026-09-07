@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Icon from './Icon';
-import { SITE_NAV } from '../constants/navigation';
+import Icon from '../ui/Icon';
+import { SITE_NAV } from '../../constants/navigation';
 import {
   BUSINESS_LEGAL_NAME,
   BUSINESS_NAME,
@@ -9,8 +9,8 @@ import {
   PHONE_DISPLAY,
   PHONE_NUMBER,
   SOCIAL_LINKS,
-} from '../constants/urls';
-import { currentYear } from '../lib/localTime';
+} from '../../constants/urls';
+import { currentYear } from '../../lib/localTime';
 
 const LEGAL_LINKS = [
   { to: '/privacy-policy', label: 'Privacy Policy' },

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Icon from './Icon';
-import { PHONE_DISPLAY, PHONE_NUMBER } from '../constants/urls';
+import Icon from '../ui/Icon';
+import { PHONE_DISPLAY, PHONE_NUMBER } from '../../constants/urls';
 
 /**
  * The two things a visitor on a phone came for, pinned where a thumb already

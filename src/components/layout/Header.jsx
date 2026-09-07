@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import Icon from './Icon';
-import ArtPlate from './ArtPlate';
-import useScrolledPast from '../hooks/useScrolledPast';
-import { SITE_NAV } from '../constants/navigation';
+import Icon from '../ui/Icon';
+import ArtPlate from '../ui/ArtPlate';
+import useScrolledPast from '../../hooks/useScrolledPast';
+import { SITE_NAV } from '../../constants/navigation';
 import {
   HQ_CITY,
   MAIN_WEBSITE_URL,
   PHONE_DISPLAY,
   PHONE_NUMBER,
   SOCIAL_LINKS,
-} from '../constants/urls';
+} from '../../constants/urls';
 
 const SCROLL_THRESHOLD_PX = 20;
 

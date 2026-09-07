@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import HeroSection from '../components/HeroSection';
-import SectionBadge from '../components/SectionBadge';
-import Icon from '../components/Icon';
+import HeroSection from '../components/ui/HeroSection';
+import SectionBadge from '../components/ui/SectionBadge';
+import Icon from '../components/ui/Icon';
 import {
   CONTACT_EMAIL,
   OFFICES,
@@ -10,8 +10,8 @@ import {
   SERVICE_AREAS,
   SITE_ORIGIN,
 } from '../constants/urls';
-import Breadcrumbs from '../components/Breadcrumbs';
-import Seo from '../components/Seo';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
+import Seo from '../components/ui/Seo';
 import { SHARE_IMAGE } from '../constants/seo';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 

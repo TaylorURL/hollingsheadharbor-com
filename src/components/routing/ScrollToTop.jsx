@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MAIN_CONTENT_ID } from '../constants/navigation';
+import { MAIN_CONTENT_ID } from '../../constants/navigation';
 
 // A link into a section of a route that has not been downloaded yet arrives
 // before the section exists, so the target is looked for repeatedly for this

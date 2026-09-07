@@ -4,8 +4,8 @@ import Footer from './Footer';
 import BackToTop from './BackToTop';
 import SplitRail from '@taylorurl/split-rail';
 import MobileRail from './MobileRail';
-import useClickSpark from '../hooks/useClickSpark';
-import { MAIN_CONTENT_ID } from '../constants/navigation';
+import useClickSpark from '../../hooks/useClickSpark';
+import { MAIN_CONTENT_ID } from '../../constants/navigation';
 
 function Layout() {
   useClickSpark();

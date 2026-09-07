@@ -135,8 +135,11 @@ hollingsheadharbor-com/
     ├── App.jsx                Routes wrapped in the shared Layout
     ├── main.jsx               Browser entry
     ├── index.css              Design tokens, the three themes, Tailwind layers
-    ├── components/            Layout, Header, Footer, MobileRail, HeroSection, Breadcrumbs,
-    │                          ApplicationForm, FormControls, ArtPlate, Icon, Seo, …
+    ├── components/
+    │   ├── layout/            Layout, Header, Footer, MobileRail, BackToTop
+    │   ├── routing/           ScrollToTop, RouteFallback
+    │   ├── application/       ApplicationForm, FormControls
+    │   └── ui/                Icon, SectionBadge, HeroSection, Breadcrumbs, ArtPlate, Seo
     ├── pages/                 Home, About, Equipment, Careers, Contact, PrivacyPolicy, Terms, NotFound
     ├── data/                  positions.json · equipment.json
     ├── constants/             application.js · navigation.js · seo.js · urls.js

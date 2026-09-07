@@ -1,5 +1,5 @@
-import Icon from './Icon';
-import useScrolledPast from '../hooks/useScrolledPast';
+import Icon from '../ui/Icon';
+import useScrolledPast from '../../hooks/useScrolledPast';
 
 const VISIBILITY_THRESHOLD_PX = 400;
 

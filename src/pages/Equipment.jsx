@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import HeroSection from '../components/HeroSection';
-import SectionBadge from '../components/SectionBadge';
-import Icon from '../components/Icon';
-import ArtPlate from '../components/ArtPlate';
+import HeroSection from '../components/ui/HeroSection';
+import SectionBadge from '../components/ui/SectionBadge';
+import Icon from '../components/ui/Icon';
+import ArtPlate from '../components/ui/ArtPlate';
 import equipment from '../data/equipment.json';
 import { PHONE_DISPLAY, PHONE_NUMBER, SITE_ORIGIN } from '../constants/urls';
-import Breadcrumbs from '../components/Breadcrumbs';
-import Seo from '../components/Seo';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
+import Seo from '../components/ui/Seo';
 import { SHARE_IMAGE } from '../constants/seo';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 

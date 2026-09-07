@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import Icon from './Icon';
+import Icon from '../ui/Icon';
 
 const CONTROL_IDLE = 'focus:border-accent focus:ring-accent/30';
 const CONTROL_INVALID =

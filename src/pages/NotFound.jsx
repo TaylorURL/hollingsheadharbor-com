@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import SectionBadge from '../components/SectionBadge';
-import Icon from '../components/Icon';
-import Seo from '../components/Seo';
+import SectionBadge from '../components/ui/SectionBadge';
+import Icon from '../components/ui/Icon';
+import Seo from '../components/ui/Seo';
 import { SHARE_IMAGE } from '../constants/seo';
 import { SITE_ORIGIN } from '../constants/urls';
 
