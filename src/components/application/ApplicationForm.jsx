@@ -280,18 +280,16 @@ function validate(values, employers) {
 
 function SuccessPanel({ position, onReset }) {
   return (
-    <div className="rounded-lg border border-line bg-surface-raised p-10 text-center shadow-card md:p-14">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-navy-800 text-white">
-        <Icon name="check" className="h-8 w-8" />
+    <div className="panel p-8 text-center md:p-10">
+      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-sm bg-accent text-ink-on-accent">
+        <Icon name="check" className="h-6 w-6" strokeWidth={1.5} />
       </div>
-      <h3 className="mt-7 font-display text-3xl font-bold tracking-tight text-ink">
-        Application received
-      </h3>
-      <p className="mx-auto mt-4 max-w-md text-prose leading-relaxed text-ink-muted">
+      <h3 className="mt-6 font-display text-3xl font-bold text-ink">Application received</h3>
+      <p className="mx-auto mt-4 max-w-md text-prose text-ink-muted">
         We have your {position.toLowerCase()} application. Our hiring office will contact you about
         next steps.
       </p>
-      <button type="button" onClick={onReset} className="btn btn-outline mt-8">
+      <button type="button" onClick={onReset} className="btn-outline mt-8">
         Submit Another Application
       </button>
     </div>
@@ -310,7 +308,7 @@ function ErrorSummary({ errors }) {
   return (
     <div
       role="alert"
-      className="rounded-lg border border-danger bg-danger-surface p-5 text-sm text-danger-ink"
+      className="rounded-md border border-danger bg-danger-surface p-5 text-sm text-danger-ink"
     >
       <p className="flex items-center gap-2 font-semibold">
         <Icon name="close" className="h-4 w-4 shrink-0" />
@@ -342,15 +340,13 @@ function EmployerBlock({ index, employer, errors, onChange }) {
   const fieldName = (field) => `employer${index}-${field}`;
 
   return (
-    <div className="rounded-lg border border-line bg-surface-sunken p-5 md:p-6">
+    <div className="rounded-md border border-line bg-surface-sunken p-5 md:p-6">
       <div className="mb-5 flex items-baseline gap-3">
         <span className="font-display text-lg font-bold tracking-tight text-ink">
           {employerBlockTitle(index)}
         </span>
         {isOptional && (
-          <span className="text-xs font-semibold uppercase tracking-eyebrow text-ink-subtle">
-            Optional
-          </span>
+          <span className="text-micro uppercase tracking-eyebrow text-ink-subtle">Optional</span>
         )}
       </div>
 
@@ -588,7 +584,7 @@ function ApplicationForm({ defaultPosition = '' }) {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-5">
       <ErrorSummary errors={errors} />
 
       <FormSection
@@ -851,7 +847,7 @@ function ApplicationForm({ defaultPosition = '' }) {
           error={errors.hadInjury}
         />
         {values.hadInjury === 'Yes' && (
-          <div className="space-y-5 rounded-lg border border-line bg-surface-sunken p-5 md:p-6">
+          <div className="space-y-5 rounded-md border border-line bg-surface-sunken p-5 md:p-6">
             <FieldGrid>
               <TextField
                 name="injuryDate"
@@ -921,7 +917,7 @@ function ApplicationForm({ defaultPosition = '' }) {
           error={errors.convicted}
         />
         {values.convicted === 'Yes' && (
-          <div className="space-y-5 rounded-lg border border-line bg-surface-sunken p-5 md:p-6">
+          <div className="space-y-5 rounded-md border border-line bg-surface-sunken p-5 md:p-6">
             <TextField
               name="convictionDate"
               label={FIELD_LABELS.convictionDate}
@@ -955,9 +951,9 @@ function ApplicationForm({ defaultPosition = '' }) {
       </FormSection>
 
       <FormSection title="Read and sign">
-        <div className="rounded-lg border border-line bg-surface-sunken p-5 text-sm leading-relaxed text-ink-body md:p-6">
+        <div className="rounded-md border border-line bg-surface-sunken p-5 text-prose text-ink-body md:p-6">
           <p>{CERTIFICATION_TEXT}</p>
-          <h4 className="mt-6 font-display text-base font-bold tracking-tight text-ink">
+          <h4 className="mt-6 font-display text-base font-bold text-ink">
             Probationary status of new employees
           </h4>
           <p className="mt-2">{PROBATIONARY_TEXT}</p>
@@ -1021,7 +1017,7 @@ function ApplicationForm({ defaultPosition = '' }) {
       {submitError && (
         <div
           role="alert"
-          className="rounded-lg border border-danger bg-danger-surface p-5 text-sm font-medium text-danger-ink"
+          className="rounded-md border border-danger bg-danger-surface p-5 text-sm font-medium text-danger-ink"
         >
           {submitError} Please try again.
         </div>
@@ -1032,13 +1028,13 @@ function ApplicationForm({ defaultPosition = '' }) {
           type="submit"
           disabled={status === 'submitting'}
           aria-busy={status === 'submitting'}
-          className="btn btn-primary group px-9 py-4 disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn-primary group px-8 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === 'submitting' ? 'Submitting…' : 'Submit Application'}
           {status !== 'submitting' && (
             <Icon
               name="arrow-right"
-              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+              className="h-4 w-4 transition-transform duration-base ease-out group-hover:translate-x-0.5"
             />
           )}
         </button>

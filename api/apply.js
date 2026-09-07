@@ -75,15 +75,21 @@ function employerRows(employers) {
  * once, under the same names, rather than restated at every element.
  *
  * The names track the site's semantic tokens: INK is --ink, INK_MUTED is
- * --ink-muted, ACCENT is --accent-contrast, HAIRLINE is a separator at the
- * weight --line carries on paper, and PAPER is --surface-cool. One accent, one
- * family: everything else is ink at a different weight.
+ * --ink-muted, ACCENT is --accent-contrast, HAIRLINE is --line resolved against
+ * white, and PAPER is --surface-cool. One accent, one family: everything else
+ * is ink at a different weight.
+ *
+ * The type follows the site's steps rather than approximating them, because
+ * this page and the application form are read by the same person on the same
+ * day: the label over each table is the micro step, and the applicant's name
+ * tracks at the same -0.024em an h1 does. Nothing here is rounded, because
+ * nothing here is a control — it is a printed record of a form.
  */
 const MAIL = {
   INK: '#0f172a',
   INK_MUTED: '#6b7280',
   ACCENT: '#dc2626',
-  HAIRLINE: '#e8ecf3',
+  HAIRLINE: '#e2e3e5',
   PAPER: '#f8fafb',
   SANS: 'Helvetica,Arial,sans-serif',
 };
@@ -92,7 +98,7 @@ function renderHtml(sections, applicantName, position) {
   const blocks = sections
     .map(
       (section) => `
-    <h2 style="font:600 15px/1.4 ${MAIL.SANS};color:${MAIL.INK};text-transform:uppercase;letter-spacing:.08em;margin:32px 0 8px">
+    <h2 style="font:700 12px/1.4 ${MAIL.SANS};color:${MAIL.INK};text-transform:uppercase;letter-spacing:.14em;margin:32px 0 10px">
       ${escapeHtml(section.title)}
     </h2>
     <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse">
@@ -110,10 +116,10 @@ function renderHtml(sections, applicantName, position) {
     .join('');
 
   return `<div style="max-width:680px;margin:0 auto;padding:32px 24px;background:${MAIL.PAPER}">
-    <p style="font:700 12px/1 ${MAIL.SANS};color:${MAIL.ACCENT};text-transform:uppercase;letter-spacing:.12em;margin:0">
+    <p style="font:700 12px/1 ${MAIL.SANS};color:${MAIL.ACCENT};text-transform:uppercase;letter-spacing:.14em;margin:0">
       Employment application
     </p>
-    <h1 style="font:700 24px/1.2 ${MAIL.SANS};color:${MAIL.INK};letter-spacing:-.02em;margin:8px 0 4px">${escapeHtml(applicantName)}</h1>
+    <h1 style="font:700 24px/1.2 ${MAIL.SANS};color:${MAIL.INK};letter-spacing:-.024em;margin:8px 0 4px">${escapeHtml(applicantName)}</h1>
     <p style="font:400 15px/1.5 ${MAIL.SANS};color:${MAIL.INK_MUTED};margin:0">
       Applying for ${escapeHtml(position)}
     </p>

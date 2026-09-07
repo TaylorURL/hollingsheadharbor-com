@@ -220,7 +220,7 @@ export function ChoiceField({
               type="button"
               onClick={() => onChange(option)}
               aria-pressed={isSelected}
-              className={`pressable min-h-control rounded-control border px-5 py-3 text-control font-semibold ${
+              className={`pressable min-h-control rounded-control border px-4 py-3 text-control font-semibold ${
                 isSelected
                   ? 'border-accent bg-accent text-ink-on-accent hover:border-accent-strong hover:bg-accent-strong'
                   : `bg-surface-field text-accent hover:border-line-strong hover:bg-surface-accent ${
@@ -245,7 +245,7 @@ export function CheckboxField({ name, label, checked, onChange, required, error 
     <div>
       <label
         htmlFor={id}
-        className={`pressable flex items-start gap-3 rounded-control border p-4 ${
+        className={`pressable flex items-start gap-3 rounded-control border p-3.5 ${
           checked
             ? 'border-accent bg-surface-accent'
             : `bg-surface-field hover:bg-surface-accent ${
@@ -262,7 +262,7 @@ export function CheckboxField({ name, label, checked, onChange, required, error 
           aria-invalid={error ? 'true' : undefined}
           aria-required={required ? 'true' : undefined}
           aria-describedby={error ? `${id}-error` : undefined}
-          className="mt-1 h-5 w-5 shrink-0 rounded border-line-field"
+          className="mt-1 h-5 w-5 shrink-0 rounded-sm border-line-field"
         />
         <span className="text-sm font-semibold text-accent-strong">
           {label}
@@ -285,7 +285,7 @@ export function FileField({ name, label, file, onChange, accept, hint, error }) 
       <div className="flex flex-wrap items-center gap-3">
         <label
           htmlFor={id}
-          className="pressable inline-flex min-h-control items-center gap-2 rounded-control border border-line-field bg-surface-field px-5 py-3 text-control font-semibold text-accent hover:border-line-strong hover:bg-surface-accent"
+          className="pressable inline-flex min-h-control items-center gap-2 rounded-control border border-line-field bg-surface-field px-4 py-3 text-control font-semibold text-accent hover:border-line-strong hover:bg-surface-accent"
         >
           <Icon name="document" className="h-4 w-4" />
           Choose File
@@ -321,15 +321,15 @@ export function FileField({ name, label, file, onChange, accept, hint, error }) 
 
 export function FormSection({ title, description, children }) {
   return (
-    <section className="rounded-lg border border-line bg-surface-raised p-6 shadow-card md:p-9">
-      <h3 className="font-display text-2xl font-bold tracking-tight text-ink">{title}</h3>
-      {description && <p className="mt-2 text-sm leading-relaxed text-ink-muted">{description}</p>}
-      <div className="mt-7 space-y-6">{children}</div>
+    <section className="panel p-6 md:p-8">
+      <h3 className="font-display text-2xl font-bold text-ink">{title}</h3>
+      {description && <p className="mt-2 text-prose text-ink-muted">{description}</p>}
+      <div className="mt-6 space-y-5">{children}</div>
     </section>
   );
 }
 
 export function FieldGrid({ children, columns = 2 }) {
   const layout = columns === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
-  return <div className={`grid grid-cols-1 gap-5 ${layout}`}>{children}</div>;
+  return <div className={`grid grid-cols-1 gap-4 ${layout}`}>{children}</div>;
 }

@@ -79,6 +79,10 @@ export default {
         caption: ['0.75rem', { lineHeight: '1.125rem', letterSpacing: '0em', fontWeight: '400' }],
         label: ['0.8125rem', { lineHeight: '1.25rem', letterSpacing: '0em', fontWeight: '600' }],
         prose: ['0.9375rem', { lineHeight: '1.6', letterSpacing: '0em', fontWeight: '400' }],
+        // The sentence under a heading. One step above body and no more: a lead
+        // set at 18px with relaxed leading is a brochure paragraph, and the
+        // whole page tips soft the moment eleven sections open with one.
+        lead: ['1.0625rem', { lineHeight: '1.55', letterSpacing: '-0.003em', fontWeight: '400' }],
         control: [
           'var(--control-font-size)',
           { lineHeight: '1.5', letterSpacing: '0em', fontWeight: '400' },
@@ -107,16 +111,21 @@ export default {
         full: 'var(--radius-full)',
       },
 
-      // Short spreads, so a raised surface reads as a panel edge rather than a
-      // soft consumer card. Widening the blur undoes that.
+      // Almost nothing. A card on this site is held by its border, not by the
+      // distance it floats: the shadow is one hairline of contact and a two
+      // pixel spread, which is what a plate laid on a plate looks like. These
+      // are for the elements that genuinely stand off the page — the fixed bar,
+      // the mobile rail, the back-to-top button — and a static card should be
+      // carrying `panel` instead of either of them.
       boxShadow: {
-        card: '0 1px 2px rgb(var(--shadow-ink) / 0.05), 0 4px 12px -6px rgb(var(--shadow-ink) / 0.1)',
+        card: '0 1px 1px rgb(var(--shadow-ink) / 0.04), 0 1px 3px -1px rgb(var(--shadow-ink) / 0.07)',
         'card-hover':
-          '0 2px 4px rgb(var(--shadow-ink) / 0.07), 0 10px 24px -10px rgb(var(--shadow-ink) / 0.18)',
+          '0 1px 1px rgb(var(--shadow-ink) / 0.05), 0 4px 10px -4px rgb(var(--shadow-ink) / 0.14)',
       },
 
       transitionTimingFunction: {
         'out-quint': 'var(--ease-out-quint)',
+        out: 'var(--ease-out)',
       },
       transitionDuration: {
         fast: 'var(--duration-fast)',
@@ -134,9 +143,14 @@ export default {
         toast: 'var(--z-toast)',
       },
 
+      // The dark ground a band is cut from. It runs top to bottom rather than on
+      // the diagonal, and between two steps rather than three: a plate lit from
+      // above is lighter at its top edge, and that is the whole of the effect
+      // being reached for. A 135-degree three-stop wash is a decoration laid
+      // over a panel, and it reads as one the moment a photograph or a drawn
+      // plate sits next to it.
       backgroundImage: {
-        'hull-deep':
-          'linear-gradient(135deg, rgb(var(--hull)) 0%, rgb(var(--hull-mid)) 45%, rgb(var(--navy-900)) 100%)',
+        'hull-deep': 'linear-gradient(180deg, rgb(var(--hull-mid)) 0%, rgb(var(--hull)) 100%)',
       },
     },
   },

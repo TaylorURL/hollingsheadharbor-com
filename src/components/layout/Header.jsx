@@ -14,9 +14,15 @@ import {
 
 const SCROLL_THRESHOLD_PX = 20;
 
+/*
+ * The 2px rule that draws itself under a nav word is the only drawn structure
+ * in the bar, and it is what keeps the words reading as a set of headings on a
+ * sheet rather than as a row of controls. It arrives at the speed of a switch
+ * rather than gliding to a stop.
+ */
 function desktopNavLinkClasses({ isActive }) {
   const base =
-    'pressable relative inline-flex items-center px-4 py-2 text-label font-semibold uppercase tracking-eyebrow after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-red-600 after:transition-[width] after:duration-300 after:ease-out-quint hover:after:w-2/3';
+    'pressable relative inline-flex items-center px-4 py-2 text-label font-semibold uppercase tracking-eyebrow after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-red-600 after:transition-[width] after:duration-base after:ease-out hover:after:w-2/3';
   const state = isActive
     ? 'text-accent-contrast hover:text-danger-ink after:w-2/3'
     : 'text-accent/85 hover:text-accent-strong';
@@ -25,7 +31,7 @@ function desktopNavLinkClasses({ isActive }) {
 
 function desktopNavTriggerClasses(isOpen) {
   const base =
-    'pressable relative flex items-center gap-1.5 px-4 py-2 text-label font-semibold uppercase tracking-eyebrow after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-red-600 after:transition-[width] after:duration-300 after:ease-out-quint hover:after:w-2/3';
+    'pressable relative flex items-center gap-1.5 px-4 py-2 text-label font-semibold uppercase tracking-eyebrow after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-red-600 after:transition-[width] after:duration-base after:ease-out hover:after:w-2/3';
   const state = isOpen
     ? 'text-accent-contrast hover:text-danger-ink after:w-2/3'
     : 'text-accent/85 hover:text-accent-strong';
@@ -36,7 +42,7 @@ function mobileNavLinkClasses({ isActive }) {
   const state = isActive
     ? 'bg-danger-surface text-accent-contrast hover:bg-danger-surface/70'
     : 'text-ink-body hover:bg-surface-accent hover:text-accent-strong';
-  return `pressable flex min-h-control items-center rounded-xl px-4 py-3 text-base font-semibold ${state}`;
+  return `pressable flex min-h-control items-center rounded-md px-4 py-3 text-base font-semibold ${state}`;
 }
 
 /**
@@ -48,7 +54,7 @@ function mobileNavLinkClasses({ isActive }) {
 function TopBar({ isScrolled }) {
   return (
     <div
-      className={`hidden bg-navy-900 text-caption text-white/85 transition-[padding] duration-300 md:block ${
+      className={`hidden bg-navy-900 text-caption text-white/85 transition-[padding] duration-base ease-out md:block ${
         isScrolled ? 'py-1' : 'py-2'
       }`}
     >
@@ -67,7 +73,7 @@ function TopBar({ isScrolled }) {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-micro font-semibold uppercase tracking-eyebrow text-white/70">
+          <span className="text-micro uppercase tracking-eyebrow text-white/70">
             SRM Marine Transportation
           </span>
           <span className="h-4 w-px bg-white/15" aria-hidden="true" />
@@ -79,7 +85,7 @@ function TopBar({ isScrolled }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="pressable flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-surface-raised hover:text-accent-strong"
+                className="pressable flex h-7 w-7 items-center justify-center rounded-sm border border-white/15 bg-white/10 hover:border-white/45 hover:text-white"
               >
                 <Icon name={link.icon} className="h-3 w-3" />
               </a>
@@ -89,7 +95,7 @@ function TopBar({ isScrolled }) {
               href={MAIN_WEBSITE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="pressable text-caption font-semibold uppercase tracking-eyebrow hover:text-white"
+              className="pressable text-micro uppercase tracking-eyebrow hover:text-white"
             >
               Main Site
             </a>
@@ -101,23 +107,24 @@ function TopBar({ isScrolled }) {
 }
 
 /**
- * The menu on a phone. It hangs off the fixed bar, so it opens wherever the
- * page happens to be, and it scrolls inside its own box against the visible
- * viewport — a menu measured against the layout viewport puts its last rows
- * behind the browser's toolbar, which is where they stay.
+ * The menu on a phone. It opens inside the fixed bar rather than hanging off
+ * it the way the desktop panel does, so the bar's own shadow draws its bottom
+ * edge and it carries none of its own. It scrolls inside its own box against
+ * the visible viewport — a menu measured against the layout viewport puts its
+ * last rows behind the browser's toolbar, which is where they stay.
  */
 function MobileMenu({ id, isOpen, onClose }) {
   return (
     <div
       id={id}
       aria-hidden={!isOpen}
-      className={`overflow-hidden transition-[max-height,visibility] duration-slow ease-out-quint lg:hidden ${
+      className={`overflow-hidden transition-[max-height,visibility] duration-slow ease-out lg:hidden ${
         isOpen ? 'visible max-h-[var(--mobile-menu-max-height)]' : 'invisible max-h-0'
       }`}
     >
       <nav
         aria-label="Primary"
-        className="max-h-[var(--mobile-menu-max-height)] overflow-y-auto overscroll-contain border-t border-line bg-surface px-4 pb-[calc(var(--rail-offset)+1.5rem)] pt-5 shadow-card"
+        className="max-h-[var(--mobile-menu-max-height)] overflow-y-auto overscroll-contain border-t border-line bg-surface px-4 pb-[calc(var(--rail-offset)+1.5rem)] pt-5"
       >
         {SITE_NAV.map((link) => (
           <div key={link.to} className="mb-1">
@@ -131,7 +138,7 @@ function MobileMenu({ id, isOpen, onClose }) {
                     key={section.id}
                     to={`${link.to}#${section.id}`}
                     onClick={onClose}
-                    className="pressable flex min-h-control items-center rounded-lg px-3 text-sm font-semibold text-ink-muted hover:bg-surface-accent hover:text-accent-strong"
+                    className="pressable flex min-h-control items-center rounded-sm px-3 text-label text-ink-muted hover:bg-surface-accent hover:text-accent-strong"
                   >
                     {section.label}
                   </Link>
@@ -145,7 +152,7 @@ function MobileMenu({ id, isOpen, onClose }) {
           <div className="mb-4 flex items-center justify-between px-2">
             <a
               href={`tel:${PHONE_NUMBER}`}
-              className="pressable flex min-h-control items-center gap-2 text-sm font-semibold text-accent hover:text-accent-contrast"
+              className="pressable flex min-h-control items-center gap-2 text-label text-accent hover:text-accent-contrast"
             >
               <Icon name="phone" className="h-4 w-4 text-accent-contrast" />
               <span>{PHONE_DISPLAY}</span>
@@ -158,7 +165,7 @@ function MobileMenu({ id, isOpen, onClose }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="pressable flex h-11 w-11 items-center justify-center rounded-full bg-surface-accent text-accent hover:bg-accent hover:text-ink-on-accent"
+                  className="pressable icon-tile hover:border-accent hover:text-accent-contrast"
                 >
                   <Icon name={link.icon} className="h-4 w-4" />
                 </a>
@@ -170,7 +177,7 @@ function MobileMenu({ id, isOpen, onClose }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={onClose}
-            className="pressable block rounded-xl bg-navy-800 px-4 py-4 text-center font-semibold text-white hover:bg-navy-900"
+            className="btn-secondary w-full"
           >
             Main Website
           </a>
@@ -188,21 +195,23 @@ function HamburgerButton({ controls, isOpen, onToggle }) {
       aria-label="Toggle Menu"
       aria-expanded={isOpen}
       aria-controls={controls}
-      className="pressable relative flex h-11 w-11 items-center justify-center rounded-lg text-accent hover:bg-surface-accent lg:hidden"
+      className="pressable relative flex h-11 w-11 items-center justify-center rounded-md text-accent hover:bg-surface-accent lg:hidden"
     >
+      {/* Three bars with cut ends. A 2px rule with a round cap is a lozenge,
+          and three of them stacked is the softest mark on a phone screen. */}
       <div className="relative flex h-5 w-6 flex-col justify-between">
         <span
-          className={`block h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 ease-out-quint ${
+          className={`block h-0.5 w-full origin-center bg-current transition-transform duration-base ease-out ${
             isOpen ? 'translate-y-2 rotate-45' : ''
           }`}
         />
         <span
-          className={`block h-0.5 w-full rounded-full bg-current transition-opacity duration-200 ${
+          className={`block h-0.5 w-full bg-current transition-opacity duration-fast ${
             isOpen ? 'opacity-0' : ''
           }`}
         />
         <span
-          className={`block h-0.5 w-full origin-center rounded-full bg-current transition-transform duration-300 ease-out-quint ${
+          className={`block h-0.5 w-full origin-center bg-current transition-transform duration-base ease-out ${
             isOpen ? '-translate-y-2 -rotate-45' : ''
           }`}
         />
@@ -219,22 +228,22 @@ function HamburgerButton({ controls, isOpen, onToggle }) {
  */
 function PanelFeature({ feature, onNavigate }) {
   return (
-    <div className="flex gap-5 rounded-lg border border-line bg-surface-cool p-5">
+    <div className="panel-sunken flex gap-4 p-5">
       <ArtPlate name={feature.art} className="h-[112px] w-[180px] shrink-0 text-accent" />
       <div>
-        <span className="block font-display text-lg font-bold leading-snug tracking-tight text-ink">
+        <span className="block font-display text-lg font-bold leading-snug text-ink">
           {feature.title}
         </span>
-        <span className="mt-2 block text-prose leading-relaxed text-ink-muted">{feature.body}</span>
+        <span className="mt-2 block text-prose text-ink-muted">{feature.body}</span>
         <Link
           to={feature.to}
           onClick={onNavigate}
-          className="pressable group mt-4 inline-flex min-h-control items-center gap-2 text-sm font-semibold text-accent-contrast hover:text-danger-ink"
+          className="pressable group mt-4 inline-flex min-h-control items-center gap-2 text-label text-accent-contrast hover:text-danger-ink"
         >
           {feature.action}
           <Icon
             name="arrow-right"
-            className="h-4 w-4 transition-transform duration-base group-hover:translate-x-1"
+            className="h-4 w-4 transition-transform duration-base ease-out group-hover:translate-x-0.5"
           />
         </Link>
       </div>
@@ -247,7 +256,7 @@ function NavPanel({ id, item, isOpen, onNavigate }) {
   return (
     <div
       id={id}
-      className={`nav-panel absolute inset-x-0 top-full border-b border-line bg-surface shadow-card-hover transition-[opacity,transform] duration-base ease-out-quint ${
+      className={`nav-panel absolute inset-x-0 top-full border-b border-line bg-surface shadow-card-hover transition-[opacity,transform] duration-base ease-out ${
         isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
       }`}
     >
@@ -260,13 +269,13 @@ function NavPanel({ id, item, isOpen, onNavigate }) {
                 key={section.id}
                 to={`${item.to}#${section.id}`}
                 onClick={onNavigate}
-                className="pressable group rounded-lg p-4 hover:bg-surface-accent"
+                className="pressable group rounded-sm p-3.5 hover:bg-surface-accent"
               >
-                <span className="flex items-center gap-2 font-display text-base font-bold tracking-tight text-ink">
+                <span className="flex items-center gap-2 font-display text-base font-bold text-ink">
                   {section.label}
                   <Icon
                     name="arrow-right"
-                    className="h-4 w-4 text-accent-contrast transition-transform duration-base group-hover:translate-x-1"
+                    className="h-4 w-4 text-accent-contrast transition-transform duration-base ease-out group-hover:translate-x-0.5"
                   />
                 </span>
                 <span className="mt-1 block text-prose text-ink-muted">{section.blurb}</span>
@@ -318,7 +327,7 @@ function Header() {
 
   return (
     <header
-      className={`site-header transition-shadow duration-300 ${
+      className={`site-header transition-shadow duration-base ease-out ${
         isScrolled ? 'shadow-card-hover' : 'shadow-card'
       }`}
     >
@@ -331,13 +340,18 @@ function Header() {
       >
         <div className="container-page">
           <div
-            className={`flex items-center justify-between transition-[height] duration-300 ${
+            className={`flex items-center justify-between transition-[height] duration-base ease-out ${
               isScrolled ? 'h-[var(--header-height-scrolled)]' : 'h-[var(--header-height)]'
             }`}
           >
+            {/* No hover ground. The link's box is exactly the mark's box, and the
+                mark is a transparent PNG, so a tint paints between the letters
+                rather than behind the link and reads as a rendering fault. The
+                press the base layer already gives every anchor is the whole of
+                the feedback this one needs. */}
             <Link
               to="/"
-              className="pressable group flex items-center rounded-md hover:bg-surface-accent"
+              className="pressable flex items-center"
               aria-label="Hollingshead Harbor Home"
             >
               <img
@@ -348,7 +362,7 @@ function Header() {
                 width="760"
                 height="200"
                 fetchPriority="high"
-                className={`w-auto transition-[height] duration-300 ${
+                className={`w-auto transition-[height] duration-base ease-out ${
                   isScrolled ? 'h-10' : 'h-14'
                 }`}
               />
@@ -369,7 +383,7 @@ function Header() {
                     {link.label}
                     <Icon
                       name="chevron-down"
-                      className={`h-3.5 w-3.5 transition-transform duration-base ease-out-quint ${
+                      className={`h-3.5 w-3.5 transition-transform duration-base ease-out ${
                         openPanel === link.to ? 'rotate-180' : ''
                       }`}
                     />
@@ -383,14 +397,11 @@ function Header() {
             </nav>
 
             <div className="hidden items-center gap-3 lg:flex">
-              <Link
-                to="/careers"
-                className="pressable group inline-flex min-h-control items-center gap-2 rounded-md bg-red-600 px-5 py-3 text-sm font-semibold text-white hover:bg-red-700"
-              >
+              <Link to="/careers" className="btn-primary group px-5 py-3">
                 Apply for a Job
                 <Icon
                   name="arrow-right"
-                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                  className="h-4 w-4 transition-transform duration-base ease-out group-hover:translate-x-0.5"
                 />
               </Link>
             </div>
