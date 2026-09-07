@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeroSection from '../components/HeroSection';
-import SectionBadge from '../components/SectionBadge';
-import Icon from '../components/Icon';
-import ApplicationForm from '../components/ApplicationForm';
+import HeroSection from '../components/ui/HeroSection';
+import SectionBadge from '../components/ui/SectionBadge';
+import Icon from '../components/ui/Icon';
+import ApplicationForm from '../components/application/ApplicationForm';
 import positions from '../data/positions.json';
-import Breadcrumbs from '../components/Breadcrumbs';
-import Seo from '../components/Seo';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
+import Seo from '../components/ui/Seo';
 import { SHARE_IMAGE } from '../constants/seo';
 import { SITE_ORIGIN } from '../constants/urls';
 import useScrollAnimation from '../hooks/useScrollAnimation';

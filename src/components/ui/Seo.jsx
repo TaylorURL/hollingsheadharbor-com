@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { SHARE_IMAGE, businessGraph, breadcrumbGraph, pageGraph } from '../constants/seo';
-import { BUSINESS_NAME } from '../constants/urls';
+import { SHARE_IMAGE, businessGraph, breadcrumbGraph, pageGraph } from '../../constants/seo';
+import { BUSINESS_NAME } from '../../constants/urls';
 
 const MANAGED = 'data-seo';
 

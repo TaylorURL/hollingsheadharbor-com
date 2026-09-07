@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Icon from './Icon';
+import Icon from '../ui/Icon';
 import {
   CheckboxField,
   ChoiceField,
@@ -22,7 +22,7 @@ import {
   RESUME_ACCEPT,
   US_STATES,
   emptyEmployer,
-} from '../constants/application';
+} from '../../constants/application';
 
 /**
  * Every label the applicant reads, in the order the form asks for it. The

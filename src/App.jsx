@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import ScrollToTop from './components/ScrollToTop';
-import RouteFallback from './components/RouteFallback';
+import Layout from './components/layout/Layout';
+import ScrollToTop from './components/routing/ScrollToTop';
+import RouteFallback from './components/routing/RouteFallback';
 import { withBuildRefresh } from './lib/chunk-recovery';
 
 /**
