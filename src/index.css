@@ -651,41 +651,6 @@
     background-color: rgb(var(--surface) / 0.97);
   }
 
-  /*
-   * The texture behind a dark band: deck tread plate.
-   *
-   * Pairs of raised treads set in a checker, which is how the walking surface
-   * of a barge deck, a towboat's engine room and a pilothouse floor is actually
-   * rolled — it is the one piece of steel everybody who works for this company
-   * stands on all day. It runs on the diagonal, so it never resolves into the
-   * graph paper a square grid does or the courses a running bond does.
-   *
-   * It is drawn once as a mask rather than twice as an image, so the shape is
-   * carried by the mask and the colour by the background underneath it — which
-   * is what lets the same plate be navy on a white band and white on a hull one,
-   * and follow the dark and gray themes without a second copy of the art.
-   */
-  .pattern-deck,
-  .pattern-deck-dark {
-    --deck-art: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='%23000'%3E%3Cg transform='translate(16 16) rotate(-38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3Cg transform='translate(48 16) rotate(38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3Cg transform='translate(16 48) rotate(38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3Cg transform='translate(48 48) rotate(-38)'%3E%3Crect x='-10' y='-6.6' width='20' height='4' rx='2'/%3E%3Crect x='-10' y='2.6' width='20' height='4' rx='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    -webkit-mask-image: var(--deck-art);
-    mask-image: var(--deck-art);
-    -webkit-mask-size: 56px 56px;
-    mask-size: 56px 56px;
-    -webkit-mask-repeat: repeat;
-    mask-repeat: repeat;
-  }
-  /* On a white band the plate has to be almost gone. Dark ink on a light ground
-     carries far more weight than the reverse at the same alpha, and at anything
-     stronger than this the treads read as a pattern printed behind the copy
-     rather than as the material the band is cut from. */
-  .pattern-deck {
-    background-color: rgb(var(--accent) / 0.09);
-  }
-  .pattern-deck-dark {
-    background-color: rgb(var(--white) / 0.16);
-  }
-
   /* Buttons. --radius-md puts the corner on the same 4px every panel edge and
      every field uses, so a button sits in a form rather than on top of one. */
   .btn {

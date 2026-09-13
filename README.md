@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.37.0-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.37.0" />
+  <img src="https://img.shields.io/badge/version-2026.37.1-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.37.1" />
   <img src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=fff" width="121" height="28" alt="React 19" />
   <img src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=fff" width="101" height="28" alt="Vite 7" />
   <img src="https://img.shields.io/badge/React_Router-7-dc2626?style=for-the-badge&logo=reactrouter&logoColor=fff" width="166" height="28" alt="React Router 7" />
@@ -117,6 +117,7 @@ flowchart LR
 - **A hidden honeypot field returns success.** Bots that fill it get a 200 and no email is sent, so a scraper cannot tell rejection from delivery.
 - **One hero component.** Every route with a hero band renders `HeroSection`: a photographic backdrop under a navy wash with a red rule beneath it, so pages stay consistent without per-page art direction.
 - **A deploy never strands an open tab.** Route chunks carry a content hash, so a tab left open across a release asks for a filename the host no longer has. `lib/chunk-recovery.js` turns that one failure into a single reload per tab rather than an error screen.
+- **The network map comes from the harbor list.** `scripts/build-service-map.mjs` projects the thirteen harbors in `data/harbors.json`, and the six states around them from public-domain Census outlines, onto the plate `ArtPlate` draws, and writes `data/service-map.json`. Add a harbor to the list, run `npm run map`, and the map and the inventory under it move together.
 - **Sections reveal on scroll.** `useScrollAnimation` wraps `IntersectionObserver`; the `stagger-*` classes in `src/index.css` space the reveals within a group.
 - **Every colour comes from one token block.** `src/index.css` holds the primitives, the semantic aliases that name them by purpose, and the light, dark, and gray themes that redefine those aliases. `tailwind.config.js` generates its whole palette from them and names no value of its own. Navy and red are anchored to the SRM brand, with warm "sand" and cool "mist" surface tints and a deep "hull" tone for heroes.
 
@@ -131,6 +132,8 @@ hollingsheadharbor-com/
 │                              photos, self-hosted Archivo and Inter, icons,
 │                              robots.txt, sitemap.xml, llms.txt, share card,
 │                              web manifest, release.json
+├── scripts/
+│   └── build-service-map.mjs  Projects the harbors and the states around them onto the network plate
 └── src/
     ├── App.jsx                Routes wrapped in the shared Layout
     ├── main.jsx               Browser entry
@@ -141,7 +144,7 @@ hollingsheadharbor-com/
     │   ├── application/       ApplicationForm, FormControls
     │   └── ui/                Icon, SectionBadge, HeroSection, Breadcrumbs, ArtPlate, Seo
     ├── pages/                 Home, About, Equipment, Careers, Contact, PrivacyPolicy, Terms, NotFound
-    ├── data/                  positions.json · equipment.json
+    ├── data/                  positions.json · equipment.json · harbors.json · service-map.json
     ├── constants/             application.js · navigation.js · seo.js · urls.js
     ├── hooks/                 useScrollAnimation.js · useScrolledPast.js · useClickSpark.js
     └── lib/                   chunk-recovery.js · localTime.js

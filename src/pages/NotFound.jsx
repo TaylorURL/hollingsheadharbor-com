@@ -18,10 +18,6 @@ function NotFound() {
           noindex: true,
         }}
       />
-      <div
-        className="pattern-deck-dark pointer-events-none absolute inset-0 opacity-40"
-        aria-hidden="true"
-      />
 
       <div className="container-page relative text-center text-white">
         <SectionBadge color="light">Off course</SectionBadge>

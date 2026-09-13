@@ -2,7 +2,7 @@
   "name": "hollingsheadharbor-com",
   "private": true,
   "license": "UNLICENSED",
-  "version": "2026.37.0",
+  "version": "2026.37.1",
   "type": "module",
   "engines": {
     "node": "22.x"
@@ -11,6 +11,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "map": "node scripts/build-service-map.mjs",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
