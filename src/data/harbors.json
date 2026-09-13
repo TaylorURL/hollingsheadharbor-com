@@ -1,0 +1,75 @@
+[
+  { "name": "Decatur Harbor", "city": "Decatur", "state": "AL", "lat": 34.63427, "lon": -87.03413 },
+  {
+    "name": "Panama City Harbor",
+    "city": "Panama City",
+    "state": "FL",
+    "lat": 30.14332,
+    "lon": -85.62145
+  },
+  {
+    "name": "Pensacola Harbor",
+    "city": "Pensacola",
+    "state": "FL",
+    "lat": 30.40424,
+    "lon": -87.24712
+  },
+  {
+    "name": "Port St. Joe Harbor",
+    "city": "Port St. Joe",
+    "state": "FL",
+    "lat": 29.82743,
+    "lon": -85.30789
+  },
+  {
+    "name": "Southport Harbor",
+    "city": "Southport",
+    "state": "FL",
+    "lat": 30.27261,
+    "lon": -85.64972
+  },
+  { "name": "Detroit Harbor", "city": "Detroit", "state": "MI", "lat": 42.28876, "lon": -83.10421 },
+  {
+    "name": "Ashtabula Harbor",
+    "city": "Ashtabula",
+    "state": "OH",
+    "lat": 41.90126,
+    "lon": -80.79685
+  },
+  {
+    "name": "Fairport Harbor",
+    "city": "Painesville",
+    "state": "OH",
+    "lat": 41.76036,
+    "lon": -81.28152
+  },
+  {
+    "name": "Downtown Harbor",
+    "city": "Nashville",
+    "state": "TN",
+    "lat": 36.17686,
+    "lon": -86.78205
+  },
+  {
+    "name": "Hollingshead Harbor",
+    "city": "Nashville",
+    "state": "TN",
+    "lat": 36.20658,
+    "lon": -86.88447
+  },
+  { "name": "Baytown Harbor", "city": "Baytown", "state": "TX", "lat": 29.76431, "lon": -94.91954 },
+  {
+    "name": "Freeport Harbor",
+    "city": "Freeport",
+    "state": "TX",
+    "lat": 28.96898,
+    "lon": -95.28494
+  },
+  {
+    "name": "San Leon Harbor",
+    "city": "San Leon",
+    "state": "TX",
+    "lat": 29.46652,
+    "lon": -94.96277
+  }
+]

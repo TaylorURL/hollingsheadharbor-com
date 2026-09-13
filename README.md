@@ -117,6 +117,7 @@ flowchart LR
 - **A hidden honeypot field returns success.** Bots that fill it get a 200 and no email is sent, so a scraper cannot tell rejection from delivery.
 - **One hero component.** Every route with a hero band renders `HeroSection`: a photographic backdrop under a navy wash with a red rule beneath it, so pages stay consistent without per-page art direction.
 - **A deploy never strands an open tab.** Route chunks carry a content hash, so a tab left open across a release asks for a filename the host no longer has. `lib/chunk-recovery.js` turns that one failure into a single reload per tab rather than an error screen.
+- **The network map is drawn from the harbor list.** `scripts/build-service-map.mjs` projects the thirteen harbors in `data/harbors.json` and the six states around them onto the plate `ArtPlate` draws, from public-domain Census outlines, and writes `data/service-map.json`. Add a harbor to the list, run `npm run map`, and the map and the inventory under it move together.
 - **Sections reveal on scroll.** `useScrollAnimation` wraps `IntersectionObserver`; the `stagger-*` classes in `src/index.css` space the reveals within a group.
 - **Every colour comes from one token block.** `src/index.css` holds the primitives, the semantic aliases that name them by purpose, and the light, dark, and gray themes that redefine those aliases. `tailwind.config.js` generates its whole palette from them and names no value of its own. Navy and red are anchored to the SRM brand, with warm "sand" and cool "mist" surface tints and a deep "hull" tone for heroes.
 
@@ -131,6 +132,8 @@ hollingsheadharbor-com/
 │                              photos, self-hosted Archivo and Inter, icons,
 │                              robots.txt, sitemap.xml, llms.txt, share card,
 │                              web manifest, release.json
+├── scripts/
+│   └── build-service-map.mjs  Projects the harbors and the states around them onto the network plate
 └── src/
     ├── App.jsx                Routes wrapped in the shared Layout
     ├── main.jsx               Browser entry
@@ -141,7 +144,7 @@ hollingsheadharbor-com/
     │   ├── application/       ApplicationForm, FormControls
     │   └── ui/                Icon, SectionBadge, HeroSection, Breadcrumbs, ArtPlate, Seo
     ├── pages/                 Home, About, Equipment, Careers, Contact, PrivacyPolicy, Terms, NotFound
-    ├── data/                  positions.json · equipment.json
+    ├── data/                  positions.json · equipment.json · harbors.json · service-map.json
     ├── constants/             application.js · navigation.js · seo.js · urls.js
     ├── hooks/                 useScrollAnimation.js · useScrolledPast.js · useClickSpark.js
     └── lib/                   chunk-recovery.js · localTime.js

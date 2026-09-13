@@ -34,10 +34,6 @@ function SocialLink({ href, label, icon }) {
 function CallToActionBanner() {
   return (
     <div className="relative overflow-hidden bg-navy-900 text-white">
-      <div
-        className="pattern-deck-dark pointer-events-none absolute inset-0 opacity-40"
-        aria-hidden="true"
-      />
       <div className="container-page relative flex flex-col items-center justify-between gap-6 py-12 md:flex-row">
         <div className="text-center md:text-left">
           <span className="eyebrow eyebrow-on-dark">Now hiring</span>
