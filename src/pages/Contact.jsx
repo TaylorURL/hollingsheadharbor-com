@@ -23,10 +23,6 @@ const HERO = {
 function PhoneCard() {
   return (
     <div className="relative overflow-hidden rounded-md bg-navy-900 p-8 text-white md:p-10">
-      <div
-        className="pattern-deck-dark pointer-events-none absolute inset-0 opacity-40"
-        aria-hidden="true"
-      />
       {/* A column rather than a plain block. The eyebrow and the number are both
           inline-level boxes — the label so it can carry its leader line, the
           number so its hit area stops at the digits — so left in normal flow

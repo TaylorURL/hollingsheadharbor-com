@@ -192,10 +192,6 @@ function BeginningSection() {
 function QuoteSection() {
   return (
     <section className="relative overflow-hidden bg-surface-warm py-16 md:py-20">
-      <div
-        className="pointer-events-none absolute inset-0 pattern-deck opacity-70"
-        aria-hidden="true"
-      />
       <div className="container-page relative">
         <figure className="mx-auto max-w-4xl text-center scroll-animate">
           <SectionBadge color="red">The American dream</SectionBadge>
@@ -224,10 +220,6 @@ function CoreValuesSection() {
       id="core-values"
       className="scroll-mt-[var(--header-offset-wide)] relative overflow-hidden bg-surface py-16 md:py-20"
     >
-      <div
-        className="pointer-events-none absolute inset-0 pattern-deck opacity-70"
-        aria-hidden="true"
-      />
       <div className="container-page relative">
         <div className="mx-auto mb-12 max-w-2xl text-center scroll-animate">
           <SectionBadge color="red">Core values</SectionBadge>

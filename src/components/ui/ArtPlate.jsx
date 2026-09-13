@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import SERVICE_MAP from '../../data/service-map.json';
 
 /*
  * The drawn plates. Every one is set on the same 320x200 ground, which is what
@@ -30,6 +31,27 @@ const GROUND = 0.06;
 const RED = 'rgb(var(--accent-contrast))';
 const SAND = 'rgb(var(--sand-400))';
 const WHITE = 'rgb(var(--white))';
+const HULL = 'rgb(var(--hull))';
+
+/* The one plate that is not drawn by hand. The coastline, the six states and
+   the harbors are read from src/data/service-map.json, which
+   scripts/build-service-map.mjs projects from public-domain Census outlines
+   and the harbor list, so the map moves when a harbor does and never has to
+   be redrawn.
+
+   It is also the one plate with a ground of its own. Every other plate lets
+   the band show through; on a map the water has to sit darker than the deck
+   around it, or the Gulf reads as more deck. The hull is the same token in
+   all three themes, which is what lets this plate name it. The land sits one
+   step above that so the Gulf and the lakes read as water. The states stand a step above the land, ruled once
+   along every border so a line shared by two states is no heavier than the
+   coast. The harbors are the only red on the plate: a disc with a white
+   centre, small enough that the two Nashville sites and the two on St. Andrew
+   Bay overlap where they actually are rather than being spread apart to be
+   counted. */
+const NETWORK_LAND = 0.1;
+const NETWORK_STATE = 0.22;
+const NETWORK_BORDER = 0.5;
 
 const PLATES = {
   /* A towboat pushing a loaded tow, which is the whole of what the fleet does.
@@ -181,6 +203,46 @@ const PLATES = {
       </g>
     </>
   ),
+
+  /* The harbor network on the map it actually occupies. */
+  network: (
+    <>
+      <path
+        d={SERVICE_MAP.land}
+        fill="currentColor"
+        fillOpacity={NETWORK_LAND}
+        fillRule="evenodd"
+      />
+      {SERVICE_MAP.states.map((state) => (
+        <path
+          key={state.code}
+          d={state.path}
+          fill="currentColor"
+          fillOpacity={NETWORK_STATE}
+          fillRule="evenodd"
+        />
+      ))}
+      <path
+        d={SERVICE_MAP.borders}
+        fill="none"
+        stroke="currentColor"
+        strokeOpacity={NETWORK_BORDER}
+        strokeWidth="0.75"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <g fill={RED}>
+        {SERVICE_MAP.harbors.map((harbor) => (
+          <circle key={harbor.name} cx={harbor.x} cy={harbor.y} r="4" />
+        ))}
+      </g>
+      <g fill={WHITE}>
+        {SERVICE_MAP.harbors.map((harbor) => (
+          <circle key={harbor.name} cx={harbor.x} cy={harbor.y} r="1.6" />
+        ))}
+      </g>
+    </>
+  ),
 };
 
 /**
@@ -194,8 +256,8 @@ const PLATES = {
  * rides the viewBox and stays in proportion to the drawing at every size a
  * plate is called at. The clip also holds the rivers, which run off the edge of
  * their plate on purpose. Its id comes from the render rather than the plate
- * name: waterways is drawn in the menu and again on the home page, and two
- * elements answering to one id send both clips to whichever landed first.
+ * name: a page can draw a plate the menu also draws, and two elements
+ * answering to one id send both clips to whichever landed first.
  */
 function ArtPlate({ name, className = '' }) {
   const clipId = `art-plate-${useId().replace(/[^\w-]/g, '')}`;
