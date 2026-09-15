@@ -222,24 +222,26 @@
         // cancelled one.
         var HOLD_MS = 1500;
         var heldAssets = [];
-        function flushHeldAssets(verify) {
+        function flushHeldAssets() {
           var pending = heldAssets.splice(0, heldAssets.length);
           for (var i = 0; i < pending.length; i += 1) {
-            if (verify) {
-              reportIfStillMissing(pending[i].message, pending[i].url);
-            } else {
-              report('resource', pending[i].message);
-            }
+            reportIfStillMissing(pending[i].message, pending[i].url);
           }
         }
         window.addEventListener('hollingshead:build-refresh', function () {
           heldAssets.length = 0;
         });
-        // Leaving for any other reason ends the wait, so a page closed on a real
-        // failure still reports it. A second request cannot come back by then,
-        // so what is held goes straight out.
+        // Leaving the page is itself one of the things that abandons every
+        // request still open, so an error event arriving as the document goes
+        // away is the weakest evidence there is, and the second request that
+        // would settle it cannot come back before the page is gone. Sending it
+        // anyway turns an ordinary visit closed mid-load into a burst of
+        // failures naming files that are on the server and load for everyone
+        // who stays. A file the server really does not have keeps failing, so
+        // the next visit that outlasts the wait reports it with the evidence
+        // this moment cannot supply, and what is held here is dropped.
         window.addEventListener('pagehide', function () {
-          flushHeldAssets(false);
+          heldAssets.length = 0;
         });
         // Capture phase, because element load failures fire error events that do not bubble.
         window.addEventListener(
@@ -252,9 +254,7 @@
                   message: 'Failed to load ' + event.target.tagName.toLowerCase() + ': ' + source,
                   url: source,
                 });
-                setTimeout(function () {
-                  flushHeldAssets(true);
-                }, HOLD_MS);
+                setTimeout(flushHeldAssets, HOLD_MS);
               } else {
                 // An error that crosses a script boundary can arrive without an Error object,
                 // so fall back to the position the event itself carries.
