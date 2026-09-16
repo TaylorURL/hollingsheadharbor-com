@@ -2,7 +2,7 @@
   "name": "hollingsheadharbor-com",
   "private": true,
   "license": "UNLICENSED",
-  "version": "2026.38.0",
+  "version": "2026.38.1",
   "type": "module",
   "engines": {
     "node": "22.x"
@@ -10,11 +10,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "map": "node scripts/build-service-map.mjs",
     "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "map": "node scripts/build-service-map.mjs"
   },
   "dependencies": {
     "@taylorurl/split-rail": "github:TaylorURL/split-rail#v2026.36.0",

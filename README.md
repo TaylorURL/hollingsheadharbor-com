@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2026.38.0-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.38.0" />
+  <img src="https://img.shields.io/badge/version-2026.38.1-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.38.1" />
   <img src="https://img.shields.io/badge/React-19-2a3163?style=for-the-badge&logo=react&logoColor=fff" width="121" height="28" alt="React 19" />
   <img src="https://img.shields.io/badge/Vite-7-2a3163?style=for-the-badge&logo=vite&logoColor=fff" width="101" height="28" alt="Vite 7" />
   <img src="https://img.shields.io/badge/React_Router-7-dc2626?style=for-the-badge&logo=reactrouter&logoColor=fff" width="166" height="28" alt="React Router 7" />
@@ -78,8 +78,10 @@ Three variables, set in Vercel and required only by `api/apply.js`. Without them
 | `npm run build` | Production build to `dist/`. |
 | `npm run preview` | Serve the production build locally. |
 | `npm run lint` | Lint with ESLint. |
+| `npm run lint:fix` | Lint and apply the fixes ESLint can make itself. |
 | `npm run format` | Format `src/**` with Prettier. |
 | `npm run format:check` | Check formatting without writing. |
+| `npm run map` | Rebuild `src/data/service-map.json` from `src/data/harbors.json`. |
 
 ## Routes
 
@@ -146,7 +148,7 @@ hollingsheadharbor-com/
     ├── pages/                 Home, About, Equipment, Careers, Contact, PrivacyPolicy, Terms, NotFound
     ├── data/                  positions.json · equipment.json · harbors.json · service-map.json
     ├── constants/             application.js · navigation.js · seo.js · urls.js
-    ├── hooks/                 useScrollAnimation.js · useScrolledPast.js · useClickSpark.js
+    ├── hooks/                 useScrollAnimation.js · useScrolledPast.js
     └── lib/                   chunk-recovery.js · localTime.js
 ```
 
