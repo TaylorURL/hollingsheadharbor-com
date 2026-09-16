@@ -78,8 +78,10 @@ Three variables, set in Vercel and required only by `api/apply.js`. Without them
 | `npm run build` | Production build to `dist/`. |
 | `npm run preview` | Serve the production build locally. |
 | `npm run lint` | Lint with ESLint. |
+| `npm run lint:fix` | Lint and apply the fixes ESLint can make itself. |
 | `npm run format` | Format `src/**` with Prettier. |
 | `npm run format:check` | Check formatting without writing. |
+| `npm run map` | Rebuild `src/data/service-map.json` from `src/data/harbors.json`. |
 
 ## Routes
 
@@ -146,7 +148,7 @@ hollingsheadharbor-com/
     ├── pages/                 Home, About, Equipment, Careers, Contact, PrivacyPolicy, Terms, NotFound
     ├── data/                  positions.json · equipment.json · harbors.json · service-map.json
     ├── constants/             application.js · navigation.js · seo.js · urls.js
-    ├── hooks/                 useScrollAnimation.js · useScrolledPast.js · useClickSpark.js
+    ├── hooks/                 useScrollAnimation.js · useScrolledPast.js
     └── lib/                   chunk-recovery.js · localTime.js
 ```
 
