@@ -92,14 +92,28 @@
         } catch (ignored) {}
         // An extension injects its scripts into the page, so a rejection thrown
         // inside one arrives at this handler with nothing of the site in its
-        // stack. A stack naming only extension scripts describes the visitor's
+        // stack. A stack naming only browser scripts describes the visitor's
         // browser; one carrying a single site frame is the site's.
-        function extensionOnly(stack) {
-          var schemes = String(stack || '').match(/[a-z][a-z0-9+.-]*:\/\//gi);
-          if (!schemes) return false;
-          for (var i = 0; i < schemes.length; i += 1) {
-            var scheme = schemes[i].slice(0, -3).toLowerCase();
-            if (scheme.slice(-9) !== 'extension') return false;
+        //
+        // DuckDuckGo's iOS browser injects its privacy runtime the same way,
+        // under a user-script: scheme rather than an extension one, and it logs
+        // its own setup failures through console.error, which arrives here with
+        // the frame written into the message and nothing in the stack argument.
+        // So both are read, and a frame is recognised whether its scheme is
+        // followed by // or by the line number on its own. Anything else in
+        // front of a line number - a site URL, an Error: prefix - leaves the
+        // report where it was.
+        function browserOnly(text) {
+          var frames = String(text || '').match(/(?:^|[\s@(])[a-z][a-z0-9+.-]*:(?:\/\/|\d)/gi);
+          if (!frames) return false;
+          for (var i = 0; i < frames.length; i += 1) {
+            var scheme = frames[i]
+              .toLowerCase()
+              .replace(/^[\s@(]/, '')
+              .split(':')[0];
+            if (scheme.slice(-9) === 'extension') continue;
+            if (scheme === 'user-script') continue;
+            return false;
           }
           return true;
         }
@@ -153,7 +167,7 @@
         function report(kind, message, stack) {
           hold(kind, message, stack);
           if (sent >= 10) return; // a page stuck in an error loop stops at ten
-          if (extensionOnly(stack)) return;
+          if (browserOnly(stack) || browserOnly(message)) return;
           sent += 1;
           try {
             send(
