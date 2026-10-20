@@ -220,9 +220,19 @@
               if (!opaque && !response.ok) report('resource', message);
             },
             function () {
-              // A page on its way out cancels this request too, which says nothing
-              // about the file.
-              if (!leaving) report('resource', message);
+              // The second request came back with no answer at all, which is not
+              // the same as an answer saying the file is gone. A file this origin
+              // does not have answers 404 twice over and is reported on the line
+              // above; a same-origin request that never completes says only that
+              // the browser stopped asking. Leaving the page does that, and so
+              // does a renderer that ends its pass with every subresource still
+              // in flight - a crawler working through a budget abandons the lot
+              // at once without ever unloading the document, so `leaving` is
+              // false and there is nothing else here to tell the two apart by.
+              // Cross-origin is the exception: an opaque answer carries no
+              // status, so whether the request completes is the only evidence
+              // available.
+              if (opaque && !leaving) report('resource', message);
             }
           );
         }
