@@ -6,38 +6,19 @@ Website for Hollingshead Harbor, a marine transportation company with 13 harbors
 
 [hollingsheadharbor.com](https://www.hollingsheadharbor.com)
 
-<img src="https://img.shields.io/badge/version-2026.44.1-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.44.1" />
+<img src="https://img.shields.io/badge/version-2026.44.2-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.44.2" />
 
-What the company runs and where, plus a full employment application wheelmen and deckhands can fill out on a phone, resume included. React single-page app on Vite, with one Vercel function for applications.
+What the company runs and where, plus a full employment application wheelmen and deckhands can fill out on a phone, resume included. React on Vite, with one Vercel function for applications.
 
-## How it's built
+Jobs, equipment and harbors are JSON in `src/data/`. Adding a job or a boat isn't a code change.
 
-- **Content is JSON.** Jobs, equipment and harbors are files in `src/data/`. Adding a job or a boat isn't a code change.
-- **One schema for the application.** `src/constants/application.js` describes every section and field once. The form renders it, the client validator checks it, and the email walks it in the same order.
-- **Applications are email, nothing else.** `api/apply.js` renders the answers as a readable email and sends it with the resume attached through Resend. Applications carry an SSN and date of birth, so nothing in the function logs the payload.
-- **The map is generated.** `npm run map` draws `src/data/service-map.json` from Census Bureau outlines (us-atlas) and `harbors.json`, projected onto the same plate every illustration uses. The atlas is fetched when it runs, not kept. Only the small output is checked in.
+## The application
 
-<details>
-<summary>Decisions and tradeoffs</summary>
+Every section and field is described once in `src/constants/application.js`. The form renders from it, the client validator checks against it, and the email walks it in the same order.
 
-- The resume is capped at 3 MB. The size check runs on the server against the base64 length.
-- A hidden honeypot field catches bots. A real applicant never sees it.
-- Errors back to the applicant are vague on purpose when the problem is on our side.
-- `src/lib/chunk-recovery.js` reloads once when a deploy has removed a chunk an open tab asks for.
-- `middleware.js` checks a TaylorURL status endpoint and shows a holding page if the site is paused. Fails open. `api/version.js` returns the deployed commit, uncached.
+`api/apply.js` turns the answers into a readable email and sends it, resume attached, through Resend. Nothing is stored. Applications carry an SSN and date of birth, so the function never logs the payload, and errors shown to the applicant stay vague when the fault is ours. Resumes are capped at 3 MB, checked on the server against the base64 length. A hidden honeypot field catches bots.
 
-</details>
-
-<details>
-<summary>Running it locally</summary>
-
-```bash
-npm install
-npm run dev        # Vite dev server
-npm run build      # production build to dist/
-```
-
-The application form posts to `api/apply.js`, a Vercel function that sends the email through Resend. `npm run dev` doesn't serve it, so use `vercel dev` when you need to test the form. Copy `.env.example` to `.env` and fill in:
+`npm run dev` doesn't serve the function. Use `vercel dev` to test the form, with these in `.env`:
 
 | Variable         | What it is                                                |
 | :--------------- | :-------------------------------------------------------- |
@@ -45,19 +26,16 @@ The application form posts to `api/apply.js`, a Vercel function that sends the e
 | `CAREERS_INBOX`  | Where applications go (comma-separated for more than one) |
 | `CAREERS_FROM`   | From address, on a domain verified with Resend            |
 
-After editing `src/data/harbors.json`, run `npm run map` to rebuild the harbor map.
+## The map
 
-</details>
+`npm run map` draws `src/data/service-map.json` from Census Bureau outlines (us-atlas) and `harbors.json`, on the same projection the illustrations use. The atlas is downloaded when it runs and only the small output is committed. Rerun it after editing `harbors.json`.
 
-## Built with
+```bash
+npm install
+npm run dev
+npm run build
+```
 
-React 19, React Router, Vite, Tailwind CSS and Resend. Hosted on Vercel.
-
-<details>
-<summary>License</summary>
-
-Proprietary. Copyright (c) 2026 TaylorURL LLC, all rights reserved. See [LICENSE.md](LICENSE.md).
-
-</details>
+React 19, React Router, Vite, Tailwind CSS and Resend, on Vercel. Proprietary, see [LICENSE.md](LICENSE.md).
 
 Built and maintained by [TaylorURL](https://www.taylorurl.com).
