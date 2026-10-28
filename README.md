@@ -6,7 +6,7 @@ Website for Hollingshead Harbor, a marine transportation company with 13 harbors
 
 [hollingsheadharbor.com](https://www.hollingsheadharbor.com)
 
-<img src="https://img.shields.io/badge/version-2026.44.1-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.44.1" />
+<img src="https://img.shields.io/badge/version-2026.44.2-2a3163?style=for-the-badge" width="170" height="28" alt="Version 2026.44.2" />
 
 What the company runs and where, plus a full employment application wheelmen and deckhands can fill out on a phone, resume included. React on Vite, with one Vercel function for applications.
 
